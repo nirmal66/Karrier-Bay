@@ -1,5 +1,6 @@
 package activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.yourapp.developer.karrierbay.R;
+
+import java.io.IOException;
 
 import Model.Otp;
 import Model.SignUpRequest;
@@ -144,9 +147,6 @@ public class SignUpActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
 
-
-
-
               String signinRequest = new Gson().toJson(new SignUpRequest(email.getText().toString(),password.getText().toString(),confirmPassword.getText().toString(),phoneNumber.getText().toString(),"http://asss.com",fullName.getText().toString()));
                 Log.d("LoginResponse", signinRequest);
                 RequestBody body =
@@ -155,7 +155,16 @@ public class SignUpActivity extends BaseActivity {
                 call.enqueue(new Callback<SignUpResponse>() {
                     @Override
                     public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
-                       Log.d("LoginResponse", response.body().getStatus().toString());
+                        if(response.errorBody()==null) {
+                            Log.d("LoginResponse", response.body().getStatus().toString());
+                        }else{
+                            try {
+                            Toast.makeText(getApplicationContext(),response.errorBody().string().toString(),Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(SignUpActivity.this,MainActivity.class));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        }
                     }
 
                     @Override
