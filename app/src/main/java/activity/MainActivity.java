@@ -11,10 +11,15 @@ import android.view.MenuItem;
 
 import com.yourapp.developer.karrierbay.R;
 
+import Utilities.SessionManager;
+
 /**
  * A login screen that offers login via email/password.
  */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private SessionManager sessionManager;
+    private NavigationView navigationView;
 
 
     @Override
@@ -24,7 +29,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
+        sessionManager = new SessionManager(getApplicationContext());
         setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -47,6 +55,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        if(id == R.id.nav_logout)
+        {
+            sessionManager.logoutUser();
+            finish();
+            //Toast.makeText(getApplicationContext(), "User Login Status: " + sessionManager.checkLogin(), Toast.LENGTH_LONG).show();
+        }
+
+
         return false;
     }
 }

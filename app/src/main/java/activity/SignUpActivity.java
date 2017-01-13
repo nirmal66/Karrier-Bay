@@ -157,11 +157,15 @@ public class SignUpActivity extends BaseActivity {
                     public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                         if(response.errorBody()==null) {
                             Log.d("LoginResponse", response.body().getStatus().toString());
+                            startActivity(new Intent(SignUpActivity.this,MainActivity.class));
+                            finish();
                         }else{
                             try {
                             Toast.makeText(getApplicationContext(),response.errorBody().string().toString(),Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(SignUpActivity.this,MainActivity.class));
-                        } catch (IOException e) {
+                                finish();
+
+                            } catch (IOException e) {
                             e.printStackTrace();
                         }
                         }

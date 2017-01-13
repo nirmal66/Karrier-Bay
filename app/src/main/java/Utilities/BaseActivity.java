@@ -25,6 +25,5 @@ public class BaseActivity extends Activity {
         mTfSemiBold = Typeface.createFromAsset(getAssets(),"OpenSans-Semibold.ttf");
 
         apiService = ApiClient.getClient().create(ApiInterface.class);
-
     }
 }

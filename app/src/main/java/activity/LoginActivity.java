@@ -14,6 +14,7 @@ import com.yourapp.developer.karrierbay.R;
 import Model.LoginRequest;
 import Model.LoginResponse;
 import Utilities.BaseActivity;
+import Utilities.SessionManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,11 +28,15 @@ public class LoginActivity extends BaseActivity {
     private TextView SignUp, haveAccount, forgotPassword;
     private Button signIn;
     private EditText email,password;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+
+
+            setContentView(R.layout.activity_login);
+
         SignUp = (TextView)findViewById(R.id.sign_up);
         haveAccount = (TextView)findViewById(R.id.account);
         forgotPassword = (TextView)findViewById(R.id.forgot_password);
@@ -46,33 +51,43 @@ public class LoginActivity extends BaseActivity {
         email.setTypeface(mTfSemiBold);
         password.setTypeface(mTfRegular);
 
+        sessionManager = new SessionManager(getApplicationContext());
+        if (sessionManager.checkLogin()) {
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
+
+
+
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Call<LoginResponse> call = apiService.getLogin(new LoginRequest(email.getText().toString(),password.getText().toString()));
-                call.enqueue(new Callback<LoginResponse>() {
-                    @Override
-                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
-                        if(response.code()==200) {
-                            Log.d("LoginResponse", response.body().getData().getEmail().toString());
-                            // Log.d("Error",response.body().getErrors().toString());
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    Call<LoginResponse> call = apiService.getLogin(new LoginRequest(email.getText().toString(), password.getText().toString()));
+                    call.enqueue(new Callback<LoginResponse>() {
+                        @Override
+                        public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+
+                            if (response.code() == 200) {
+                                Log.d("LoginResponse", response.body().getData().getEmail().toString());
+                                // Log.d("Error",response.body().getErrors().toString());
+                                sessionManager.createLoginSession(response.body().getData().getEmail().toString());
+                                Toast.makeText(getApplicationContext(), response.body().getData().getEmail().toString(), Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                finish();
+
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Password Incorrect", Toast.LENGTH_LONG).show();
+                            }
+
                         }
-                        else
-                        {
-                            Toast.makeText(LoginActivity.this,"Password Incorrect",Toast.LENGTH_LONG).show();
+
+                        @Override
+                        public void onFailure(Call<LoginResponse> call, Throwable t) {
+
                         }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<LoginResponse> call, Throwable t) {
-
-                    }
-                });
-
+                    });
             }
         });
         SignUp.setOnClickListener(new View.OnClickListener() {
