@@ -20,6 +20,7 @@ import Model.Otp;
 import Model.SignUpRequest;
 import Model.SignUpResponse;
 import Utilities.BaseActivity;
+import Utilities.SessionManager;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -35,6 +36,8 @@ public class SignUpActivity extends BaseActivity {
     private Button signUp;
     private TextView story1, terms, story2, privacy;
     private EditText fullName, phoneNumber, otp, password, email, confirmPassword;
+    private SessionManager sessionManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,7 @@ public class SignUpActivity extends BaseActivity {
         email.setTypeface(mTfSemiBold);
         confirmPassword.setTypeface(mTfSemiBold);
 
+        sessionManager = new SessionManager(getApplicationContext());
 
         phoneNumber.addTextChangedListener(new TextWatcher() {
             @Override
@@ -157,11 +161,13 @@ public class SignUpActivity extends BaseActivity {
                     public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                         if(response.errorBody()==null) {
                             Log.d("LoginResponse", response.body().getStatus().toString());
+                            sessionManager.createLoginSession(response.body().getData().getEmail().toString(),response.body().getData().getName().toString());
                             startActivity(new Intent(SignUpActivity.this,MainActivity.class));
                             finish();
                         }else{
                             try {
-                            Toast.makeText(getApplicationContext(),response.errorBody().string().toString(),Toast.LENGTH_LONG).show();
+                               // sessionManager.createLoginSession(response.errorBody().string().toString(),response.body().getData().getName().toString());
+                                Toast.makeText(getApplicationContext(),response.errorBody().string().toString(),Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(SignUpActivity.this,MainActivity.class));
                                 finish();
 

@@ -34,4 +34,6 @@
     <string name="weight">WEIGHT</string>
     <string name="volumetricweight">VOLUMETRICWEIGHT</string>
     <string name="noofseat">NO. OF SEAT</string>
+    <string name="action_notification">Notification</string>
+
 </resources>

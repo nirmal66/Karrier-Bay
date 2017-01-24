@@ -30,12 +30,12 @@
                 android:layout_marginTop="@dimen/edit_text_height"
                 android:textColor="@color/textHintColor"
                 android:textSize="@dimen/font_size"
-                android:text="@{data.name}"
+          />
+            <!-- android:text="@{data.name}"-->
 
-                />
 
 
-                <Spinner
+            <Spinner
                     android:id="@+id/height_unit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
