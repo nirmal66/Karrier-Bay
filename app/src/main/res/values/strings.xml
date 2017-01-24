@@ -21,5 +21,17 @@
     <string name="prompt_privacy">Privacy Policy</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="from">FROM</string>
+    <string name="to">TO</string>
+    <string name="deb_date">DEP. Date</string>
+    <string name="deb_time">DEP. Time</string>
+    <string name="arr_date">ARR. Date</string>
+    <string name="arr_time">ARR. Time</string>
+    <string name="prompt_wanttosend">Select</string>
+    <string name="wanttosend">WANT TO SEND</string>
+    <string name="next">NEXT</string>
+    <string name="category">CATEGORY</string>
+    <string name="weight">WEIGHT</string>
+    <string name="volumetricweight">VOLUMETRICWEIGHT</string>
+    <string name="noofseat">NO. OF SEAT</string>
 </resources>
