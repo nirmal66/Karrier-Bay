@@ -23,29 +23,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <TextView
-                android:id="@+id/forgot_password"
+                android:id="@+id/labelPickDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/edit_text_height"
-                android:textColor="@color/textHintColor"
-                android:textSize="@dimen/font_size"
-                android:text="@{user.firstName}"
-          />
+                android:layout_weight="50"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/textColorDark"
+                android:textSize="20dp"
+                android:text="@string/pick_details" />
 
-
-
-
-            <Spinner
-                    android:id="@+id/height_unit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-android:layout_marginTop="10dp"
-                    android:entries="@array/citynames"
-                    android:prompt="@string/prompt_password"
-                    android:spinnerMode="dialog"
-                    style="@style/Widget.AppCompat.Spinner.Underlined"
-                    android:layout_gravity="bottom"/>
 
             <LinearLayout
                 android:id="@+id/deplabelform"
@@ -55,23 +43,23 @@ android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
                 <TextView
-                    android:id="@+id/labelDEBDate"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/labelPickName"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
 
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/font_size"
-                    android:text="@string/deb_date" />
+                    android:text="@string/name" />
                 <TextView
-                    android:id="@+id/labelDEBTime"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/labelPickNumber"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
 
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/font_size"
-                    android:text="@string/deb_time" />
+                    android:text="@string/prompt_mobile_phonenumber" />
                 </LinearLayout>
 
             <LinearLayout
@@ -81,14 +69,14 @@ android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/etDEPDate"
+                        android:id="@+id/etPickName"
                         android:layout_width="wrap_content"
                         android:layout_weight="50"
                         android:layout_height="@dimen/edit_text_height"
                          android:inputType="text"
                         android:maxLines="1"
                         android:backgroundTint="@color/editTextSelected"
-                        android:drawableRight="@android:drawable/ic_menu_day"
+
                         android:singleLine="true"
                         android:textStyle="bold"
                         android:textColor="@color/textColorDark"
@@ -97,14 +85,14 @@ android:layout_marginTop="10dp"
                         android:textSize="@dimen/font_size" />
 
                     <EditText
-                        android:id="@+id/etDEPTime"
+                        android:id="@+id/etPickMobile"
                         android:layout_width="wrap_content"
                         android:layout_weight="50"
                         android:layout_height="@dimen/edit_text_height"
                         android:onClick="timeClick"
                         android:inputType="text"
                         android:maxLines="1"
-                        android:drawableRight="@android:drawable/ic_menu_week"
+
                         android:backgroundTint="@color/editTextSelected"
                         android:singleLine="true"
                         android:textStyle="bold"
@@ -113,170 +101,64 @@ android:layout_marginTop="10dp"
                         android:textSize="@dimen/font_size" />
      </LinearLayout>
 
-
-            <TextView
-                android:id="@+id/labelTo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:textColor="@color/textHintColor"
-                android:textSize="@dimen/font_size"
-                android:text="@string/from" />
-
-
-            <Spinner
-                android:id="@+id/spTo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:entries="@array/citynames"
-                android:prompt="@string/prompt_wanttosend"
-                android:spinnerMode="dialog"
-                style="@style/Widget.AppCompat.Spinner.Underlined"
-                android:layout_gravity="bottom"/>
-
             <LinearLayout
-                android:id="@+id/tolabelform"
+                android:id="@+id/labelpickFlatFrom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
                 <TextView
-                    android:id="@+id/labelToDate"
+                    android:id="@+id/labelPickFlatName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
 
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/font_size"
-                    android:text="@string/arr_date" />
+                    android:text="@string/flat_no" />
                 <TextView
-                    android:id="@+id/labelToTime"
+                    android:id="@+id/labelPickFlat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
 
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/font_size"
-                    android:text="@string/arr_time" />
+                    android:text="@string/address" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/toform"
+                android:id="@+id/pickform"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/etToDate"
+                    android:id="@+id/etFlatNo"
                     android:layout_width="wrap_content"
                     android:layout_weight="50"
-                    android:layout_height="@dimen/edit_text_height"
-                     android:inputType="text"
-                    android:onClick="dateClick"
-                    android:maxLines="1"
-                    android:backgroundTint="@color/editTextSelected"
-                    android:drawableRight="@android:drawable/ic_menu_day"
-                    android:singleLine="true"
-                    android:textStyle="bold"
-                    android:textColor="@color/textColorDark"
-                    android:textColorHint="@color/textHintColor"
-                    android:textSize="@dimen/font_size" />
-
-                <EditText
-                    android:id="@+id/etToTime"
-                    android:layout_width="wrap_content"
-                    android:layout_weight="50"
-                    android:layout_height="@dimen/edit_text_height"
-                     android:inputType="text"
-                    android:maxLines="1"
-                   android:onClick="timeClick"
-                    android:drawableRight="@android:drawable/ic_menu_week"
-                    android:backgroundTint="@color/editTextSelected"
-                    android:singleLine="true"
-                    android:textStyle="bold"
-                    android:textColor="@color/textColorDark"
-                    android:textColorHint="@color/textHintColor"
-                    android:textSize="@dimen/font_size" />
-            </LinearLayout>
-            <TextView
-                android:id="@+id/labelWantTo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:textColor="@color/textHintColor"
-                android:textSize="@dimen/font_size"
-                android:text="@string/wanttosend" />
-                <Spinner
-                    android:id="@+id/spinWantTo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/wanttosend"
-                    android:prompt="@string/prompt_wanttosend"
-                    android:spinnerMode="dialog"
-                    style="@style/Widget.AppCompat.Spinner.Underlined"
-                    android:layout_gravity="bottom"/>
-        <LinearLayout
-            android:id="@+id/dynamicformsarticle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/articlelabelform"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/labelCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="50"
-
-                    android:textColor="@color/textHintColor"
-                    android:textSize="@dimen/font_size"
-                    android:text="@string/category" />
-
-                <TextView
-                    android:id="@+id/labelWeight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="50"
-
-                    android:textColor="@color/textHintColor"
-                    android:textSize="@dimen/font_size"
-                    android:text="@string/weight" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/categoryweightforms"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Spinner
-                    android:id="@+id/spinCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="37"
-                    android:entries="@array/category"
-                    android:prompt="@string/prompt_wanttosend"
-                    android:spinnerMode="dialog"
-                    style="@style/Widget.AppCompat.Spinner.Underlined"
-                    android:layout_gravity="bottom"/>
-
-                <EditText
-                    android:id="@+id/etWeight"
-                    android:layout_width="wrap_content"
-                    android:layout_weight="63"
                     android:layout_height="@dimen/edit_text_height"
                     android:inputType="text"
                     android:maxLines="1"
+                    android:backgroundTint="@color/editTextSelected"
+
+                    android:singleLine="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/textColorDark"
+                    android:textColorHint="@color/textHintColor"
+                    android:onClick="dateClick"
+                    android:textSize="@dimen/font_size" />
+
+                <EditText
+                    android:id="@+id/etFlatName"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="50"
+                    android:layout_height="@dimen/edit_text_height"
                     android:onClick="timeClick"
+                    android:inputType="text"
+                    android:maxLines="1"
+
                     android:backgroundTint="@color/editTextSelected"
                     android:singleLine="true"
                     android:textStyle="bold"
@@ -285,88 +167,230 @@ android:layout_marginTop="10dp"
                     android:textSize="@dimen/font_size" />
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/articlelabelvolumetricform"
+                android:id="@+id/labelpickaddressFrom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
-
                 <TextView
-                    android:id="@+id/labelVolumetric"
+                    android:id="@+id/labelPickAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
 
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/font_size"
-                    android:text="@string/category" />
+                    android:text="@string/address" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/volumetweightforms"
+                android:id="@+id/pickaddressform"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Spinner
-                    android:id="@+id/spinHeight"
+                <EditText
+                    android:id="@+id/etPckAddress"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="33"
-                    android:entries="@array/height"
-                    android:prompt="@string/prompt_wanttosend"
-                    android:spinnerMode="dialog"
-                    style="@style/Widget.AppCompat.Spinner.Underlined"
-                    android:layout_gravity="bottom"/>
-                <Spinner
-                    android:id="@+id/spinWidth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="33"
-                    android:entries="@array/width"
-                    android:prompt="@string/prompt_wanttosend"
-                    android:spinnerMode="dialog"
-                    style="@style/Widget.AppCompat.Spinner.Underlined"
-                    android:layout_gravity="bottom"/>
-                <Spinner
-                    android:id="@+id/spinBand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="33"
-                    android:entries="@array/band"
-                    android:prompt="@string/prompt_wanttosend"
-                    android:spinnerMode="dialog"
-                    style="@style/Widget.AppCompat.Spinner.Underlined"
-                    android:layout_gravity="bottom"/>
+                    android:layout_weight="50"
+                    android:layout_height="@dimen/edit_text_height"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:backgroundTint="@color/editTextSelected"
+
+                    android:singleLine="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/textColorDark"
+                    android:textColorHint="@color/textHintColor"
+                    android:onClick="dateClick"
+                    android:textSize="@dimen/font_size" />
 
             </LinearLayout>
-            </LinearLayout>
-        <LinearLayout
-            android:id="@+id/dynamicformsPassengers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
             <TextView
-                android:id="@+id/labelSeat"
+                android:id="@+id/labelDeliveyDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/textColorDark"
+                android:textSize="20dp"
+                android:text="@string/delivery_details" />
 
 
-                android:textColor="@color/textHintColor"
-                android:textSize="@dimen/font_size"
-                android:text="@string/noofseat" />
-            <Spinner
-                android:id="@+id/spinSeat"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/deliverylabelform"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="33"
-                android:entries="@array/passengers"
-                android:prompt="@string/prompt_wanttosend"
-                android:spinnerMode="dialog"
-                style="@style/Widget.AppCompat.Spinner.Underlined"
-                android:layout_gravity="bottom"/>
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/labelDeliveyName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+
+                    android:textColor="@color/textHintColor"
+                    android:textSize="@dimen/font_size"
+                    android:text="@string/name" />
+                <TextView
+                    android:id="@+id/labelDeliveyNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+
+                    android:textColor="@color/textHintColor"
+                    android:textSize="@dimen/font_size"
+                    android:text="@string/prompt_mobile_phonenumber" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/delform"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etDeliveryName"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="50"
+                    android:layout_height="@dimen/edit_text_height"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:backgroundTint="@color/editTextSelected"
+
+                    android:singleLine="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/textColorDark"
+                    android:textColorHint="@color/textHintColor"
+                    android:onClick="dateClick"
+                    android:textSize="@dimen/font_size" />
+
+                <EditText
+                    android:id="@+id/etDeliveyMobile"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="50"
+                    android:layout_height="@dimen/edit_text_height"
+                    android:onClick="timeClick"
+                    android:inputType="text"
+                    android:maxLines="1"
+
+                    android:backgroundTint="@color/editTextSelected"
+                    android:singleLine="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/textColorDark"
+                    android:textColorHint="@color/textHintColor"
+                    android:textSize="@dimen/font_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/labeldeliveryFlatFrom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/labelDelveryFlatName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+
+                    android:textColor="@color/textHintColor"
+                    android:textSize="@dimen/font_size"
+                    android:text="@string/flat_no" />
+                <TextView
+                    android:id="@+id/labelDeliFlat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+
+                    android:textColor="@color/textHintColor"
+                    android:textSize="@dimen/font_size"
+                    android:text="@string/address" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/deliform"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etDeliveyFlatNo"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="50"
+                    android:layout_height="@dimen/edit_text_height"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:backgroundTint="@color/editTextSelected"
+
+                    android:singleLine="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/textColorDark"
+                    android:textColorHint="@color/textHintColor"
+                    android:onClick="dateClick"
+                    android:textSize="@dimen/font_size" />
+
+                <EditText
+                    android:id="@+id/etDeliveryFlatName"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="50"
+                    android:layout_height="@dimen/edit_text_height"
+                    android:onClick="timeClick"
+                    android:inputType="text"
+                    android:maxLines="1"
+
+                    android:backgroundTint="@color/editTextSelected"
+                    android:singleLine="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/textColorDark"
+                    android:textColorHint="@color/textHintColor"
+                    android:textSize="@dimen/font_size" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/labeldeliveryaddressFrom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/labelDeliveyAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+
+                    android:textColor="@color/textHintColor"
+                    android:textSize="@dimen/font_size"
+                    android:text="@string/address" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/deliaddressform"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etDeliAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="50"
+                    android:layout_height="@dimen/edit_text_height"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:backgroundTint="@color/editTextSelected"
+
+                    android:singleLine="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/textColorDark"
+                    android:textColorHint="@color/textHintColor"
+                    android:onClick="dateClick"
+                    android:textSize="@dimen/font_size" />
+
             </LinearLayout>
             <Button
                 android:id="@+id/email_sign_in_button"

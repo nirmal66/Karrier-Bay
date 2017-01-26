@@ -32,8 +32,20 @@
     <string name="next">NEXT</string>
     <string name="category">CATEGORY</string>
     <string name="weight">WEIGHT</string>
-    <string name="volumetricweight">VOLUMETRICWEIGHT</string>
+    <string name="volumetricweight">VOLUMETRIC WEIGHT</string>
     <string name="noofseat">NO. OF SEAT</string>
     <string name="action_notification">Notification</string>
+    <string name="pick_details">Pick Details</string>
+    <string name="name">Name</string>
+    <string name="flat_no">FLAT NO</string>
+    <string name="address">ADDRESS</string>
+    <string name="delivery_details">DELIVEY DETAILS</string>
+    <string name="departure_from">DEPARTURE FROM</string>
+    <string name="arrival_at">ARRIVAL AT</string>
+    <string name="trip_summary">TRIP SUMMARY</string>
+    <string name="departure_date_time">DEP. DATE and TIME</string>
+    <string name="pickup_details">Pick UP Details</string>
+    <string name="proceed">PROCEED</string>
 
-</resources>
+
+ </resources>
