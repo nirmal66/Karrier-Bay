@@ -35,6 +35,7 @@
     <string name="volumetricweight">VOLUMETRIC WEIGHT</string>
     <string name="noofseat">NO. OF SEAT</string>
     <string name="action_notification">Notification</string>
+    <string name="action_home">Home</string>
     <string name="pick_details">Pick Details</string>
     <string name="name">Name</string>
     <string name="flat_no">FLAT NO</string>

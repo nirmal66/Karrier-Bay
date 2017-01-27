@@ -14,7 +14,8 @@ import android.view.MenuItem;
 
 import com.yourapp.developer.karrierbay.R;
 
-import Fragment.*;
+import Fragment.HomeFragment;
+import Fragment.NotificationFragment;
 import Utilities.SessionManager;
 
 /**
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private SessionManager sessionManager;
     private NavigationView navigationView;
     private String tag;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +71,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.action_notification)
         {
             fragment(new NotificationFragment(),"NotificationFragment");
+            //item.setVisible(false);
         }
+
         return super.onOptionsItemSelected(item);
     }
 
