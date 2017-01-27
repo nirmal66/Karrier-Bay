@@ -14,7 +14,7 @@ import android.view.MenuItem;
 
 import com.yourapp.developer.karrierbay.R;
 
-import Fragment.HomeFragment;
+import Fragment.*;
 import Utilities.SessionManager;
 
 /**
@@ -62,6 +62,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id == R.id.action_notification)
+        {
+            fragment(new NotificationFragment(),"NotificationFragment");
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

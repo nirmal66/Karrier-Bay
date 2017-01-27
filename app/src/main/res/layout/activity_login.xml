@@ -38,7 +38,7 @@
                     android:id="@+id/phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/edit_text_height"
-                    android:hint="@string/email"
+                    android:hint="@string/title"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true"
