@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <data>
+        <variable name="user" type="Model.User"/>
+    </data>
+<LinearLayout
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_marginBottom="@dimen/activity_horizontal_margin"
+    android:background="@color/textColorWhite"
+    android:padding="5dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/myimage"
+            android:id="@+id/imageView"
+  />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_weight="50"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="19dp"
+            android:textColor="@color/textColorDark"
+            android:textSize="10dp"
+            android:text="Tony Tom" />
+        <TextView
+            android:id="@+id/tvVerificationStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="13dp"
+            android:textColor="@color/textColorWhite"
+            android:background="@drawable/tv_verify_outline"
+            android:textSize="7dp"
+            android:text="Verified carrier" />
+            <TextView
+                android:id="@+id/tvCarrierDetails"
+                android:layout_width="match_parent"
+                android:layout_height="19dp"
+                android:layout_gravity="center"
+                android:textColor="@color/textHintColor"
+                android:textSize="12dp"
+                android:gravity="left|bottom"
+                android:text="BTM Layout, Banglore" />
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+
+            android:layout_height="match_parent"
+
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/rating_star_red"
+                />
+            <TextView
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+
+                android:textColor="@color/textColorHighlight"
+                android:textSize="12dp"
+                android:text="4.0" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/textHintColor"/>
+
+            <LinearLayout
+                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/labelfrom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+
+                    android:textColor="@color/textHintColor"
+                    android:textSize="10dp"
+                    android:text="@string/from" />
+                <TextView
+                    android:id="@+id/labelFromValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:textColor="@color/textColorDark"
+                    android:textSize="12dp"
+                    android:text="Banglore, Karnataka" />
+                </LinearLayout>
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/labelTo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+
+            android:textColor="@color/textHintColor"
+            android:textSize="10dp"
+            android:text="@string/to" />
+        <TextView
+            android:id="@+id/labelToValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+
+            android:textColor="@color/textColorDark"
+            android:textSize="12dp"
+            android:text="Calicut, Karnataka" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/textHintColor"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:srcCompat="@drawable/card_time"
+            android:id="@+id/ivHrs"
+             />
+        <TextView
+            android:id="@+id/tvHrs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:layout_marginLeft="6dp"
+
+            android:textColor="@color/textColorDark"
+            android:textSize="11dp"
+            android:text="@string/to" />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:srcCompat="@drawable/card_item"
+            android:id="@+id/ivItem"
+            />
+        <TextView
+            android:id="@+id/tvItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:layout_marginLeft="6dp"
+
+            android:textColor="@color/textColorDark"
+            android:textSize="11dp"
+            android:text="Goods or Person" />
+        <TextView
+            android:id="@+id/tvnotify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:layout_marginLeft="6dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/tv_notify_outline"
+            android:textColor="@color/textColorHighlight"
+            android:textSize="11dp"
+            android:text="   NOTIFY   "  />
+    </LinearLayout>
+
+</LinearLayout>
+    </layout>
