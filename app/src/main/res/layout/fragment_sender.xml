@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- <data>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+ <data>
          <variable name="user" type="Model.User"/>
-     </data>-->
+     <import type="android.view.View"/>
+     </data>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -275,6 +278,7 @@
                             android:layout_weight="37"
                             android:entries="@array/category"
                             android:prompt="@string/prompt_wanttosend"
+                            android:selectedItemPosition="@={user.spinCategoryIdx}"
                             android:spinnerMode="dialog" />
 
                         <EditText
@@ -290,7 +294,7 @@
                             android:textColor="@color/textColorDark"
                             android:textColorHint="@color/textHintColor"
                             android:textSize="@dimen/font_size"
-                            android:textStyle="bold" />
+                             android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout

@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                             et.setText(arg1 + "-" + arg2 + 1 + "-" + arg3);
                         }
-                    }, year, month, day);
+                    }, year, month, day).show();
 }
 
     public void timeClick(View view) {
