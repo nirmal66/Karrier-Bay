@@ -393,7 +393,7 @@
 
             </LinearLayout>
             <Button
-                android:id="@+id/email_sign_in_button"
+                android:id="@+id/btn_sender_next"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -401,6 +401,7 @@
                 android:background="@drawable/button_outline"
                 android:textSize="@dimen/font_size_hint"
                 android:text="@string/next"
+                android:onClick="nextClick"
                 android:textColor="@color/textColorWhite"
                 android:textStyle="bold" />
         </LinearLayout>

@@ -15,7 +15,7 @@
     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="56dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="10dp"
 
@@ -24,26 +24,26 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:srcCompat="@drawable/myimage"
+            android:background="@drawable/myimage"
             android:id="@+id/imageView"
   />
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_weight="50"
+            android:layout_weight="56"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:orientation="vertical">
         <TextView
             android:id="@+id/tvName"
             android:layout_width="match_parent"
-            android:layout_height="19dp"
+            android:layout_height="21dp"
             android:textColor="@color/textColorDark"
-            android:textSize="10dp"
-            android:text="Tony Tom" />
+            android:textSize="12dp"
+            android:text="@{user.firstName}" />
         <TextView
             android:id="@+id/tvVerificationStatus"
             android:layout_width="wrap_content"
-            android:layout_height="13dp"
+            android:layout_height="15dp"
             android:textColor="@color/textColorWhite"
             android:background="@drawable/tv_verify_outline"
             android:textSize="7dp"
@@ -51,7 +51,7 @@
             <TextView
                 android:id="@+id/tvCarrierDetails"
                 android:layout_width="match_parent"
-                android:layout_height="19dp"
+                android:layout_height="21dp"
                 android:layout_gravity="center"
                 android:textColor="@color/textHintColor"
                 android:textSize="12dp"
@@ -154,7 +154,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            app:srcCompat="@drawable/card_time"
+            android:background="@drawable/card_time"
             android:id="@+id/ivHrs"
              />
         <TextView
@@ -170,7 +170,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            app:srcCompat="@drawable/card_item"
+            android:background="@drawable/card_item"
             android:id="@+id/ivItem"
             />
         <TextView

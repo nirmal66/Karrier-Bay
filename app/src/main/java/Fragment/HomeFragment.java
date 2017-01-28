@@ -43,7 +43,8 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 ((MainActivity) getActivity()).fragment(new SenderFragment(),"SenderFragment");
-            }
+
+           }
         });
     }
 
