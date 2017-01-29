@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,7 +46,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         sessionManager = new SessionManager(getApplicationContext());
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Karrier Bay</font>"));
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -121,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         public void onDateSet(DatePicker arg0,
                                               int arg1, int arg2, int arg3) {
 
-                            et.setText(arg1 + "-" + arg2 + 1 + "-" + arg3);
+                            et.setText(arg3 + "-" + arg2 + 1 + "-" + arg1);
                         }
                     }, year, month, day).show();
 }

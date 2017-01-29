@@ -397,6 +397,7 @@
                     android:id="@+id/btn_sender_next"
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
+                    android:layout_marginBottom="27dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/button_gap"
                     android:background="@drawable/button_outline"

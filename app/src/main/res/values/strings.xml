@@ -36,7 +36,7 @@
     <string name="noofseat">NO. OF SEAT</string>
     <string name="action_notification">Notification</string>
     <string name="action_home">Home</string>
-    <string name="pick_details">Pick Details</string>
+    <string name="pick_details">PICK DETAILS</string>
     <string name="name">Name</string>
     <string name="flat_no">FLAT NO</string>
     <string name="address">ADDRESS</string>
@@ -45,7 +45,7 @@
     <string name="arrival_at">ARRIVAL AT</string>
     <string name="trip_summary">TRIP SUMMARY</string>
     <string name="departure_date_time">DEP. DATE and TIME</string>
-    <string name="pickup_details">Pick UP Details</string>
+    <string name="pickup_details">PICK UP DETAILS</string>
     <string name="proceed">PROCEED</string>
 
 

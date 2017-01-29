@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.yourapp.developer.karrierbay.R;
 
 import Adapter.MyAdapter;
 import Model.DataList;
+import activity.MainActivity;
 
 public class CarrierListFragment extends Fragment {
 
@@ -36,6 +38,8 @@ public class CarrierListFragment extends Fragment {
 
         MyAdapter mAdapter = new MyAdapter(new DataList().list);
         mRecyclerView.setAdapter(mAdapter);
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>CARRIER LIST</font>"));
+
 //
 //        FragmentDemoBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_demo, container, false);
 //        final UserViewModel userViewModel = new UserViewModel();

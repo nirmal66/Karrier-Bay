@@ -30,8 +30,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="50"
                 android:layout_marginBottom="10dp"
+                android:layout_marginTop="7dp"
                 android:textColor="@color/textColorDark"
-                android:textSize="20dp"
+                android:textSize="17dp"
                 android:text="@string/pick_details" />
 
 
@@ -215,7 +216,7 @@
                 android:layout_weight="50"
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/textColorDark"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:text="@string/delivery_details" />
 
 
@@ -395,6 +396,7 @@
             <Button
                 android:id="@+id/btn_sender_next"
                 style="?android:textAppearanceSmall"
+                android:layout_marginBottom="27dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/button_gap"

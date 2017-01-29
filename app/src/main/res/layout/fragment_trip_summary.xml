@@ -2,9 +2,9 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
-  <!--  <data>
+   <data>
         <variable name="user" type="Model.User"/>
-    </data>-->
+    </data>
 <LinearLayout
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -18,7 +18,7 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:id="@+id/scheduleform"
+android:layout_marginTop="7dp"       android:id="@+id/scheduleform"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -31,7 +31,7 @@
                 android:layout_weight="50"
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/textColorDark"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:text="@string/trip_summary" />
 
 
@@ -232,7 +232,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="19dp"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:text="@string/pickup_details"/>
 
             <TextView
@@ -249,7 +249,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="19dp"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:text="@string/delivery_details"/>
 
             <TextView
@@ -261,11 +261,12 @@
                 android:textSize="15dp"
                 android:text="Raghav +9894100445 \n 49g/7,Vinayagar kovil street, \n Chennai "/>
             <Button
-                android:id="@+id/email_sign_in_button"
+                android:id="@+id/btn_sender_next"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/button_gap"
+                android:layout_marginBottom="27dp"
                 android:background="@drawable/button_outline"
                 android:textSize="@dimen/font_size_hint"
                 android:text="@string/proceed"
