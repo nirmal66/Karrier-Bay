@@ -226,9 +226,11 @@
                     android:layout_gravity="bottom"
                     android:entries="@array/wanttosend"
                     android:prompt="@string/prompt_wanttosend"
+
                     android:spinnerMode="dialog" />
 
                 <LinearLayout
+                    android:visibility="@{user.spinWantToSendIdx == 1 ? View.GONE : View.VISIBLE}"
                     android:id="@+id/dynamicformsarticle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -264,6 +266,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+
                         android:id="@+id/categoryweightforms"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -278,12 +281,13 @@
                             android:layout_weight="37"
                             android:entries="@array/category"
                             android:prompt="@string/prompt_wanttosend"
-                            android:selectedItemPosition="@={user.spinCategoryIdx}"
                             android:spinnerMode="dialog" />
-
+                        <!--bind:selectedValue="@={user.text}"-->
+                        <!--android:selectedItemPosition="@={user.spinWantToSendIdx}"-->
                         <EditText
                             android:id="@+id/etWeight"
                             android:layout_width="wrap_content"
+
                             android:layout_height="@dimen/edit_text_height"
                             android:layout_weight="63"
                             android:backgroundTint="@color/editTextSelected"
@@ -360,6 +364,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="@{user.spinWantToSendIdx == 0 ? View.GONE : View.VISIBLE}"
+
                     android:id="@+id/dynamicformsPassengers"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
