@@ -1,26 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <group
         android:id="@+id/nav_top_view"
         android:checkableBehavior="single">
-
-        <item
-            android:id="@+id/nav_my_profile"
-            android:icon="@drawable/menu_profile"
-            android:title="My Profile"
-            />
-
         <item
             android:id="@+id/nav_my_bay"
             android:title="My Bay"
             android:icon="@drawable/menu_my_bay"/>
-
-    </group>
-
-    <group
-        android:id="@+id/nav_mid_view"
-        android:checkableBehavior="single">
 
         <item
             android:id="@+id/nav_refer_and_earn"
@@ -47,11 +35,6 @@
             android:id="@+id/nav_settings"
             android:icon="@drawable/menu_settings"
             android:title="Settings" />
-
-        <item
-            android:id="@+id/nav_legal"
-            android:icon="@drawable/menu_legal"
-            android:title="Legal" />
 
         <item
             android:id="@+id/nav_logout"

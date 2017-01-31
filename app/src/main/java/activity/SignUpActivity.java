@@ -115,18 +115,19 @@ public class SignUpActivity extends BaseActivity {
                 Log.i("checking the i value","i value is "+ i+".");
                 if(i==4)
                 {
-                    Call<Otp> call = apiService.verifyOtp(Integer.parseInt(otp.getText().toString()),"+91"+phoneNumber.getText().toString());
+                    Call<Otp> call = apiService.verifyOtp(otp.getText().toString(),"+91"+phoneNumber.getText().toString());
                     call.enqueue(new Callback<Otp>() {
                         @Override
                         public void onResponse(Call<Otp> call, Response<Otp> response) {
                             if(response.code()==200)
                             {
                                 Log.d("LoginResponse", response.body().toString());
-                                Toast.makeText(getApplicationContext(),response.body().toString(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),response.body().getMessage().toString(),Toast.LENGTH_LONG).show();
                             }
                             if(response.code()==400)
                             {
-                                //Log.d("LoginResponse", response.body().getError().toString());
+
+                                Log.d("LoginResponse", response.raw().request().url().toString());
                                 Toast.makeText(getApplicationContext(),"bad response",Toast.LENGTH_LONG).show();
                             }
 
@@ -161,15 +162,16 @@ public class SignUpActivity extends BaseActivity {
                     public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                         if(response.errorBody()==null) {
                             Log.d("LoginResponse", response.body().getStatus().toString());
-                            sessionManager.createLoginSession(response.body().getData().getEmail().toString(),response.body().getData().getName().toString());
+                            sessionManager.createLoginSession(response.body().getData().getEmail().toString(),response.body().getData().getUid().toString());
                             startActivity(new Intent(SignUpActivity.this,MainActivity.class));
                             finish();
                         }else{
                             try {
                                // sessionManager.createLoginSession(response.errorBody().string().toString(),response.body().getData().getName().toString());
+                               // Toast.makeText(getApplicationContext(),response.errorBody().string().toString(),Toast.LENGTH_LONG).show();
                                 Toast.makeText(getApplicationContext(),response.errorBody().string().toString(),Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(SignUpActivity.this,MainActivity.class));
-                                finish();
+                                //  startActivity(new Intent(SignUpActivity.this,MainActivity.class));
+                              //  finish();
 
                             } catch (IOException e) {
                             e.printStackTrace();

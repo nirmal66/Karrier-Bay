@@ -22,5 +22,5 @@ public interface ApiInterface {
     @POST("auth/send_otp/{phone}")
     Call<Otp> getOtp(@Path("phone") String phoneNumber);
     @POST("auth/verify/{otp}/phone_number/{phone}")
-    Call<Otp> verifyOtp(@Path("otp") int otp, @Path("phone") String phoneNumber);
+    Call<Otp> verifyOtp(@Path("otp") String otp, @Path("phone") String phoneNumber);
 }

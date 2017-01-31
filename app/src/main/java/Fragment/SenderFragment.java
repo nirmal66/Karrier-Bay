@@ -27,8 +27,7 @@ public class SenderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
        // return inflater.inflate(R.layout.fragment_sender, container, false);
-        FragmentSenderBinding binding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_sender, container, false);
+        FragmentSenderBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sender, container, false);
         View view = binding.getRoot();
         //here data must be an instance of the class MarsDataProvider
           user=new User("Vel");
