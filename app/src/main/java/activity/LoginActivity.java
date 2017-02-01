@@ -27,7 +27,7 @@ public class LoginActivity extends BaseActivity {
 
     private TextView SignUp, haveAccount, forgotPassword;
     private Button signIn;
-    private EditText email,password;
+    private EditText email, password;
     private SessionManager sessionManager;
 
     @Override
@@ -35,14 +35,14 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
 
-            setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login);
 
-        SignUp = (TextView)findViewById(R.id.sign_up);
-        haveAccount = (TextView)findViewById(R.id.account);
-        forgotPassword = (TextView)findViewById(R.id.forgot_password);
-        signIn = (Button)findViewById(R.id.email_sign_in_button);
-        email = (EditText)findViewById(R.id.phone_number);
-        password = (EditText)findViewById(R.id.password);
+        SignUp = (TextView) findViewById(R.id.sign_up);
+        haveAccount = (TextView) findViewById(R.id.account);
+        forgotPassword = (TextView) findViewById(R.id.forgot_password);
+        signIn = (Button) findViewById(R.id.email_sign_in_button);
+        email = (EditText) findViewById(R.id.phone_number);
+        password = (EditText) findViewById(R.id.password);
 
         signIn.setTypeface(mTfBold);
         haveAccount.setTypeface(mTfRegular);
@@ -58,12 +58,11 @@ public class LoginActivity extends BaseActivity {
         }
 
 
-
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                Boolean validate = Validation();
+                if (validate) {
                     Call<LoginResponse> call = apiService.getLogin(new LoginRequest(email.getText().toString(), password.getText().toString()));
                     call.enqueue(new Callback<LoginResponse>() {
                         @Override
@@ -72,7 +71,7 @@ public class LoginActivity extends BaseActivity {
                             if (response.code() == 200) {
                                 Log.d("LoginResponse", response.body().getData().getEmail().toString());
                                 // Log.d("Error",response.body().getErrors().toString());
-                                sessionManager.createLoginSession(response.body().getData().getEmail().toString(),response.body().getData().getUid().toString());
+                                sessionManager.createLoginSession(response.body().getData().getEmail().toString(), response.body().getData().getUid().toString());
                                 Toast.makeText(getApplicationContext(), response.body().getData().getEmail().toString(), Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 finish();
@@ -88,18 +87,38 @@ public class LoginActivity extends BaseActivity {
 
                         }
                     });
+                }
             }
         });
         SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
             }
         });
         // Set up the login form.
 
     }
 
+
+    public boolean Validation() {
+        if (email.getText().length() == 0 || password.getText().length() == 0) {
+            if (email.getText().length() == 0) {
+                email.setError("Enter valid email");
+            } else {
+                password.setError("Enter your password");
+            }
+            return false;
+        } /*else if (email.getText().length() == 0) {
+            email.setError("Enter valid email");
+            return false;
+        } else if (password.getText().length() == 0) {
+            password.setError("Enter your password");
+            return false;
+        }*/ else {
+            return true;
+        }
+    }
 
 }
 

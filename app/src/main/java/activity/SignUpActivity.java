@@ -78,15 +78,14 @@ public class SignUpActivity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                Log.i("checking the i value","i value is "+ i+".");
-                if(i==9)
-                {
-                    Call<Otp> call = apiService.getOtp("+91"+phoneNumber.getText().toString());
+                Log.i("checking the i value", "i value is " + i + ".");
+                if (i == 9) {
+                    Call<Otp> call = apiService.getOtp("+91" + phoneNumber.getText().toString());
                     call.enqueue(new Callback<Otp>() {
                         @Override
                         public void onResponse(Call<Otp> call, Response<Otp> response) {
                             Log.d("LoginResponse", response.body().getMessage().toString());
-                            Toast.makeText(getApplicationContext(),response.body().getMessage().toString(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), response.body().getMessage().toString(), Toast.LENGTH_LONG).show();
                         }
 
                         @Override
@@ -112,23 +111,20 @@ public class SignUpActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Log.i("checking the i value","i value is "+ i+".");
-                if(i==4)
-                {
-                    Call<Otp> call = apiService.verifyOtp(otp.getText().toString(),"+91"+phoneNumber.getText().toString());
+                Log.i("checking the i value", "i value is " + i + ".");
+                if (i == 4) {
+                    Call<Otp> call = apiService.verifyOtp(otp.getText().toString(), "+91" + phoneNumber.getText().toString());
                     call.enqueue(new Callback<Otp>() {
                         @Override
                         public void onResponse(Call<Otp> call, Response<Otp> response) {
-                            if(response.code()==200)
-                            {
+                            if (response.code() == 200) {
                                 Log.d("LoginResponse", response.body().toString());
-                                Toast.makeText(getApplicationContext(),response.body().getMessage().toString(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), response.body().getMessage().toString(), Toast.LENGTH_LONG).show();
                             }
-                            if(response.code()==400)
-                            {
+                            if (response.code() == 400) {
 
                                 Log.d("LoginResponse", response.raw().request().url().toString());
-                                Toast.makeText(getApplicationContext(),"bad response",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "bad response", Toast.LENGTH_LONG).show();
                             }
 
                         }
@@ -152,41 +148,65 @@ public class SignUpActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
 
-              String signinRequest = new Gson().toJson(new SignUpRequest(email.getText().toString(),password.getText().toString(),confirmPassword.getText().toString(),phoneNumber.getText().toString(),"http://asss.com",fullName.getText().toString()));
-                Log.d("LoginResponse", signinRequest);
-                RequestBody body =
-                        RequestBody.create(MediaType.parse("application/json"), signinRequest);
-                Call<SignUpResponse> call = apiService.getSignUp(body);
-                call.enqueue(new Callback<SignUpResponse>() {
-                    @Override
-                    public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
-                        if(response.errorBody()==null) {
-                            Log.d("LoginResponse", response.body().getStatus().toString());
-                            sessionManager.createLoginSession(response.body().getData().getEmail().toString(),response.body().getData().getUid().toString());
-                            startActivity(new Intent(SignUpActivity.this,MainActivity.class));
-                            finish();
-                        }else{
-                            try {
-                               // sessionManager.createLoginSession(response.errorBody().string().toString(),response.body().getData().getName().toString());
-                               // Toast.makeText(getApplicationContext(),response.errorBody().string().toString(),Toast.LENGTH_LONG).show();
-                                Toast.makeText(getApplicationContext(),response.errorBody().string().toString(),Toast.LENGTH_LONG).show();
-                                //  startActivity(new Intent(SignUpActivity.this,MainActivity.class));
-                              //  finish();
+                boolean validate = Validation();
+                if (validate) {
+                    String signinRequest = new Gson().toJson(new SignUpRequest(email.getText().toString(), password.getText().toString(), confirmPassword.getText().toString(), phoneNumber.getText().toString(), "http://asss.com", fullName.getText().toString()));
+                    Log.d("LoginResponse", signinRequest);
+                    RequestBody body =
+                            RequestBody.create(MediaType.parse("application/json"), signinRequest);
+                    Call<SignUpResponse> call = apiService.getSignUp(body);
+                    call.enqueue(new Callback<SignUpResponse>() {
+                        @Override
+                        public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
+                            if (response.errorBody() == null) {
+                                Log.d("LoginResponse", response.body().getStatus().toString());
+                                sessionManager.createLoginSession(response.body().getData().getEmail().toString(), response.body().getData().getUid().toString());
+                                startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                                finish();
+                            } else {
+                                try {
+                                    // sessionManager.createLoginSession(response.errorBody().string().toString(),response.body().getData().getName().toString());
+                                    // Toast.makeText(getApplicationContext(),response.errorBody().string().toString(),Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), response.errorBody().string().toString(), Toast.LENGTH_LONG).show();
+                                    //  startActivity(new Intent(SignUpActivity.this,MainActivity.class));
+                                    //  finish();
 
-                            } catch (IOException e) {
-                            e.printStackTrace();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
                         }
+
+                        @Override
+                        public void onFailure(Call<SignUpResponse> call, Throwable t) {
+                            Log.d("failure", t.toString());
+
                         }
-                    }
-
-                    @Override
-                    public void onFailure(Call<SignUpResponse> call, Throwable t) {
-                        Log.d("failure", t.toString());
-
-                    }
-                });
+                    });
+                }
             }
         });
+    }
+
+    public boolean Validation() {
+        if (email.getText().length() == 0 || password.getText().length() == 0 || confirmPassword.getText().length() == 0 || phoneNumber.getText().length() == 0 || fullName.getText().length() == 0 || otp.getText().length() == 0) {
+            if (fullName.getText().length() == 0) {
+                fullName.setError("Enter your name");
+            } else if (email.getText().length() == 0) {
+                email.setError("Enter valid email");
+            } else if (password.getText().length() == 0) {
+                password.setError("Enter your password");
+            } else if (confirmPassword.getText().length() == 0) {
+                confirmPassword.setError("Enter your password");
+            } else if (phoneNumber.getText().length() == 0) {
+                phoneNumber.setError("Enter your phone number");
+            } else if (otp.getText().length() == 0) {
+                otp.setError("Enter valid OTP");
+            }
+            return false;
+        } else {
+            return true;
+        }
     }
 
 
