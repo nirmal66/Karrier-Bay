@@ -3,6 +3,7 @@ package RetroGit;
 import Model.LoginRequest;
 import Model.LoginResponse;
 import Model.Otp;
+import Model.SenderOrderRequest;
 import Model.SignUpResponse;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -17,10 +18,17 @@ public interface ApiInterface {
     // @FormUrlEncoded
     @POST("auth/sign_in")
     Call<LoginResponse> getLogin(@Body LoginRequest loginRequest);
+
     @POST("auth")
     Call<SignUpResponse> getSignUp(@Body RequestBody body);
+
     @POST("auth/send_otp/{phone}")
     Call<Otp> getOtp(@Path("phone") String phoneNumber);
+
     @POST("auth/verify/{otp}/phone_number/{phone}")
     Call<Otp> verifyOtp(@Path("otp") int otp, @Path("phone") String phoneNumber);
+
+    @POST("sender/order")
+    Call<SenderOrderRequest> postSenderOrder(@Body SenderOrderRequest senderOrderRequest);
+
 }
