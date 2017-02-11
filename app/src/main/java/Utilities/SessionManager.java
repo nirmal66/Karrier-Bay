@@ -6,13 +6,17 @@ import android.content.SharedPreferences;
 
 import java.util.HashMap;
 
+import Model.LoginResponse;
 import activity.LoginActivity;
+import okhttp3.Headers;
+import retrofit2.Response;
+
 
 /**
  * Created by nirmal.ku on 11/7/2016.
  */
 public class SessionManager {
-    protected SharedPreferences sharedPreferences;
+    public SharedPreferences sharedPreferences;
     // Editor for Shared preferences
     SharedPreferences.Editor editor;
     // Context
@@ -28,8 +32,8 @@ public class SessionManager {
     // Email address (make variable public to access from outside)
     public static final String KEY_EMAIL = "email";
 
-    public static final String KEY_ACCESS_TOKEN = "accessToken";
-
+    public static final String ACCESS_TOKEN = "Access-Token";
+    public static final String CLIENT = "Client";
     // Constructor
     public SessionManager(Context context){
         this._context = context;
@@ -40,7 +44,7 @@ public class SessionManager {
     /**
      * Create login session
      * */
-    public void createLoginSession(String email,String name){
+    public void createLoginSession(String email, String name, Headers headers){
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
         // Storing name in pref
@@ -48,6 +52,10 @@ public class SessionManager {
         // Storing email in pref
         editor.putString(KEY_EMAIL, email);
         // commit changes
+        editor.putString(ACCESS_TOKEN, headers.get("access-token"));
+
+        editor.putString(CLIENT,headers.get("client")); ;
+
         editor.commit();
     }
 

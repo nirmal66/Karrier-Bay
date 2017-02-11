@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/tools">
  <data>
-         <variable name="user" type="Model.User"/>
+         <variable name="sender" type="Model.SenderOrderRequest"/>
      <import type="android.view.View"/>
      </data>
     <LinearLayout
@@ -230,7 +230,7 @@
                     android:spinnerMode="dialog" />
 
                 <LinearLayout
-                    android:visibility="@{user.spinWantToSendIdx == 1 ? View.GONE : View.VISIBLE}"
+                    android:visibility="@{sender.spinWantToSendIdx == 1 ? View.GONE : View.VISIBLE}"
                     android:id="@+id/dynamicformsarticle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -364,7 +364,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="@{user.spinWantToSendIdx == 0 ? View.GONE : View.VISIBLE}"
+                    android:visibility="@{sender.spinWantToSendIdx == 0 ? View.GONE : View.VISIBLE}"
 
                     android:id="@+id/dynamicformsPassengers"
                     android:layout_width="match_parent"

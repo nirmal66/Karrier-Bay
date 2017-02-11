@@ -70,8 +70,10 @@ public class LoginActivity extends BaseActivity {
 
                             if (response.code() == 200) {
                                 Log.d("LoginResponse", response.body().getData().getEmail().toString());
+
                                 // Log.d("Error",response.body().getErrors().toString());
-                                sessionManager.createLoginSession(response.body().getData().getEmail().toString(), response.body().getData().getUid().toString());
+                                sessionManager.createLoginSession(response.body().getData().getEmail().toString(),
+                                        response.body().getData().getUid().toString(),response.headers());
                                 Toast.makeText(getApplicationContext(), response.body().getData().getEmail().toString(), Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 finish();

@@ -27,6 +27,8 @@ import java.util.HashMap;
 
 import Fragment.HomeFragment;
 import Fragment.NotificationFragment;
+import RetroGit.ApiClient;
+import RetroGit.ApiInterface;
 import Utilities.SessionManager;
 
 /**
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String tag;
     private HashMap<String,String> user;
     private TextView emailHeader;
+    public ApiInterface apiService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         emailHeader = (TextView)hView.findViewById(R.id.email_header);
         user = sessionManager.getUserDetails();
         emailHeader.setText(user.get(SessionManager.KEY_NAME));
+        apiService = ApiClient.getClientWithHeader(this).create(ApiInterface.class);
 
         fragment(new HomeFragment(), "MainFragment");
     }
