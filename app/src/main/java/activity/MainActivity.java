@@ -18,9 +18,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.yourapp.developer.karrierbay.R;
+
+import java.util.HashMap;
 
 import Fragment.HomeFragment;
 import Fragment.NotificationFragment;
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private SessionManager sessionManager;
     private NavigationView navigationView;
     private String tag;
+    private HashMap<String,String> user;
+    private TextView emailHeader;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,14 +50,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         sessionManager = new SessionManager(getApplicationContext());
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
+
+
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Karrier Bay</font>"));
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+
+        View hView = navigationView.getHeaderView(0);
+        emailHeader = (TextView)hView.findViewById(R.id.email_header);
+        user = sessionManager.getUserDetails();
+        emailHeader.setText(user.get(SessionManager.KEY_NAME));
 
         fragment(new HomeFragment(), "MainFragment");
     }
