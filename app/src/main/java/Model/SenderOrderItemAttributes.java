@@ -1,12 +1,14 @@
 package Model;
 
+import android.databinding.BaseObservable;
+
 /**
  * Created by vel on 11/2/17.
  */
 
-public class Sender_order_item_attributes
+public class SenderOrderItemAttributes extends BaseObservable
 {
-    private Item_attributes item_attributes;
+    private ItemAttributes item_attributes;
 
     private String quantity;
 
@@ -34,17 +36,17 @@ public class Sender_order_item_attributes
 
     private int item_subtype_index;
 
-    public Item_attributes getItem_attributes ()
+    public ItemAttributes getItem_attributes ()
     {
         if(item_attributes==null)
         {
-            item_attributes=new Item_attributes();
+            item_attributes=new ItemAttributes();
         }
 
         return item_attributes;
     }
 
-    public void setItem_attributes (Item_attributes item_attributes)
+    public void setItem_attributes (ItemAttributes item_attributes)
     {
         this.item_attributes = item_attributes;
     }

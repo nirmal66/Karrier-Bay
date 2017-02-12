@@ -2,10 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/tools">
- <data>
-         <variable name="sender" type="Model.SenderOrderRequest"/>
-     <import type="android.view.View"/>
-     </data>
+    <data>
+        <variable name="sender" type="Model.SenderOrder"/>
+        <variable name="item" type="Model.ItemAttributes"/>
+
+
+        <import type="android.view.View"/>
+    </data>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,7 +43,7 @@
 
 
                 <Spinner
-                    android:id="@+id/height_unit"
+                    android:id="@+id/sp_from_loc"
                     style="@style/Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -131,7 +134,7 @@
 
 
                 <Spinner
-                    android:id="@+id/spTo"
+                    android:id="@+id/sp_To_loc"
                     style="@style/Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -273,7 +276,7 @@
                         android:orientation="horizontal">
 
                         <Spinner
-                            android:id="@+id/spinCategory"
+                            android:id="@+id/sp_sub_type"
                             style="@style/Widget.AppCompat.Spinner.Underlined"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -287,7 +290,7 @@
                         <EditText
                             android:id="@+id/etWeight"
                             android:layout_width="wrap_content"
-
+                          android:text="@={item.weight}"
                             android:layout_height="@dimen/edit_text_height"
                             android:layout_weight="63"
                             android:backgroundTint="@color/editTextSelected"
@@ -298,7 +301,7 @@
                             android:textColor="@color/textColorDark"
                             android:textColorHint="@color/textHintColor"
                             android:textSize="@dimen/font_size"
-                             android:textStyle="bold" />
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout

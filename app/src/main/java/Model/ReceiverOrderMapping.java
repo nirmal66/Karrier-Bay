@@ -8,14 +8,8 @@ import android.databinding.Bindable;
  * Created by vel on 11/2/17.
  */
 
-public class Pickup_order_mapping extends BaseObservable
+public class ReceiverOrderMapping extends BaseObservable
 {
-    private String landmark;
-
-    private String phone_2;
-
-    private String address_line_1;
-
     public String getLandmark() {
         return landmark;
     }
@@ -80,6 +74,12 @@ public class Pickup_order_mapping extends BaseObservable
         this.auto_save = auto_save;
     }
 
+    private String landmark;
+
+    private String phone_2;
+
+    private String address_line_1;
+
     private String pin;
 
     private String phone_1;
@@ -89,8 +89,9 @@ public class Pickup_order_mapping extends BaseObservable
     private String name;
 
     private String auto_save;
-
-//    @Bindable public String getLandmark ()
+//
+//    @Bindable
+//    public String getLandmark ()
 //    {
 //        return landmark;
 //    }
@@ -178,7 +179,11 @@ public class Pickup_order_mapping extends BaseObservable
 //        this.auto_save = auto_save;
 //        notifyPropertyChanged(BR.auto_save);
 //    }
-
-
+//
+//    @Override
+//    public String toString()
+//    {
+//        return "ClassPojo [landmark = "+landmark+", phone_2 = "+phone_2+", address_line_1 = "+address_line_1+", pin = "+pin+", phone_1 = "+phone_1+", address_line_2 = "+address_line_2+", name = "+name+", auto_save = "+auto_save+"]";
+//    }
 }
 

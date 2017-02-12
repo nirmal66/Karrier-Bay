@@ -27,6 +27,7 @@ import java.util.HashMap;
 
 import Fragment.HomeFragment;
 import Fragment.NotificationFragment;
+import Model.SenderOrder;
 import RetroGit.ApiClient;
 import RetroGit.ApiInterface;
 import Utilities.SessionManager;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private HashMap<String,String> user;
     private TextView emailHeader;
     public ApiInterface apiService;
+    public SenderOrder sender=new SenderOrder();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,5 +1,11 @@
 package Model;
 
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
+
+import com.google.gson.annotations.SerializedName;
+import com.yourapp.developer.karrierbay.BR;
+
 /**
  * Created by vel on 11/2/17.
  */
@@ -7,7 +13,7 @@ package Model;
 
 
 
-public class Item_attributes
+public class ItemAttributes extends BaseObservable
 {
     private String breadth;
 
@@ -48,7 +54,8 @@ public class Item_attributes
 
     private int lengthIndex;
 
-    private String item_weight;
+    @SerializedName("item_weight")
+    private String weight;
 
     public String getBreadth ()
     {
@@ -79,7 +86,7 @@ public class Item_attributes
     {
         this.item_value = item_value;
     }
-
+    @Bindable
     public String getLength ()
     {
         return length;
@@ -88,16 +95,17 @@ public class Item_attributes
     public void setLength (String length)
     {
         this.length = length;
+        notifyPropertyChanged(BR.length);
     }
-
-    public String getItem_weight ()
+    @Bindable
+    public String getWeight()
     {
-        return item_weight;
+        return weight;
     }
-
-    public void setItem_weight (String item_weight)
+    public void setWeight(String weight)
     {
-        this.item_weight = item_weight;
+        this.weight = weight;
+        notifyPropertyChanged(BR.weight);
     }
 
 

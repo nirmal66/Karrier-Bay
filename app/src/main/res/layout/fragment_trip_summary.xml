@@ -3,7 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
    <data>
-        <variable name="user" type="Model.User"/>
+       <variable name="sender" type="Model.SenderOrder"/>
+       <variable name="item" type="Model.ItemAttributes"/>
+       <variable name="pickup" type="Model.PickupOrderMapping"/>
+       <variable name="delivery" type="Model.ReceiverOrderMapping"/>
+       <import type="android.view.View"/>
     </data>
 <LinearLayout
     android:orientation="vertical" android:layout_width="match_parent"

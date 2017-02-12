@@ -7,9 +7,15 @@ import android.databinding.Bindable;
 /**
  * Created by vel on 11/2/17.
  */
-
-public class Receiver_order_mapping extends BaseObservable
+import com.yourapp.developer.karrierbay.BR;
+public class PickupOrderMapping extends BaseObservable
 {
+    private String landmark;
+
+    private String phone_2;
+
+    private String address_line_1;
+
     public String getLandmark() {
         return landmark;
     }
@@ -57,13 +63,14 @@ public class Receiver_order_mapping extends BaseObservable
     public void setAddress_line_2(String address_line_2) {
         this.address_line_2 = address_line_2;
     }
-
+    @Bindable
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+        notifyPropertyChanged(BR.name);
     }
 
     public String getAuto_save() {
@@ -74,12 +81,6 @@ public class Receiver_order_mapping extends BaseObservable
         this.auto_save = auto_save;
     }
 
-    private String landmark;
-
-    private String phone_2;
-
-    private String address_line_1;
-
     private String pin;
 
     private String phone_1;
@@ -89,9 +90,8 @@ public class Receiver_order_mapping extends BaseObservable
     private String name;
 
     private String auto_save;
-//
-//    @Bindable
-//    public String getLandmark ()
+
+//    @Bindable public String getLandmark ()
 //    {
 //        return landmark;
 //    }
@@ -179,11 +179,7 @@ public class Receiver_order_mapping extends BaseObservable
 //        this.auto_save = auto_save;
 //        notifyPropertyChanged(BR.auto_save);
 //    }
-//
-//    @Override
-//    public String toString()
-//    {
-//        return "ClassPojo [landmark = "+landmark+", phone_2 = "+phone_2+", address_line_1 = "+address_line_1+", pin = "+pin+", phone_1 = "+phone_1+", address_line_2 = "+address_line_2+", name = "+name+", auto_save = "+auto_save+"]";
-//    }
+
+
 }
 

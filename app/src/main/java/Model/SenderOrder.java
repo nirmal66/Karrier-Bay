@@ -3,19 +3,33 @@ package Model;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
+import com.google.gson.annotations.SerializedName;
+import com.yourapp.developer.karrierbay.BR;
+
 
 /**
  * Created by vel on 11/2/17.
  */
 
-public class Sender_order extends BaseObservable {
+public class SenderOrder extends BaseObservable {
     private String to_geo_long;
+    private int spinWantToSendIdx = 1;
 
-    private Pickup_order_mapping pickup_order_mapping;
+    @Bindable
+    public int getSpinWantToSendIdx() {
+        return spinWantToSendIdx;
+    }
 
-    private Sender_order_item_attributes[] sender_order_item_attributes;
+    public void setSpinWantToSendIdx(int spinWantToSendIdx) {
+        this.spinWantToSendIdx = spinWantToSendIdx;
+        notifyPropertyChanged(BR.spinWantToSendIdx);
+    }
+    @SerializedName("pickup_orderMapping")
+    private PickupOrderMapping pickupOrderMapping;
 
-    private Receiver_order_mapping receiver_order_mapping;
+    private SenderOrderItemAttributes[] sender_order_item_attributes;
+    @SerializedName("receiver_orderMapping")
+    private ReceiverOrderMapping receiverOrderMapping;
 
     private String from_geo_lat;
 
@@ -33,29 +47,47 @@ public class Sender_order extends BaseObservable {
         this.to_geo_long = to_geo_long;
     }
 
-    public Pickup_order_mapping getPickup_order_mapping() {
-        return pickup_order_mapping;
+    @Bindable
+    public PickupOrderMapping getPickupOrderMapping() {
+        if (pickupOrderMapping == null) {
+            pickupOrderMapping = new PickupOrderMapping();
+        }
+        return pickupOrderMapping;
     }
 
-    public void setPickup_order_mapping(Pickup_order_mapping pickup_order_mapping) {
-        this.pickup_order_mapping = pickup_order_mapping;
+    public void setPickupOrderMapping(PickupOrderMapping pickupOrderMapping) {
+        this.pickupOrderMapping = pickupOrderMapping;
+
+
     }
 
-    public Sender_order_item_attributes[] getSender_order_item_attributes() {
+
+    public SenderOrderItemAttributes[] getSender_order_item_attributes() {
+        if (sender_order_item_attributes == null || sender_order_item_attributes.length == 0) {
+            sender_order_item_attributes = new SenderOrderItemAttributes[1];
+            sender_order_item_attributes[0] = new SenderOrderItemAttributes();
+        }
         return sender_order_item_attributes;
     }
 
-    public void setSender_order_item_attributes(Sender_order_item_attributes[] sender_order_item_attributes) {
+    public void setSender_order_item_attributes(SenderOrderItemAttributes[] sender_order_item_attributes) {
         this.sender_order_item_attributes = sender_order_item_attributes;
     }
 
-    public Receiver_order_mapping getReceiver_order_mapping() {
-        return receiver_order_mapping;
+    @Bindable
+    public ReceiverOrderMapping getReceiverOrderMapping() {
+        if (receiverOrderMapping == null) {
+            receiverOrderMapping = new ReceiverOrderMapping();
+        }
+
+        return receiverOrderMapping;
     }
 
-    public void setReceiver_order_mapping(Receiver_order_mapping receiver_order_mapping) {
-        this.receiver_order_mapping = receiver_order_mapping;
+    @Bindable
+    public void setReceiverOrderMapping(ReceiverOrderMapping receiverOrderMapping) {
+        this.receiverOrderMapping = receiverOrderMapping;
     }
+
 
     public String getFrom_geo_lat() {
         return from_geo_lat;
@@ -130,19 +162,7 @@ public class Sender_order extends BaseObservable {
 //        this.to_geo_long = to_geo_long;
 //    }
 //
-//    @Bindable
-//    public Pickup_order_mapping getPickup_order_mapping() {
-//        if (pickup_order_mapping == null) {
-//            pickup_order_mapping = new Pickup_order_mapping();
-//        }
-//        return pickup_order_mapping;
-//    }
-//
-//    public void setPickup_order_mapping(Pickup_order_mapping pickup_order_mapping) {
-//        this.pickup_order_mapping = pickup_order_mapping;
-////        notifyPropertyChanged(BR.pickup_order_mapping);
-//
-//    }
+
 //
 //    @Bindable
 //    public String getFrom_geo_lat() {
@@ -205,32 +225,20 @@ public class Sender_order extends BaseObservable {
 //    }
 //
 //    @Bindable
-//    public Sender_order_item_attributes[] getSender_order_item_attributes() {
+//    public SenderOrderItemAttributes[] getSender_order_item_attributes() {
 //        if (sender_order_item_attributes == null || sender_order_item_attributes.length == 0) {
-//            sender_order_item_attributes = new Sender_order_item_attributes[1];
-//            sender_order_item_attributes[0] = new Sender_order_item_attributes();
+//            sender_order_item_attributes = new SenderOrderItemAttributes[1];
+//            sender_order_item_attributes[0] = new SenderOrderItemAttributes();
 //        }
 //        return sender_order_item_attributes;
 //    }
 //
 //    @Bindable
-//    public void setSender_order_item_attributes(Sender_order_item_attributes[] sender_order_item_attributes) {
+//    public void setSender_order_item_attributes(SenderOrderItemAttributes[] sender_order_item_attributes) {
 //        this.sender_order_item_attributes = sender_order_item_attributes;
 //    }
 //
-//    @Bindable
-//    public Receiver_order_mapping getReceiver_order_mapping() {
-//        if (receiver_order_mapping == null) {
-//            receiver_order_mapping = new Receiver_order_mapping();
-//        }
-//
-//        return receiver_order_mapping;
-//    }
-//
-//    @Bindable
-//    public void setReceiver_order_mapping(Receiver_order_mapping receiver_order_mapping) {
-//        this.receiver_order_mapping = receiver_order_mapping;
-//    }
+
 //
 //    @Bindable
 //    public String getComments() {
@@ -245,6 +253,6 @@ public class Sender_order extends BaseObservable {
 //    @Override
 //    @Bindable
 //    public String toString() {
-//        return "ClassPojo [to_geo_long = " + to_geo_long + ", pickup_order_mapping = " + pickup_order_mapping + ", from_geo_lat = " + from_geo_lat + ", from_loc = " + from_loc + ", to_geo_lat = " + to_geo_lat + ", to_loc = " + to_loc + ", from_geo_long = " + from_geo_long + ", isInsured = " + isInsured + ", sender_order_item_attributes = " + sender_order_item_attributes + ", receiver_order_mapping = " + receiver_order_mapping + ", comments = " + comments + "]";
+//        return "ClassPojo [to_geo_long = " + to_geo_long + ", pickupOrderMapping = " + pickupOrderMapping + ", from_geo_lat = " + from_geo_lat + ", from_loc = " + from_loc + ", to_geo_lat = " + to_geo_lat + ", to_loc = " + to_loc + ", from_geo_long = " + from_geo_long + ", isInsured = " + isInsured + ", sender_order_item_attributes = " + sender_order_item_attributes + ", receiverOrderMapping = " + receiverOrderMapping + ", comments = " + comments + "]";
 //    }
 }

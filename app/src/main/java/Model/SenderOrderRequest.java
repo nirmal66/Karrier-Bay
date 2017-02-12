@@ -1,38 +1,42 @@
 package Model;
 
 import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 
 import com.yourapp.developer.karrierbay.BR;
 
 public   class SenderOrderRequest  extends BaseObservable {
 
-    private int spinWantToSendIdx = 1;
+//    private int spinWantToSendIdx = 1;
+//
+//    @Bindable
+//    public int getSpinWantToSendIdx() {
+//        return spinWantToSendIdx;
+//    }
+//
+//    public void setSpinWantToSendIdx(int spinWantToSendIdx) {
+//        this.spinWantToSendIdx = spinWantToSendIdx;
+//        notifyPropertyChanged(BR.spinWantToSendIdx);
+//    }
+    public SenderOrder SenderOrder;
 
-    @Bindable
-    public int getSpinWantToSendIdx() {
-        return spinWantToSendIdx;
-    }
-
-    public void setSpinWantToSendIdx(int spinWantToSendIdx) {
-        this.spinWantToSendIdx = spinWantToSendIdx;
-        notifyPropertyChanged(BR.spinWantToSendIdx);
-    }
-    public Sender_order sender_order;
-
-    public Sender_order getSender_order ()
+    public SenderOrder getSenderOrder()
     {
-        return sender_order;
+        if(SenderOrder ==null)
+        {
+            SenderOrder =new SenderOrder();
+        }
+        return SenderOrder;
     }
 
-    public void setSender_order (Sender_order sender_order)
+    public void setSenderOrder(SenderOrder SenderOrder)
     {
-        this.sender_order = sender_order;
+        this.SenderOrder = SenderOrder;
+        notifyPropertyChanged(BR.sender);
     }
 
     @Override
     public String toString()
     {
-        return "ClassPojo [sender_order = "+sender_order+"]";
+        return "ClassPojo [SenderOrder = "+ SenderOrder +"]";
     }
 }
