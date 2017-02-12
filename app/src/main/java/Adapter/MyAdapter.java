@@ -11,6 +11,7 @@ import com.yourapp.developer.karrierbay.R;
 
 import java.util.List;
 
+import Model.SenderOrder;
 import Utilities.CustomViewHolder;
 import Model.User;
 
@@ -19,10 +20,10 @@ import Model.User;
  */
 
 public class MyAdapter extends RecyclerView.Adapter<CustomViewHolder> {
-    private List<User> mMyModels;
+    private List<SenderOrder> orderList;
 
-    public MyAdapter(List<User> myModels) {
-        mMyModels = myModels;
+    public MyAdapter(List<SenderOrder> orderList) {
+        this.orderList = orderList;
     }
 
     @Override
@@ -36,11 +37,13 @@ public class MyAdapter extends RecyclerView.Adapter<CustomViewHolder> {
     public void onBindViewHolder(CustomViewHolder customViewHolder, int i) {
         ViewDataBinding viewDataBinding = customViewHolder.getViewDataBinding();
 
-        viewDataBinding.setVariable(BR.user, mMyModels.get(i));
+        viewDataBinding.setVariable(BR.sender, orderList.get(i));
+        viewDataBinding.setVariable(BR.senderitems, orderList.get(i).getSender_order_item()[0]);
+        viewDataBinding.setVariable(BR.item,orderList.get(i).getSender_order_item()[0].getItem_attributes());
     }
 
     @Override
     public int getItemCount() {
-        return (null != mMyModels ? mMyModels.size() : 0);
+        return (null != orderList ? orderList.size() : 0);
     }
 }

@@ -1,14 +1,19 @@
 package RetroGit;
 
+import java.util.List;
+
 import Model.LoginRequest;
 import Model.LoginResponse;
 import Model.Otp;
+import Model.SenderOrder;
+import Model.SenderOrderListResponse;
 import Model.SenderOrderRequest;
 import Model.SenderOrderResponse;
 import Model.SignUpResponse;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -32,4 +37,6 @@ public interface ApiInterface {
     @POST("sender/order")
     Call<SenderOrderResponse> postSenderOrder(@Body SenderOrderRequest senderOrderRequest);
 
+    @GET("sender/orders")
+    Call<List<SenderOrder>> getSenderOrder();
 }

@@ -2,6 +2,7 @@ package Model;
 
 import android.databinding.BaseObservable;
 
+import com.google.gson.annotations.SerializedName;
 import com.yourapp.developer.karrierbay.BR;
 
 public   class SenderOrderRequest  extends BaseObservable {
@@ -17,6 +18,7 @@ public   class SenderOrderRequest  extends BaseObservable {
 //        this.spinWantToSendIdx = spinWantToSendIdx;
 //        notifyPropertyChanged(BR.spinWantToSendIdx);
 //    }
+    @SerializedName("sender_order")
     public SenderOrder SenderOrder;
 
     public SenderOrder getSenderOrder()
