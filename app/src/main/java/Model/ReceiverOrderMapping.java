@@ -13,7 +13,15 @@ public class ReceiverOrderMapping extends BaseObservable
     public String getLandmark() {
         return landmark;
     }
+    private String fullAdress;
+    public String getFullAdress() {
+          fullAdress = name + "\n" + landmark + "\n" + address_line_1 + "\n" + address_line_2 + "\n" + phone_1;
+        return fullAdress;
+    }
 
+    public void setFullAdress(String fullAdress) {
+        this.fullAdress = fullAdress;
+    }
     public void setLandmark(String landmark) {
         this.landmark = landmark;
     }

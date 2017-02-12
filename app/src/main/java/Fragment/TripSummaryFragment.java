@@ -38,13 +38,14 @@ public class TripSummaryFragment extends Fragment {
         sender = ((MainActivity) getActivity()).sender;
         SenderOrderItemAttributes[] sender_order_item_attributes= sender.getSender_order_item_attributes();
         ItemAttributes item= sender_order_item_attributes[0].getItem_attributes();
-        item.setWeight("200");
         binding.setSender(sender);
         binding.setItem(item);
         PickupOrderMapping pickup = sender.getPickupOrderMapping();
         binding.setPickup(pickup);
         ReceiverOrderMapping delivery = sender.getReceiverOrderMapping();
         binding.setDelivery(delivery);
+       SenderOrderItemAttributes senderorderitem= sender_order_item_attributes[0];
+        binding.setSenderorderitem(senderorderitem);
        ((MainActivity)getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>SENDER WALL</font>"));
 
         return view;

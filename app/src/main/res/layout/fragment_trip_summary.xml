@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools"
     >
    <data>
        <variable name="sender" type="Model.SenderOrder"/>
        <variable name="item" type="Model.ItemAttributes"/>
        <variable name="pickup" type="Model.PickupOrderMapping"/>
        <variable name="delivery" type="Model.ReceiverOrderMapping"/>
+       <variable name="senderorderitem" type="Model.SenderOrderItemAttributes"/>
        <import type="android.view.View"/>
     </data>
 <LinearLayout
+    android:id="@+id/lila"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -22,7 +26,8 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-android:layout_marginTop="7dp"       android:id="@+id/scheduleform"
+android:layout_marginTop="7dp"
+            android:id="@+id/scheduleform"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -63,7 +68,7 @@ android:layout_marginTop="7dp"       android:id="@+id/scheduleform"
 
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/font_size"
-                    android:text="@string/address" />
+                    android:text="@={sender.from_loc}" />
             </LinearLayout>
 
             <LinearLayout
@@ -90,7 +95,7 @@ android:layout_marginTop="7dp"       android:id="@+id/scheduleform"
 
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/font_size"
-                    android:text="@string/address" />
+                    android:text="@={sender.from_loc}" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/labelDepartureDateForm"
@@ -116,7 +121,7 @@ android:layout_marginTop="7dp"       android:id="@+id/scheduleform"
 
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/font_size"
-                    android:text="@string/address" />
+                    android:text="@={sender.to_geo_long}" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/labelarrivaeDateForm"
@@ -142,7 +147,7 @@ android:layout_marginTop="7dp"       android:id="@+id/scheduleform"
 
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/font_size"
-                    android:text="@string/address" />
+                    android:text="@={sender.from_geo_lat}" />
             </LinearLayout>
             <LinearLayout
 
@@ -168,7 +173,7 @@ android:layout_marginTop="7dp"       android:id="@+id/scheduleform"
 
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/font_size"
-                    android:text="@string/address" />
+                    android:text="@={senderorderitem.item_type}" />
             </LinearLayout>
             <LinearLayout
 
@@ -194,7 +199,7 @@ android:layout_marginTop="7dp"       android:id="@+id/scheduleform"
 
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/font_size"
-                    android:text="@string/address" />
+                    android:text="@={item.weight}" />
             </LinearLayout>
             <LinearLayout
 
@@ -220,7 +225,7 @@ android:layout_marginTop="7dp"       android:id="@+id/scheduleform"
 
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/font_size"
-                    android:text="@string/address" />
+                    android:text="@={item.volumetricfullDetails}" />
             </LinearLayout>
 
             <TextView
@@ -232,7 +237,7 @@ android:layout_marginTop="7dp"       android:id="@+id/scheduleform"
 
 
             <TextView
-
+                android:id="@+id/tvp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="19dp"
@@ -240,16 +245,16 @@ android:layout_marginTop="7dp"       android:id="@+id/scheduleform"
                 android:text="@string/pickup_details"/>
 
             <TextView
-
+                android:id="@+id/tvFromAddrese"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="19dp"
                 android:singleLine="false"
                  android:textSize="15dp"
-                android:text="Raghav +9894100445 \n 49g/7,Vinayagar kovil street, \n Chennai "/>
+                android:text="@={pickup.fullAdress}"/>
 
             <TextView
-
+                android:id="@+id/tvd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="19dp"
@@ -257,13 +262,13 @@ android:layout_marginTop="7dp"       android:id="@+id/scheduleform"
                 android:text="@string/delivery_details"/>
 
             <TextView
-
+                android:id="@+id/tvDeliveryAddressSummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="19dp"
                 android:singleLine="false"
                 android:textSize="15dp"
-                android:text="Raghav +9894100445 \n 49g/7,Vinayagar kovil street, \n Chennai "/>
+                android:text="@={delivery.fullAdress}"/>
             <Button
                 android:id="@+id/btn_sender_next"
                 style="?android:textAppearanceSmall"
@@ -279,7 +284,6 @@ android:layout_marginTop="7dp"       android:id="@+id/scheduleform"
 
 
 </LinearLayout>
-
     </ScrollView>
 </LinearLayout>
-    </layout>
+</layout>

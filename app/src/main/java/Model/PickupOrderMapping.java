@@ -12,10 +12,21 @@ public class PickupOrderMapping extends BaseObservable
 {
     private String landmark;
 
+
     private String phone_2;
 
-    private String address_line_1;
 
+    public String getFullAdress() {
+        fullAdress=name +"\n"+landmark+"\n"+address_line_1+"\n"+address_line_2+"\n"+phone_1;
+        return fullAdress;
+    }
+
+    public void setFullAdress(String fullAdress) {
+        this.fullAdress = fullAdress;
+    }
+
+    private String address_line_1;
+private String fullAdress;
     public String getLandmark() {
         return landmark;
     }

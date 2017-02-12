@@ -22,7 +22,15 @@ public class ItemAttributes extends BaseObservable
     private String height;
 
     private int heightIndex;
+    private String volumetricfullDetails;
+    public String getVolumetricfullDetails() {
+        volumetricfullDetails=length +"  "+breadth+"  "+height+"\n";
+        return volumetricfullDetails;
+    }
 
+    public void setVolumetricfullDetails(String volumetricfullDetails) {
+        this.volumetricfullDetails = volumetricfullDetails;
+    }
     public int getBreadthIndex() {
         return breadthIndex;
     }
