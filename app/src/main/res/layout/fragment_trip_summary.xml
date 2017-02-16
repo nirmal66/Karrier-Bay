@@ -205,11 +205,12 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
 
-                        android:text="@={carrierattribute.mode ?? senderorderitem.item_type}"
+
                         android:textColor="@color/textHintColor"
                         android:textSize="@dimen/font_size"
-
+                  android:text="@{carrierattribute.mode ?? senderorderitem.item_type}"
                         />
+
                     <!--android:text="@={senderorderitem.item_type}"-->
                 </LinearLayout>
 
@@ -236,7 +237,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        android:text="@={carrierattribute.capacity ?? item.weight}"
+                        android:text="@{carrierattribute.capacity ?? item.weight}"
 
                         android:textColor="@color/textHintColor"
                         android:textSize="@dimen/font_size" />
@@ -265,7 +266,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        android:text="@={carrierattribute.capacity ?? item.volumetricfullDetails}"
+                        android:text="@{carrierattribute.capacity ?? item.volumetricfullDetails}"
 
                         android:textColor="@color/textHintColor"
                         android:textSize="@dimen/font_size" />

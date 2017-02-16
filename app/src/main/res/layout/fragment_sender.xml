@@ -450,7 +450,7 @@
                         android:orientation="horizontal">
 
                         <CheckBox
-                            android:id="@+id/cb_Article"
+                            android:id="@+id/cbarticle"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom"
@@ -459,7 +459,7 @@
                             android:text="@string/article" />
 
                         <CheckBox
-                            android:id="@+id/cb_Passenger"
+                            android:id="@+id/cbpassenger"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/edit_text_height"
                             android:layout_weight="50"
@@ -481,7 +481,7 @@
                             android:layout_marginTop="15dp"
                             android:layout_weight="50"
                             android:orientation="vertical"
-                            android:visibility="@{cb_Article.checked ? View.VISIBLE : View.GONE}">
+                            android:visibility="@{cbarticle.checked ? View.VISIBLE : View.GONE}">
 
                             <TextView
                                 android:id="@+id/labelcapacity"
@@ -514,7 +514,7 @@
                             android:layout_marginTop="15dp"
                             android:layout_weight="50"
                             android:orientation="vertical"
-                            android:visibility="@{cb_Passenger.checked ? View.VISIBLE : View.GONE}">
+                            android:visibility="@{cbpassenger.checked ? View.VISIBLE : View.GONE}">
 
                             <TextView
                                 android:id="@+id/labelPassen"

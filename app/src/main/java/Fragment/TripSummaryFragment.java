@@ -21,6 +21,7 @@ import com.yourapp.developer.karrierbay.databinding.FragmentTripSummaryBinding;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import Model.CarrierScheduleDetailAttributes;
 import Model.ItemAttributes;
 import Model.PickupOrderMapping;
 import Model.ReceiverOrderMapping;
@@ -55,6 +56,9 @@ public class TripSummaryFragment extends Fragment {
         binding.setPickup(pickup);
         ReceiverOrderMapping delivery = sender.getReceiverOrderMapping();
         binding.setDelivery(delivery);
+        CarrierScheduleDetailAttributes carrierattribute = sender.getCarrierScheduleDetailAttributes();
+        binding.setCarrierattribute(carrierattribute);
+
         SenderOrderItemAttributes senderorderitem = sender_order_item_attributes[0];
         binding.setSenderorderitem(senderorderitem);
         ((MainActivity) getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>SENDER WALL</font>"));
