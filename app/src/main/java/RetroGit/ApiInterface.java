@@ -6,7 +6,6 @@ import Model.LoginRequest;
 import Model.LoginResponse;
 import Model.Otp;
 import Model.SenderOrder;
-import Model.SenderOrderListResponse;
 import Model.SenderOrderRequest;
 import Model.SenderOrderResponse;
 import Model.SignUpResponse;
@@ -34,8 +33,9 @@ public interface ApiInterface {
     @POST("auth/verify/{otp}/phone_number/{phone}")
     Call<Otp> verifyOtp(@Path("otp") String otp, @Path("phone") String phoneNumber);
 
-    @POST("sender/order")
-    Call<SenderOrderResponse> postSenderOrder(@Body SenderOrderRequest senderOrderRequest);
+    @POST("{flowtype}/order")
+    Call<SenderOrderResponse> postSenderOrder(String flowtype, @Body SenderOrderRequest senderOrderRequest);
+
 
     @GET("sender/orders")
     Call<List<SenderOrder>> getSenderOrder();

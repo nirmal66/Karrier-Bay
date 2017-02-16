@@ -13,8 +13,22 @@ import com.yourapp.developer.karrierbay.BR;
 
 public class SenderOrder extends BaseObservable {
 
+
+//    private String to_goe_lat;
+
+
+    public CarrierScheduleDetailAttributes getCarrierScheduleDetailAttributes() {
+        return carrierScheduleDetailAttributes;
+    }
+
+    public void setCarrierScheduleDetailAttributes(CarrierScheduleDetailAttributes carrierScheduleDetailAttributes) {
+        this.carrierScheduleDetailAttributes = carrierScheduleDetailAttributes;
+    }
+
     private int spinWantToSendIdx = 1;
     private String total_amount;
+    @SerializedName("carrier_schedule_detail_attributes")
+    private CarrierScheduleDetailAttributes carrierScheduleDetailAttributes;
 
     public String getTotal_amount() {
         return total_amount;
@@ -41,6 +55,14 @@ public class SenderOrder extends BaseObservable {
         this.sender_order_item = sender_order_item;
     }
 
+    public boolean isSender;
+    public boolean isSender() {
+        return isSender;
+    }
+
+    public void setSender(boolean sender) {
+        isSender = sender;
+    }
     public String getOrder_id() {
         return order_id;
     }
@@ -106,7 +128,7 @@ public class SenderOrder extends BaseObservable {
     }
 
     private String status;
-//For currier list
+    //For currier list
     private SenderOrderItemAttributes[] sender_order_item;
     private String order_id;
 
@@ -260,7 +282,6 @@ public class SenderOrder extends BaseObservable {
     public void setFrom_geo_long(String from_geo_long) {
         this.from_geo_long = from_geo_long;
     }
-
 
 
 }

@@ -47,6 +47,11 @@
     <string name="departure_date_time">DEP. DATE and TIME</string>
     <string name="pickup_details">PICK UP DETAILS</string>
     <string name="proceed">PROCEED</string>
+    <string name="stop_overs">STOP OVERS</string>
+    <string name="or_enter">Or enter it manually</string>
+    <string name="ready_to_carry">READY TO CARRY</string>
+    <string name="article">Articles</string>
+    <string name="passengers">Passengers</string>
+    <string name="capacity">CAPACITY</string>
 
-
- </resources>
+</resources>

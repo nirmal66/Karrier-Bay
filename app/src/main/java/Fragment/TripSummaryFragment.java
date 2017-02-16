@@ -83,26 +83,26 @@ public class TripSummaryFragment extends Fragment {
 
                 senderOrderRequest.setSenderOrder(sender);
                 ((MainActivity) getActivity()).fragment(new CarrierListFragment(), "SenderFragment");
-//                Call<SenderOrderResponse> call = ((MainActivity) getActivity()).apiService.postSenderOrder(senderOrderRequest);
-//                call.enqueue(new Callback<SenderOrderResponse>() {
-//                    @Override
-//                    public void onResponse(Call<SenderOrderResponse> call, Response<SenderOrderResponse> response) {
-//
-//                        if (response.code() == 201) {
-//                            Log.d("LoginResponse", response.message());
-//                            // Log.d("Error",response.body().getErrors().toString());
-//                            ((MainActivity) getActivity()).fragment(new CarrierListFragment(), "SenderFragment");
-//                        } else {
-//                            Toast.makeText(getActivity(), "Incorrect Request", Toast.LENGTH_LONG).show();
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<SenderOrderResponse> call, Throwable t) {
-//
-//                    }
-//                });
+                Call<SenderOrderResponse> call = ((MainActivity) getActivity()).apiService.postSenderOrder("sender",senderOrderRequest);
+                call.enqueue(new Callback<SenderOrderResponse>() {
+                    @Override
+                    public void onResponse(Call<SenderOrderResponse> call, Response<SenderOrderResponse> response) {
+
+                        if (response.code() == 201) {
+                            Log.d("LoginResponse", response.message());
+                            // Log.d("Error",response.body().getErrors().toString());
+                            ((MainActivity) getActivity()).fragment(new CarrierListFragment(), "SenderFragment");
+                        } else {
+                            Toast.makeText(getActivity(), "Incorrect Request", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<SenderOrderResponse> call, Throwable t) {
+
+                    }
+                });
 
             }
         });
