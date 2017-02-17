@@ -33,8 +33,8 @@ public interface ApiInterface {
     @POST("auth/verify/{otp}/phone_number/{phone}")
     Call<Otp> verifyOtp(@Path("otp") String otp, @Path("phone") String phoneNumber);
 
-    @POST("{flowtype}/order")
-    Call<SenderOrderResponse> postSenderOrder(String flowtype, @Body SenderOrderRequest senderOrderRequest);
+    @POST("{flowtype}/{flowtypeParam}")
+    Call<SenderOrderResponse> postSenderOrder(@Path("flowtype") String flowtype, @Path("flowtypeParam") String flowtypeParam, @Body SenderOrderRequest senderOrderRequest);
 
 
     @GET("sender/orders")

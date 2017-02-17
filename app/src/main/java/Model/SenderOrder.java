@@ -1,7 +1,14 @@
 package Model;
 
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.icu.util.Calendar;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.annotations.SerializedName;
 import com.yourapp.developer.karrierbay.BR;
@@ -14,10 +21,53 @@ import com.yourapp.developer.karrierbay.BR;
 public class SenderOrder extends BaseObservable {
 
 
-//    private String to_goe_lat;
 
+    @Bindable
+    public String getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(String toDate) {
+        this.toDate = toDate;
+        notifyPropertyChanged(BR.toDate);
+    }
+@Bindable
+    public String getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(String fromDate) {
+        this.fromDate = fromDate;
+        notifyPropertyChanged(BR.fromDate);
+    }
+@Bindable
+    public String getToTime() {
+        return toTime;
+    }
+
+    public void setToTime(String toTime) {
+        this.toTime = toTime;
+        notifyPropertyChanged(BR.toTime);
+    }
+@Bindable
+    public String getFromTime() {
+        return fromTime;
+    }
+
+    public void setFromTime(String fromTime) {
+        this.fromTime = fromTime;
+        notifyPropertyChanged(BR.fromTime);
+    }
+
+    private String toDate;
+    private String fromDate;
+    private String toTime;
+    private String fromTime;
 
     public CarrierScheduleDetailAttributes getCarrierScheduleDetailAttributes() {
+        if(carrierScheduleDetailAttributes==null){
+            carrierScheduleDetailAttributes=new CarrierScheduleDetailAttributes();
+        }
         return carrierScheduleDetailAttributes;
     }
 
@@ -56,6 +106,7 @@ public class SenderOrder extends BaseObservable {
     }
 
     public boolean isSender;
+
     public boolean isSender() {
         return isSender;
     }
@@ -63,6 +114,7 @@ public class SenderOrder extends BaseObservable {
     public void setSender(boolean sender) {
         isSender = sender;
     }
+
     public String getOrder_id() {
         return order_id;
     }
@@ -284,4 +336,15 @@ public class SenderOrder extends BaseObservable {
     }
 
 
+
+    public void onFocusChangeValidation(View v, boolean hasFocus) {
+        if (!hasFocus)
+        {
+           EditText et= ((EditText)v);
+            if(et.getText().toString().equals("")) {
+                et .setError("Please fill it");
+            }else{
+                et .setError(null);
+            }
+    }}
 }

@@ -16,7 +16,7 @@ public class HomeFragment extends BaseFragment {
 
 
     private Button beaCarrier, beaSender;
-
+    SenderFragment senderFragment=  new SenderFragment();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,14 +35,20 @@ public class HomeFragment extends BaseFragment {
         beaCarrier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity) getActivity()).fragment(new HomeFragment(),"MainFragment");
+                Bundle bundle=new Bundle();
+                bundle.putBoolean("isSenderFlow",false);
+                senderFragment.setArguments(bundle);
+                ((MainActivity) getActivity()).fragment(senderFragment,"MainFragment");
             }
         });
 
         beaSender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity) getActivity()).fragment(new SenderFragment(),"SenderFragment");
+                Bundle bundle=new Bundle();
+                bundle.putBoolean("isSenderFlow",true);
+                senderFragment.setArguments(bundle);
+                ((MainActivity) getActivity()).fragment(senderFragment,"SenderFragment");
 
            }
         });

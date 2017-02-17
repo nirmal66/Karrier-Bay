@@ -117,8 +117,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
+                        android:text="@{carrierattribute.start_time ?? carrierattribute.start_time }"
 
-                        android:text="@={sender.from_loc}"
                         android:textColor="@color/textHintColor"
                         android:textSize="@dimen/font_size" />
                 </LinearLayout>
@@ -147,7 +147,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
 
-                        android:text="@={sender.to_geo_long}"
+                        android:text="@={sender.to_loc}"
                         android:textColor="@color/textHintColor"
                         android:textSize="@dimen/font_size" />
                 </LinearLayout>
@@ -176,7 +176,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
 
-                        android:text="@={sender.from_geo_lat}"
+                        android:text="@{carrierattribute.end_time ?? carrierattribute.end_time }"
                         android:textColor="@color/textHintColor"
                         android:textSize="@dimen/font_size" />
                 </LinearLayout>
@@ -194,8 +194,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
+                        android:text="@{sender.isSender ? @string/wanttosend : @string/ready_to_carry}"
 
-                        android:text="@string/wanttosend"
                         android:textColor="@color/textHintColor"
                         android:textSize="@dimen/font_size" />
 
@@ -204,8 +204,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-
-
                         android:textColor="@color/textHintColor"
                         android:textSize="@dimen/font_size"
                   android:text="@{carrierattribute.mode ?? senderorderitem.item_type}"
@@ -227,8 +225,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-
-                        android:text="@string/weight"
+                        android:text="@{sender.isSender ? @string/weight : @string/capacity}"
                         android:textColor="@color/textHintColor"
                         android:textSize="@dimen/font_size" />
 
@@ -249,15 +246,14 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="15dp"
                     android:orientation="horizontal"
-                    android:visibility="@{sender.isSender ? View.VISIBLE : View.GONE}" >
+                   >
 
                     <TextView
                         android:id="@+id/labelVolumetric"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-
-                        android:text="@string/volumetricweight"
+                        android:text="@{sender.isSender ? @string/volumetricweight : @string/noofseat}"
                         android:textColor="@color/textHintColor"
                         android:textSize="@dimen/font_size" />
 
@@ -266,7 +262,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        android:text="@{carrierattribute.capacity ?? item.volumetricfullDetails}"
+                        android:text="@{carrierattribute.passengercount ?? item.volumetricfullDetails}"
 
                         android:textColor="@color/textHintColor"
                         android:textSize="@dimen/font_size" />
@@ -347,14 +343,6 @@
 
                         ></LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvFromAddressse"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="19dp"
-                        android:singleLine="false"
-                        android:text="@={pickup.fullAdress}"
-                        android:textSize="15dp" />
 
                     <EditText
                         android:id="@+id/etToTime"
@@ -365,6 +353,7 @@
                         android:hint="@string/or_enter"
                         android:inputType="text"
                         android:maxLines="1"
+                        android:text="@={sender.comments}"
                         android:textColor="@color/textColorDark"
                         android:textColorHint="@color/textHintColor"
                         android:textSize="@dimen/font_size"

@@ -102,11 +102,12 @@
                         android:layout_height="@dimen/edit_text_height"
                         android:layout_weight="50"
                         android:backgroundTint="@color/editTextSelected"
-
+                        android:text="@={sender.fromDate}"
                         android:drawableRight="@drawable/calendarcolor"
                         android:inputType="text"
                         android:maxLines="1"
                         android:onClick="dateClick"
+                        android:onFocusChange="@{sender.onFocusChangeValidation}"
                         android:singleLine="true"
                         android:textColor="@color/textColorDark"
                         android:textColorHint="@color/textHintColor"
@@ -123,6 +124,8 @@
                         android:inputType="text"
                         android:maxLines="1"
                         android:onClick="timeClick"
+                        android:text="@={sender.fromTime}"
+                        android:onFocusChange="@{sender.onFocusChangeValidation}"
                         android:singleLine="true"
                         android:textColor="@color/textColorDark"
                         android:textColorHint="@color/textHintColor"
@@ -136,7 +139,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:text="@string/from"
+                    android:text="@string/to"
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/font_size" />
 
@@ -193,9 +196,9 @@
                         android:layout_height="@dimen/edit_text_height"
                         android:layout_weight="50"
                         android:backgroundTint="@color/editTextSelected"
-
+                        android:onFocusChange="@{sender.onFocusChangeValidation}"
                         android:drawableRight="@drawable/calendarcolor"
-
+                        android:text="@={sender.toDate}"
                         android:inputType="text"
                         android:maxLines="1"
                         android:onClick="dateClick"
@@ -214,8 +217,10 @@
                         android:drawableRight="@drawable/timecolor"
                         android:inputType="text"
                         android:maxLines="1"
+                        android:text="@={sender.toTime}"
                         android:onClick="timeClick"
                         android:singleLine="true"
+                        android:onFocusChange="@{sender.onFocusChangeValidation}"
                         android:textColor="@color/textColorDark"
                         android:textColorHint="@color/textHintColor"
                         android:textSize="@dimen/font_size"
@@ -226,6 +231,7 @@
                     android:id="@+id/sender_flow_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="@{sender.isSender ? View.VISIBLE : View.GONE}"
                     android:orientation="vertical">
 
                     <TextView
@@ -309,6 +315,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="@dimen/edit_text_height"
                                 android:layout_weight="63"
+                                android:onFocusChange="@{sender.onFocusChangeValidation}"
                                 android:backgroundTint="@color/editTextSelected"
                                 android:inputType="text"
                                 android:maxLines="1"
@@ -493,13 +500,13 @@
                                 android:textSize="@dimen/font_size" />
 
                             <Spinner
-                                android:id="@+id/spin"
+                                android:id="@+id/spCarrierCapacity"
                                 style="@style/Widget.AppCompat.Spinner.Underlined"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
-                                android:layout_weight="33"
-                                android:entries="@array/height"
+                                android:layout_weight="50"
+                                android:entries="@array/capacity"
                                 android:prompt="@string/prompt_wanttosend"
                                 android:spinnerMode="dialog" />
 
@@ -526,13 +533,13 @@
                                 android:textSize="@dimen/font_size" />
 
                             <Spinner
-                                android:id="@+id/spi"
+                                android:id="@+id/spCarrierPassengers"
                                 style="@style/Widget.AppCompat.Spinner.Underlined"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
-                                android:layout_weight="33"
-                                android:entries="@array/width"
+                                android:layout_weight="50"
+                                android:entries="@array/passengers"
                                 android:prompt="@string/prompt_wanttosend"
                                 android:spinnerMode="dialog" />
                         </LinearLayout>

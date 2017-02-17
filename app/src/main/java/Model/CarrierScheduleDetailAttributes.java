@@ -16,6 +16,16 @@ public class CarrierScheduleDetailAttributes extends BaseObservable {
 
     private String mode;
 
+    public String getPassengercount() {
+        return passengercount;
+    }
+
+    public void setPassengercount(String passengercount) {
+        this.passengercount = passengercount;
+    }
+
+    private String passengercount;
+
     public String getEnd_time ()
     {
         return end_time;

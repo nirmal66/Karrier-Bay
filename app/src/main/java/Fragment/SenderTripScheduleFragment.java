@@ -28,6 +28,7 @@ public class SenderTripScheduleFragment extends Fragment {
         FragmentPickupDeliveryScheduleBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_pickup_delivery_schedule, container, false);
         View view = binding.getRoot();
         sender = ((MainActivity) getActivity()).sender;
+        binding.setSender(sender);
         PickupOrderMapping pickup = sender.getPickupOrderMapping();
         binding.setPickup(pickup);
         ReceiverOrderMapping delivery = sender.getReceiverOrderMapping();

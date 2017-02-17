@@ -61,7 +61,6 @@ public class TripSummaryFragment extends Fragment {
 
         SenderOrderItemAttributes senderorderitem = sender_order_item_attributes[0];
         binding.setSenderorderitem(senderorderitem);
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>SENDER WALL</font>"));
 
         return view;
     }
@@ -69,7 +68,12 @@ public class TripSummaryFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (sender.isSender) {
+            ((MainActivity) getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>SENDER WALL</font>"));
+        } else {
+            ((MainActivity) getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>CARRIER WALL</font>"));
 
+        }
 
         view.findViewById(R.id.btn_sender_next).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +82,7 @@ public class TripSummaryFragment extends Fragment {
 //                String s = "{\"SenderOrder\":{\"from_loc\":\"Mysore\",\"to_loc\":\"Calicut\",\"comments\":\"Car\",\"from_geo_lat\":\"11.8014\",\"from_geo_long\":\"76.0044\",\"to_geo_lat\":\"12.9716\",\"to_geo_long\":\"77.5946\",\"isInsured\":true,\"receiver_order_mapping\":{\"name\":\"Shuhail\",\"address_line_1\":\"mysore road\",\"address_line_2\":\"Wayanad\",\"phone_1\":\"12121212\",\"phone_2\":\"341356343\",\"landmark\":\"KSRTC\",\"pin\":\"679645\",\"auto_save\":true},\"pickup_order_mapping\":{\"name\":\"Shuhail\",\"address_line_1\":\"mysore road\",\"address_line_2\":\"Wayanad\",\"phone_1\":\"12121212\",\"phone_2\":\"341356343\",\"landmark\":\"KSRTC\",\"pin\":\"679645\",\"auto_save\":true},\"sender_order_item_attributes\":[{\"quantity\":1,\"item_type\":\"Laptop\",\"item_subtype\":\"Pishku\",\"item_attributes\":{\"length\":\"12\",\"breadth\":\"13\",\"height\":\"13\",\"item_weight\":\"122\",\"item_value\":\"12\"}}]}}";
 //                Gson gson = new Gson();
                 //sender  = gson.fromJson(new JSONObject(s).getString("SenderOrder"),SenderOrder.class);
+                Call<SenderOrderResponse> call = null;
                 SenderOrderRequest senderOrderRequest = new SenderOrderRequest();
                 sender.setFrom_geo_lat("11.8014");
                 sender.setFrom_geo_long("76.0044");
@@ -87,7 +92,20 @@ public class TripSummaryFragment extends Fragment {
 
                 senderOrderRequest.setSenderOrder(sender);
                 ((MainActivity) getActivity()).fragment(new CarrierListFragment(), "SenderFragment");
-                Call<SenderOrderResponse> call = ((MainActivity) getActivity()).apiService.postSenderOrder("sender",senderOrderRequest);
+                if (sender.isSender) {
+                    call = ((MainActivity) getActivity()).apiService.postSenderOrder("sender", "order", senderOrderRequest);
+                } else {
+                    senderOrderRequest.setCarrierOrder(senderOrderRequest.getSenderOrder());
+                    senderOrderRequest.getCarrierOrder().setPickupOrderMapping(null);
+                    senderOrderRequest.getCarrierOrder().setReceiverOrderMapping(null);
+                    senderOrderRequest.getCarrierOrder().setSender_order_item_attributes(null);
+
+
+                    senderOrderRequest.setSenderOrder(null);
+                    call = ((MainActivity) getActivity()).apiService.postSenderOrder("carrier", "schedule", senderOrderRequest);
+
+                }
+
                 call.enqueue(new Callback<SenderOrderResponse>() {
                     @Override
                     public void onResponse(Call<SenderOrderResponse> call, Response<SenderOrderResponse> response) {
