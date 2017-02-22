@@ -48,8 +48,6 @@
                     />
 
                 <!--android:text="@{user.firstName}"-->
-
-
                 <Spinner
                     android:id="@+id/sp_from_loc"
                     style="@style/Widget.AppCompat.Spinner.Underlined"
