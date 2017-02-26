@@ -285,12 +285,14 @@ public class SenderOrder extends BaseObservable {
         this.from_geo_lat = from_geo_lat;
     }
 
-    public String getFrom_loc() {
+@Bindable
+public String getFrom_loc() {
         return from_loc;
     }
 
     public void setFrom_loc(String from_loc) {
         this.from_loc = from_loc;
+   notifyPropertyChanged(BR.from_loc);
     }
 
     public int getFrom_loc_index() {
@@ -320,9 +322,10 @@ public class SenderOrder extends BaseObservable {
         return to_loc;
     }
 
-    @Bindable
+
     public void setTo_loc(String to_loc) {
         this.to_loc = to_loc;
+        notifyPropertyChanged(BR.to_loc);
     }
 
     //
@@ -346,5 +349,6 @@ public class SenderOrder extends BaseObservable {
             }else{
                 et .setError(null);
             }
-    }}
+    }
+    }
 }

@@ -53,5 +53,5 @@
     <string name="article">Articles</string>
     <string name="passengers">Passengers</string>
     <string name="capacity">CAPACITY</string>
-
+    <string name="continuetext">CONTINUE</string>
 </resources>

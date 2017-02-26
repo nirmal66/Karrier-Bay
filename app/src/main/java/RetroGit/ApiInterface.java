@@ -5,6 +5,8 @@ import java.util.List;
 import Model.LoginRequest;
 import Model.LoginResponse;
 import Model.Otp;
+import Model.QuoteRequest;
+import Model.QuoteResponse;
 import Model.SenderOrder;
 import Model.SenderOrderRequest;
 import Model.SenderOrderResponse;
@@ -36,7 +38,9 @@ public interface ApiInterface {
     @POST("{flowtype}/{flowtypeParam}")
     Call<SenderOrderResponse> postSenderOrder(@Path("flowtype") String flowtype, @Path("flowtypeParam") String flowtypeParam, @Body SenderOrderRequest senderOrderRequest);
 
-
     @GET("sender/orders")
     Call<List<SenderOrder>> getSenderOrder();
+
+    @POST("orchestrator/quote")
+    Call<QuoteResponse> getQuote(@Body QuoteRequest quoteRequest);
 }

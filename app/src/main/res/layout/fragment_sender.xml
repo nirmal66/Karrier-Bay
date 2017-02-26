@@ -13,6 +13,10 @@
             name="item"
             type="Model.ItemAttributes" />
 
+        <variable
+            name="carrierAttribute"
+            type="Model.CarrierScheduleDetailAttributes" />
+
 
         <import type="android.view.View" />
     </data>
@@ -48,16 +52,17 @@
                     />
 
                 <!--android:text="@{user.firstName}"-->
-                <Spinner
-                    android:id="@+id/sp_from_loc"
-                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                <EditText
+                    android:id="@+id/et_from_loc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:layout_marginTop="10dp"
-                    android:entries="@array/citynames"
-                    android:prompt="@string/prompt_password"
-                    android:spinnerMode="dialog" />
+                    android:onFocusChange="@{sender.onFocusChangeValidation}"
+                    android:spinnerMode="dialog"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:text="@={sender.from_loc}" />
 
                 <LinearLayout
                     android:id="@+id/deplabelform"
@@ -100,13 +105,15 @@
                         android:layout_height="@dimen/edit_text_height"
                         android:layout_weight="50"
                         android:backgroundTint="@color/editTextSelected"
-                        android:text="@={sender.fromDate}"
                         android:drawableRight="@drawable/calendarcolor"
                         android:inputType="text"
                         android:maxLines="1"
                         android:onClick="dateClick"
                         android:onFocusChange="@{sender.onFocusChangeValidation}"
                         android:singleLine="true"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:text="@={sender.fromDate}"
                         android:textColor="@color/textColorDark"
                         android:textColorHint="@color/textHintColor"
                         android:textSize="@dimen/font_size"
@@ -121,10 +128,12 @@
                         android:drawableRight="@drawable/timecolor"
                         android:inputType="text"
                         android:maxLines="1"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:onClick="timeClick"
-                        android:text="@={sender.fromTime}"
                         android:onFocusChange="@{sender.onFocusChangeValidation}"
                         android:singleLine="true"
+                        android:text="@={sender.fromTime}"
                         android:textColor="@color/textColorDark"
                         android:textColorHint="@color/textHintColor"
                         android:textSize="@dimen/font_size"
@@ -142,16 +151,16 @@
                     android:textSize="@dimen/font_size" />
 
 
-                <Spinner
-                    android:id="@+id/sp_To_loc"
-                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                <EditText
+                    android:id="@+id/et_To_loc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:layout_marginTop="10dp"
-                    android:entries="@array/citynames"
-                    android:prompt="@string/prompt_wanttosend"
-                    android:spinnerMode="dialog" />
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:spinnerMode="dialog"
+                    android:text="@={sender.to_loc}" />
 
                 <LinearLayout
                     android:id="@+id/tolabelform"
@@ -193,14 +202,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/edit_text_height"
                         android:layout_weight="50"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:backgroundTint="@color/editTextSelected"
-                        android:onFocusChange="@{sender.onFocusChangeValidation}"
                         android:drawableRight="@drawable/calendarcolor"
-                        android:text="@={sender.toDate}"
                         android:inputType="text"
                         android:maxLines="1"
                         android:onClick="dateClick"
+                        android:onFocusChange="@{sender.onFocusChangeValidation}"
                         android:singleLine="true"
+                        android:text="@={sender.toDate}"
                         android:textColor="@color/textColorDark"
                         android:textColorHint="@color/textHintColor"
                         android:textSize="@dimen/font_size"
@@ -215,10 +226,12 @@
                         android:drawableRight="@drawable/timecolor"
                         android:inputType="text"
                         android:maxLines="1"
-                        android:text="@={sender.toTime}"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:onClick="timeClick"
-                        android:singleLine="true"
                         android:onFocusChange="@{sender.onFocusChangeValidation}"
+                        android:singleLine="true"
+                        android:text="@={sender.toTime}"
                         android:textColor="@color/textColorDark"
                         android:textColorHint="@color/textHintColor"
                         android:textSize="@dimen/font_size"
@@ -229,8 +242,8 @@
                     android:id="@+id/sender_flow_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="@{sender.isSender ? View.VISIBLE : View.GONE}"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="@{sender.isSender ? View.VISIBLE : View.GONE}">
 
                     <TextView
                         android:id="@+id/labelWantTo"
@@ -313,11 +326,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="@dimen/edit_text_height"
                                 android:layout_weight="63"
-                                android:onFocusChange="@{sender.onFocusChangeValidation}"
                                 android:backgroundTint="@color/editTextSelected"
                                 android:inputType="text"
                                 android:maxLines="1"
                                 android:onClick="timeClick"
+                                android:onFocusChange="@{sender.onFocusChangeValidation}"
                                 android:singleLine="true"
                                 android:text="@={item.weight}"
                                 android:textColor="@color/textColorDark"
@@ -497,16 +510,14 @@
                                 android:textColor="@color/textHintColor"
                                 android:textSize="@dimen/font_size" />
 
-                            <Spinner
-                                android:id="@+id/spCarrierCapacity"
-                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                            <EditText
+                                android:id="@+id/etCarrierCapacity"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:layout_weight="50"
-                                android:entries="@array/capacity"
-                                android:prompt="@string/prompt_wanttosend"
-                                android:spinnerMode="dialog" />
+                                android:spinnerMode="dialog"
+                                android:text="@={carrierAttribute.capacity}" />
 
 
                         </LinearLayout>
