@@ -87,7 +87,7 @@
 
                     <EditText
                         android:id="@+id/etPickName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/edit_text_height"
                         android:layout_weight="50"
                         android:backgroundTint="@color/editTextSelected"
@@ -104,11 +104,11 @@
 
                     <EditText
                         android:id="@+id/etPickMobile"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/edit_text_height"
                         android:layout_weight="50"
                         android:backgroundTint="@color/editTextSelected"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:maxLines="1"
                         android:onFocusChange="@{sender.onFocusChangeValidation}"
                         android:singleLine="true"
@@ -156,7 +156,7 @@
 
                     <EditText
                         android:id="@+id/etFlatNo"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/edit_text_height"
                         android:layout_weight="50"
                         android:backgroundTint="@color/editTextSelected"
@@ -172,7 +172,7 @@
 
                     <EditText
                         android:id="@+id/etFlatName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/edit_text_height"
                         android:layout_weight="50"
                         android:backgroundTint="@color/editTextSelected"
@@ -216,7 +216,7 @@
 
                     <EditText
                         android:id="@+id/etPckAddress"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/edit_text_height"
                         android:layout_weight="50"
                         android:backgroundTint="@color/editTextSelected"
@@ -281,7 +281,7 @@
 
                     <EditText
                         android:id="@+id/etDeliveryName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/edit_text_height"
                         android:layout_weight="50"
                         android:backgroundTint="@color/editTextSelected"
@@ -298,11 +298,11 @@
 
                     <EditText
                         android:id="@+id/etDeliveyMobile"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/edit_text_height"
                         android:layout_weight="50"
                         android:backgroundTint="@color/editTextSelected"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:maxLines="1"
                         android:onFocusChange="@{sender.onFocusChangeValidation}"
                         android:singleLine="true"
@@ -350,7 +350,7 @@
 
                     <EditText
                         android:id="@+id/etDeliveyFlatNo"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/edit_text_height"
                         android:layout_weight="50"
                         android:backgroundTint="@color/editTextSelected"
@@ -367,7 +367,7 @@
 
                     <EditText
                         android:id="@+id/etDeliveryFlatName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/edit_text_height"
                         android:layout_weight="50"
                         android:backgroundTint="@color/editTextSelected"
@@ -410,7 +410,7 @@
 
                     <EditText
                         android:id="@+id/etDeliAddress"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/edit_text_height"
                         android:layout_weight="50"
                         android:backgroundTint="@color/editTextSelected"

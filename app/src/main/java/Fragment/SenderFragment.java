@@ -13,10 +13,12 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,14 +47,15 @@ import retrofit2.Response;
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
-public class SenderFragment extends Fragment implements Spinner.OnItemSelectedListener,  View.OnClickListener {
+public class SenderFragment extends Fragment implements Spinner.OnItemSelectedListener, View.OnClickListener {
 
 
     SenderOrder sender = null;
     boolean isFromLocFocused;
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
-    QuoteRequest quoteRequest =new QuoteRequest();
+    QuoteRequest quoteRequest = new QuoteRequest();
     CarrierScheduleDetailAttributes carrierAttribute;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -100,7 +103,7 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
 
         ((Spinner) view.findViewById(R.id.spCarrierPassengers)).setOnItemSelectedListener(this);
         ;
-         ((EditText) view.findViewById(R.id.etDEPDate)).setOnClickListener(this);
+        ((EditText) view.findViewById(R.id.etDEPDate)).setOnClickListener(this);
         ((EditText) view.findViewById(R.id.etToDate)).setOnClickListener(this);
 
         ((EditText) view.findViewById(R.id.etToTime)).setOnClickListener(this);
@@ -114,65 +117,74 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
             @Override
             public void onClick(View view1) {
                 if (sender.isSender) {
-                if (sender.getSpinWantToSendIdx() == 0) {
-                    quoteRequest.setBreadth(sender.getSender_order_item_attributes()[0].getItem_attributes().getBreadth());
-                    quoteRequest.setHeight(sender.getSender_order_item_attributes()[0].getItem_attributes().getHeight());
-                    quoteRequest.setLength(sender.getSender_order_item_attributes()[0].getItem_attributes().getLength());
-                    quoteRequest.setItem_weight(sender.getSender_order_item_attributes()[0].getItem_attributes().getWeight());
-                } else {
-                    quoteRequest.setItem_value(sender.getSender_order_item_attributes()[0].getQuantity());
-                }
+                    if (sender.getSpinWantToSendIdx() == 0) {
+                        quoteRequest.setBreadth(sender.getSender_order_item_attributes()[0].getItem_attributes().getBreadth());
+                        quoteRequest.setHeight(sender.getSender_order_item_attributes()[0].getItem_attributes().getHeight());
+                        quoteRequest.setLength(sender.getSender_order_item_attributes()[0].getItem_attributes().getLength());
+                        quoteRequest.setItem_weight(sender.getSender_order_item_attributes()[0].getItem_attributes().getWeight());
+                    } else {
+                        quoteRequest.setItem_value(sender.getSender_order_item_attributes()[0].getQuantity());
+                    }
 
 
-                Call call = ((MainActivity) getActivity()).apiService.getQuote(quoteRequest);
+                    Call call = ((MainActivity) getActivity()).apiService.getQuote(quoteRequest);
 
 
-                call.enqueue(new Callback<QuoteResponse>() {
-                    @Override
-                    public void onResponse(Call<QuoteResponse> call, Response<QuoteResponse> response) {
+                    call.enqueue(new Callback<QuoteResponse>() {
+                        @Override
+                        public void onResponse(Call<QuoteResponse> call, Response<QuoteResponse> response) {
 
-                        if (response.code() == 200) {
-                          QuoteResponse quoteResponse=  ((QuoteResponse)response.body());
-                            final Dialog dialog = new Dialog(getActivity());
-                            dialog.setContentView(R.layout.quote_popup);
-                            dialog.setTitle("Quote");
+                            if (response.code() == 200) {
+                                QuoteResponse quoteResponse = ((QuoteResponse) response.body());
+                                final Dialog dialog = new Dialog(getActivity());
+                                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                dialog.setContentView(R.layout.quote_popup);
 
-                            // set the custom dialog components - text, image and button
-                            TextView text = (TextView) dialog.findViewById(R.id.textView2);
-                            text.setText("The appropriate charge for your courier is RS."+quoteResponse.quote.getTotal_distance_charge()+" The prices may be vary according to the exact " +
-                                    "pick up and delivery points");
+                                sender.getPickupOrderMapping().setAddress_line_1(sender.getFrom_loc());
+                                sender.getReceiverOrderMapping().setAddress_line_1(sender.getTo_loc());
+                                // set the custom dialog components - text, image and button
+                                TextView text = (TextView) dialog.findViewById(R.id.textView2);
+                                text.setText("The appropriate charge for your courier is RS." + quoteResponse.quote.getTotal_distance_charge() + " The prices may be vary according to the exact " +
+                                        "pick up and delivery points");
 
-                            Button dialogButton = (Button) dialog.findViewById(R.id.btn_continue);
-                            // if button is clicked, close the custom dialog
-                            dialogButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    ((MainActivity) getActivity()).fragment(new SenderTripScheduleFragment(), "SenderFragment");
-                                    dialog.dismiss();
-                                }
-                            });
+                                Button dialogButton = (Button) dialog.findViewById(R.id.btn_continue);
+                                ImageView ivPop = (ImageView) dialog.findViewById(R.id.ivPop);
 
-                            dialog.show();
+                                // if button is clicked, close the custom dialog
+                                dialogButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        ((MainActivity) getActivity()).fragment(new SenderTripScheduleFragment(), "SenderFragment");
+                                        dialog.dismiss();
+                                    }
+                                });
+
+                                dialog.show();
+
+                                // if button is clicked, close the custom dialog
+                                ivPop.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                         dialog.dismiss();
+                                    }
+                                });
 
 
 
+                                Log.d("LoginResponse", response.message());
 
 
-                            Log.d("LoginResponse", response.message());
+                            } else {
+                                Toast.makeText(getActivity(), "Incorrect Request", Toast.LENGTH_LONG).show();
+                            }
 
-
-                        } else {
-                            Toast.makeText(getActivity(), "Incorrect Request", Toast.LENGTH_LONG).show();
                         }
 
-                    }
-
-                    @Override
-                    public void onFailure(Call<QuoteResponse> call, Throwable t) {
-                        Toast.makeText(getActivity(), "Incorrect Request", Toast.LENGTH_LONG).show();
-                    }
-                });
-
+                        @Override
+                        public void onFailure(Call<QuoteResponse> call, Throwable t) {
+                            Toast.makeText(getActivity(), "Incorrect Request", Toast.LENGTH_LONG).show();
+                        }
+                    });
 
 
                 } else {
@@ -258,7 +270,6 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
     }
 
 
-
     private void openAutocompleteActivity() {
         try {
             // The autocomplete activity requires Google Play Services to be available. The intent
@@ -289,12 +300,12 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
                 Place place = PlaceAutocomplete.getPlace(getActivity(), data);
                 if (isFromLocFocused) {
                     sender.setFrom_loc(place.getAddress().toString());
-                    quoteRequest.setLat1((place.getLatLng().latitude)+"");
-                    quoteRequest.setLong1((place.getLatLng().longitude)+"");
+                    quoteRequest.setLat1((place.getLatLng().latitude) + "");
+                    quoteRequest.setLong1((place.getLatLng().longitude) + "");
                 } else {
                     sender.setTo_loc(place.getAddress().toString());
-                    quoteRequest.setLat2((place.getLatLng().latitude)+"");
-                    quoteRequest.setLong2((place.getLatLng().longitude)+"");
+                    quoteRequest.setLat2((place.getLatLng().latitude) + "");
+                    quoteRequest.setLong2((place.getLatLng().longitude) + "");
                 }
 
                 Log.i("testing", "Place: " + place.getName() + place.getLatLng() + place.getAddress());
