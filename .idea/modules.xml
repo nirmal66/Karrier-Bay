@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Karrier-Bay.iml" filepath="$PROJECT_DIR$/Karrier-Bay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KarrierBay.iml" filepath="$PROJECT_DIR$/KarrierBay.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

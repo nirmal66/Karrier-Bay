@@ -3,11 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
-    <item
+ <!--   <item
         android:id="@+id/action_notification"
         android:icon="@drawable/notifications"
         android:title="@string/action_notification"
+        app:showAsAction="never" />-->
+
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/notifications"
+        android:title="@string/action_notification"
         app:showAsAction="always" />
-
-
 </menu>

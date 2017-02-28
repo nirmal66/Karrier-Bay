@@ -2,7 +2,6 @@ package activity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import java.util.Calendar;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -23,10 +22,10 @@ import android.widget.TimePicker;
 
 import com.yourapp.developer.karrierbay.R;
 
+import java.util.Calendar;
 import java.util.HashMap;
 
 import Fragment.HomeFragment;
-import Fragment.NotificationFragment;
 import Model.SenderOrder;
 import RetroGit.ApiClient;
 import RetroGit.ApiInterface;
@@ -83,8 +82,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
-            finish();
+            //super.onBackPressed();
+            if (getFragmentManager().getBackStackEntryCount() > 2) {
+                getFragmentManager().popBackStack();
+            } else {
+                super.onBackPressed();
+            }
+
         }
     }
 
@@ -98,10 +102,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-        if (id == R.id.action_notification)
+       /* if (id == R.id.action_notification)
         {
             fragment(new NotificationFragment(),"NotificationFragment");
             //item.setVisible(false);
+        }*/
+        if(id == R.id.action_home)
+        {
+            fragment(new HomeFragment(), "MainFragment");
         }
 
         return super.onOptionsItemSelected(item);
