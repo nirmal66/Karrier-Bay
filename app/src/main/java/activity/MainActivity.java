@@ -83,12 +83,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
         } else {
             //super.onBackPressed();
-            if (getFragmentManager().getBackStackEntryCount() > 2) {
-                getFragmentManager().popBackStack();
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    getSupportFragmentManager().popBackStack();
             } else {
                 super.onBackPressed();
+                //finish();
             }
 
+            String tag = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName();
+                //Toast.makeText(this,tag,Toast.LENGTH_LONG).show();
+            if(tag.equals("MainFragment"))
+            {
+                finish();
+            }
         }
     }
 

@@ -39,7 +39,7 @@ public class HomeFragment extends BaseFragment {
                 Bundle bundle=new Bundle();
                 bundle.putBoolean("isSenderFlow",false);
                 senderFragment.setArguments(bundle);
-                ((MainActivity) getActivity()).fragment(senderFragment,"carrierFragment");
+                ((MainActivity) getActivity()).fragment(senderFragment,"senderFragment");
             }
         });
 
