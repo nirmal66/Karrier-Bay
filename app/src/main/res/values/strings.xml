@@ -54,4 +54,7 @@
     <string name="passengers">Passengers</string>
     <string name="capacity">CAPACITY</string>
     <string name="continuetext">CONTINUE</string>
+    <string name="action_contact_title">Write your comments below</string>
+    <string name="action_send">SEND</string>
+
 </resources>

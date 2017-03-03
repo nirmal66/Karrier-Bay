@@ -2,6 +2,8 @@ package activity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -25,11 +27,13 @@ import com.yourapp.developer.karrierbay.R;
 import java.util.Calendar;
 import java.util.HashMap;
 
-import Fragment.HomeFragment;
+import Fragment.*;
 import Model.SenderOrder;
 import RetroGit.ApiClient;
 import RetroGit.ApiInterface;
 import Utilities.SessionManager;
+
+import static Utilities.Utility.hideKeyboard;
 
 /**
  * A login screen that offers login via email/password.
@@ -78,10 +82,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
+
+        hideKeyboard(this);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+
+            String tag = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName();
+            //Toast.makeText(this,tag,Toast.LENGTH_LONG).show();
+            if(tag.equals("MainFragment"))
+            {
+                finish();
+            }
+
             //super.onBackPressed();
             if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
                     getSupportFragmentManager().popBackStack();
@@ -90,12 +104,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //finish();
             }
 
-            String tag = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName();
-                //Toast.makeText(this,tag,Toast.LENGTH_LONG).show();
-            if(tag.equals("MainFragment"))
-            {
-                finish();
-            }
         }
     }
 
@@ -107,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        hideKeyboard(this);
         int id = item.getItemId();
        /* if (id == R.id.action_notification)
         {
@@ -119,14 +127,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragment(new HomeFragment(), "MainFragment");
         }
 
+
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        hideKeyboard(this);
         int id = item.getItemId();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+        if(id == R.id.nav_contact_us)
+        {
+            fragment(new ContactFragment(),"ContactFragment");
+        }
+        if(id == R.id.nav_rate_app)
+        {
+            //final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+            final String appPackageName = "com.yourapp.batterystatus";
+            try {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+            } catch (android.content.ActivityNotFoundException anfe) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+            }
+        }
         if (id == R.id.nav_logout) {
             sessionManager.logoutUser();
             finish();
