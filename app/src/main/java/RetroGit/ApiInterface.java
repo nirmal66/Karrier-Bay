@@ -38,8 +38,10 @@ public interface ApiInterface {
     @POST("{flowtype}/{flowtypeParam}")
     Call<SenderOrderResponse> postSenderOrder(@Path("flowtype") String flowtype, @Path("flowtypeParam") String flowtypeParam, @Body SenderOrderRequest senderOrderRequest);
 
-    @GET("sender/orders")
-    Call<List<SenderOrder>> getSenderOrder();
+    //carrier/schedules
+    //sender/orders
+    @GET("{flowtype}/{flowtypeParam}")
+    Call<List<SenderOrder>> getSenderOrCarrierOrder(@Path("flowtype") String flowtype, @Path("flowtypeParam") String flowtypeParam);
 
     @POST("orchestrator/quote")
     Call<QuoteResponse> getQuote(@Body QuoteRequest quoteRequest);

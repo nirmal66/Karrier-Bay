@@ -17,17 +17,14 @@ import com.yourapp.developer.karrierbay.R;
 import java.util.List;
 
 import Adapter.MyAdapter;
-import Model.DataList;
 import Model.SenderOrder;
-import Model.SenderOrderListResponse;
-import Model.SenderOrderResponse;
 import activity.MainActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CarrierListFragment extends Fragment {
-
+    SenderOrder sender;
 
 
     @Nullable
@@ -42,14 +39,21 @@ public class CarrierListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
      //   RowCarrierListBinding binding = DataBindingUtil.inflate(inflater, R.layout.row_carrier_list, container, false);
-
+        sender=  ((MainActivity) getActivity()).sender;
       final RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
        mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
 
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>CARRIER LIST</font>"));
 
-        Call<List<SenderOrder>> call = ((MainActivity) getActivity()).apiService.getSenderOrder();
+        Call<List<SenderOrder>> call;
+        if(sender.isSender) {
+            ((MainActivity)getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>CARRIER LIST</font>"));
+            call = ((MainActivity) getActivity()).apiService.getSenderOrCarrierOrder("carrier", "schedules");
+
+        }else{
+            ((MainActivity)getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>SENDER LIST</font>"));
+            call = ((MainActivity) getActivity()).apiService.getSenderOrCarrierOrder("sender", "orders");
+        }
         call.enqueue(new Callback<List<SenderOrder>>() {
             @Override
             public void onResponse(Call<List<SenderOrder>> call, Response<List<SenderOrder>> response) {
@@ -57,7 +61,7 @@ public class CarrierListFragment extends Fragment {
                 if (response.code() == 200&&response.body()!=null) {
                     List<SenderOrder> list=    response.body();
                     Log.d("LoginResponse", response.message());
-                    MyAdapter mAdapter = new MyAdapter(list);
+                    MyAdapter mAdapter = new MyAdapter(list,sender.getUser());
                     mRecyclerView.setAdapter(mAdapter);
 
                 } else {

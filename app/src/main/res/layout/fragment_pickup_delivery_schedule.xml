@@ -129,7 +129,7 @@
 
                     <TextView
                         android:id="@+id/labelPickFlatName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
 
@@ -139,11 +139,10 @@
 
                     <TextView
                         android:id="@+id/labelPickFlat"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"                        android:layout_height="wrap_content"
                         android:layout_weight="50"
 
-                        android:text="@string/address"
+                        android:text="@string/flatename"
                         android:textColor="@color/textHintColor"
                         android:textSize="@dimen/font_size" />
                 </LinearLayout>
@@ -323,7 +322,7 @@
 
                     <TextView
                         android:id="@+id/labelDelveryFlatName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
 
@@ -333,11 +332,10 @@
 
                     <TextView
                         android:id="@+id/labelDeliFlat"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"                        android:layout_height="wrap_content"
                         android:layout_weight="50"
 
-                        android:text="@string/address"
+                        android:text="@string/flatename"
                         android:textColor="@color/textHintColor"
                         android:textSize="@dimen/font_size" />
                 </LinearLayout>

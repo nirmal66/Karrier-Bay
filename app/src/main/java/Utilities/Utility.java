@@ -20,4 +20,13 @@ public class Utility {
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+    public static boolean isNull(String[] arr) {
+        boolean error = false;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i]==null||arr[i].isEmpty()) {
+                error = true;
+            }
+        }
+        return error;
+    }
 }

@@ -6,6 +6,7 @@
         <variable name="sender" type="Model.SenderOrder"/>
         <variable name="item" type="Model.ItemAttributes"/>
         <variable name="senderitems" type="Model.SenderOrderItemAttributes"/>
+        <variable name="user" type="Model.User"/>
     </data>
 <LinearLayout
     android:orientation="vertical" android:layout_width="match_parent"
@@ -39,7 +40,7 @@
             android:layout_height="21dp"
             android:textColor="@color/textColorDark"
             android:textSize="12dp"
-            android:text="@={sender.from_loc}" />
+            android:text="@={user.name}" />
         <TextView
             android:id="@+id/tvVerifis"
             android:layout_width="70dp"
@@ -56,7 +57,7 @@
                 android:textColor="@color/textHintColor"
                 android:textSize="12dp"
                 android:gravity="left|bottom"
-                android:text="@={sender.from_loc}" />
+                android:text="@={user.provider}" />
             </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -145,6 +146,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
         android:background="@color/textHintColor"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

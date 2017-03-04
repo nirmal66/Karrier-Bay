@@ -8,13 +8,16 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.yourapp.developer.karrierbay.R;
 import com.yourapp.developer.karrierbay.databinding.FragmentPickupDeliveryScheduleBinding;
 
+import Model.Constants;
 import Model.PickupOrderMapping;
 import Model.ReceiverOrderMapping;
 import Model.SenderOrder;
+import Utilities.Utility;
 import activity.MainActivity;
 
 public class SenderTripScheduleFragment extends Fragment {
@@ -35,7 +38,6 @@ public class SenderTripScheduleFragment extends Fragment {
         binding.setDelivery(delivery);
         return view;
 
-        // Initialize recycler view
     }
 
 
@@ -47,10 +49,31 @@ public class SenderTripScheduleFragment extends Fragment {
         view.findViewById(R.id.btn_sender_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity) getActivity()).fragment(new TripSummaryFragment(), "SenderFragment");
+                if(isPageValidationSuccess()) {
+                    ((MainActivity) getActivity()).fragment(new TripSummaryFragment(), "SenderFragment");
+                }else{
+                    Toast.makeText(getActivity(), "Please provide all fields value", Toast.LENGTH_LONG).show();
 
+                }
             }
         });
+    }
+
+    private boolean isPageValidationSuccess() {
+        ReceiverOrderMapping receiverOrderMapping = sender.getReceiverOrderMapping();
+        PickupOrderMapping pickupOrderMapping = sender.getPickupOrderMapping();
+        String validateCommonStrings[] = {receiverOrderMapping.getName(), receiverOrderMapping.getPhone_1(),
+                receiverOrderMapping.getAddress_line_1(), receiverOrderMapping.getAddress_line_2()
+                , pickupOrderMapping.getName(), pickupOrderMapping.getPhone_1(), pickupOrderMapping.getAddress_line_1(),
+                pickupOrderMapping.getAddress_line_2()
+        };
+
+        if (Utility.isNull(validateCommonStrings)) {
+            return false;
+        }
+
+
+        return true;
     }
 
 }

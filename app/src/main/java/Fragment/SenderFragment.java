@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 
+import android.provider.SyncStateContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -33,12 +34,14 @@ import com.yourapp.developer.karrierbay.R;
 import com.yourapp.developer.karrierbay.databinding.FragmentSenderBinding;
 
 import Model.CarrierScheduleDetailAttributes;
+import Model.Constants;
 import Model.ItemAttributes;
 import Model.QuoteRequest;
 import Model.QuoteResponse;
 import Model.SenderOrder;
 import Model.SenderOrderItemAttributes;
 import Model.SenderOrderResponse;
+import Utilities.Utility;
 import activity.MainActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,6 +58,9 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
     QuoteRequest quoteRequest = new QuoteRequest();
     CarrierScheduleDetailAttributes carrierAttribute;
+    SenderOrderItemAttributes[] sender_order_item_attributes;
+    SenderOrderItemAttributes senderitem;
+    ItemAttributes item;
 
     @Nullable
     @Override
@@ -65,8 +71,10 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
 
         //here data must be an instance of the class MarsDataProvider
         sender = ((MainActivity) getActivity()).sender;
-        SenderOrderItemAttributes[] sender_order_item_attributes = sender.getSender_order_item_attributes();
-        ItemAttributes item = sender_order_item_attributes[0].getItem_attributes();
+        sender_order_item_attributes = sender.getSender_order_item_attributes();
+        senderitem = sender_order_item_attributes[0];
+        binding.setSenderitem(senderitem);
+        item = sender_order_item_attributes[0].getItem_attributes();
         binding.setSender(sender);
         binding.setItem(item);
 
@@ -90,19 +98,12 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
 
         ;
         ((Spinner) view.findViewById(R.id.spinWantTo)).setOnItemSelectedListener(this);
-        ;
-        ((Spinner) view.findViewById(R.id.sp_sub_type)).setOnItemSelectedListener(this);
-        ;
-        ((Spinner) view.findViewById(R.id.spinHeight)).setOnItemSelectedListener(this);
-        ;
-        ((Spinner) view.findViewById(R.id.spinWidth)).setOnItemSelectedListener(this);
-        ;
-        ((Spinner) view.findViewById(R.id.spinBand)).setOnItemSelectedListener(this);
-        ;
-        ((Spinner) view.findViewById(R.id.spinSeat)).setOnItemSelectedListener(this);
 
-        ((Spinner) view.findViewById(R.id.spCarrierPassengers)).setOnItemSelectedListener(this);
-        ;
+        ((Spinner) view.findViewById(R.id.sp_sub_type)).setOnItemSelectedListener(this);
+
+
+
+         ;
         ((EditText) view.findViewById(R.id.etDEPDate)).setOnClickListener(this);
         ((EditText) view.findViewById(R.id.etToDate)).setOnClickListener(this);
 
@@ -126,87 +127,87 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
                         quoteRequest.setItem_value(sender.getSender_order_item_attributes()[0].getQuantity());
                     }
 
-
-                    Call call = ((MainActivity) getActivity()).apiService.getQuote(quoteRequest);
-
-
-                    call.enqueue(new Callback<QuoteResponse>() {
-                        @Override
-                        public void onResponse(Call<QuoteResponse> call, Response<QuoteResponse> response) {
-
-                            if (response.code() == 200) {
-                                QuoteResponse quoteResponse = ((QuoteResponse) response.body());
-                                final Dialog dialog = new Dialog(getActivity());
-                                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                                dialog.setContentView(R.layout.quote_popup);
-
-                                sender.getPickupOrderMapping().setAddress_line_1(sender.getFrom_loc());
-                                sender.getReceiverOrderMapping().setAddress_line_1(sender.getTo_loc());
-                                // set the custom dialog components - text, image and button
-                                TextView text = (TextView) dialog.findViewById(R.id.textView2);
-                                text.setText("The appropriate charge for your courier is RS." + quoteResponse.quote.getTotal_distance_charge() + " The prices may be vary according to the exact " +
-                                        "pick up and delivery points");
-
-                                Button dialogButton = (Button) dialog.findViewById(R.id.btn_continue);
-                                ImageView ivPop = (ImageView) dialog.findViewById(R.id.ivPop);
-
-                                // if button is clicked, close the custom dialog
-                                dialogButton.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        ((MainActivity) getActivity()).fragment(new SenderTripScheduleFragment(), "SenderFragment");
-                                        dialog.dismiss();
-                                    }
-                                });
-
-                                dialog.show();
-
-                                // if button is clicked, close the custom dialog
-                                ivPop.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                         dialog.dismiss();
-                                    }
-                                });
+                    if (isPageValidationSuccess()) {
+                        Call call = ((MainActivity) getActivity()).apiService.getQuote(quoteRequest);
 
 
+                        call.enqueue(new Callback<QuoteResponse>() {
+                            @Override
+                            public void onResponse(Call<QuoteResponse> call, Response<QuoteResponse> response) {
 
-                                Log.d("LoginResponse", response.message());
+                                if (response.code() == 200) {
+                                    QuoteResponse quoteResponse = ((QuoteResponse) response.body());
+                                    final Dialog dialog = new Dialog(getActivity());
+                                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                    dialog.setContentView(R.layout.quote_popup);
+
+                                    sender.getPickupOrderMapping().setAddress_line_2(sender.getFrom_loc());
+                                    sender.getReceiverOrderMapping().setAddress_line_2(sender.getTo_loc());
+                                    // set the custom dialog components - text, image and button
+                                    TextView text = (TextView) dialog.findViewById(R.id.textView2);
+                                    text.setText("The appropriate charge for your courier is RS." + quoteResponse.quote.getTotal_distance_charge() + " The prices may be vary according to the exact " +
+                                            "pick up and delivery points");
+
+                                    Button dialogButton = (Button) dialog.findViewById(R.id.btn_continue);
+                                    ImageView ivPop = (ImageView) dialog.findViewById(R.id.ivPop);
+
+                                    // if button is clicked, close the custom dialog
+                                    dialogButton.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            ((MainActivity) getActivity()).fragment(new SenderTripScheduleFragment(), "SenderFragment");
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                                    dialog.show();
+
+                                    // if button is clicked, close the custom dialog
+                                    ivPop.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            dialog.dismiss();
+                                        }
+                                    });
 
 
-                            } else {
-                                Toast.makeText(getActivity(), "Incorrect Request", Toast.LENGTH_LONG).show();
+                                    Log.d("LoginResponse", response.message());
+
+
+                                } else {
+                                    Toast.makeText(getActivity(), "Incorrect Request", Toast.LENGTH_LONG).show();
+                                }
+
                             }
 
-                        }
-
-                        @Override
-                        public void onFailure(Call<QuoteResponse> call, Throwable t) {
-                            Toast.makeText(getActivity(), "Incorrect Request", Toast.LENGTH_LONG).show();
-                        }
-                    });
-
+                            @Override
+                            public void onFailure(Call<QuoteResponse> call, Throwable t) {
+                                Toast.makeText(getActivity(), "Incorrect Request", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    } else {
+                        Toast.makeText(getActivity(), "Please provide all fields value", Toast.LENGTH_LONG).show();
+                    }
 
                 } else {
 
                     sender.getCarrierScheduleDetailAttributes().setStart_time(getDate(sender.getFromDate(), sender.getFromTime()));
                     sender.getCarrierScheduleDetailAttributes().setEnd_time(getDate(sender.getToDate(), sender.getToTime()));
 
-                    if (((CheckBox) view.findViewById(R.id.cbarticle)).isChecked() && ((CheckBox) view.findViewById(R.id.cbpassenger)).isChecked()) {
-                        sender.getCarrierScheduleDetailAttributes().setMode("Article & Passenger");
-                    } else if (((CheckBox) view.findViewById(R.id.cbarticle)).isChecked()) {
-                        sender.getCarrierScheduleDetailAttributes().setMode("Article");
-                        sender.getCarrierScheduleDetailAttributes().setPassengercount(null);
-                    } else if (((CheckBox) view.findViewById(R.id.cbpassenger)).isChecked()) {
-                        sender.getCarrierScheduleDetailAttributes().setMode("Passenger");
-                        sender.getCarrierScheduleDetailAttributes().setCapacity(null);
+                        if (((CheckBox) view.findViewById(R.id.cbarticle)).isChecked()) {
+                            sender.getCarrierScheduleDetailAttributes().setMode(Constants.ARTICLE);
+                            sender.getCarrierScheduleDetailAttributes().setPassengercount(null);
+                        } else if (((CheckBox) view.findViewById(R.id.cbpassenger)).isChecked()) {
+                            sender.getCarrierScheduleDetailAttributes().setMode(Constants.PASSENGER);
+                            sender.getCarrierScheduleDetailAttributes().setCapacity(null);
+                        }
+                    if (isPageValidationSuccess()) {
+
+                        ((MainActivity) getActivity()).fragment(new TripSummaryFragment(), "SenderFragment");
+
                     } else {
-                        return;
+                        Toast.makeText(getActivity(), "Please provide all fields value", Toast.LENGTH_LONG).show();
                     }
-
-
-                    ((MainActivity) getActivity()).fragment(new TripSummaryFragment(), "SenderFragment");
-
                 }
             }
 
@@ -240,23 +241,9 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
             case R.id.sp_sub_type:
                 sender_order_item_attributes[0].setItem_subtype(selectedValue);
                 break;
-            case R.id.spinHeight:
-                item_attributes.setHeight(selectedValue);
-                break;
-            case R.id.spinWidth:
-                item_attributes.setLength(selectedValue);
-                break;
-            case R.id.spinBand:
-                item_attributes.setBreadth(selectedValue);
-                break;
-            case R.id.spinSeat:
-                sender_order_item_attributes[0].setQuantity(selectedValue);
-                break;
 
 
-            case R.id.spCarrierPassengers:
-                carrierAttribute.setPassengercount(selectedValue);
-                break;
+
 
             default:
                 break;
@@ -346,4 +333,44 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
                 break;
         }
     }
+
+    private boolean isPageValidationSuccess() {
+
+        String validateCommonStrings[] = {sender.getFrom_loc(), sender.getFromDate(), sender.getFromTime(), sender.getTo_loc(), sender.getToTime(), sender.getToDate()};
+
+        if (Utility.isNull(validateCommonStrings)) {
+            return false;
+        }
+        if (sender.isSender) {
+            if (senderitem.getItem_type().equals(Constants.ARTICLE)) {
+                String validateCarrierStrings[] = {senderitem.getItem_subtype(),item.getLength(),item.getHeight(),item.getBreadth()
+                ,item.getWeight()};
+                if (Utility.isNull(validateCarrierStrings)) {
+                    return false;
+                }
+            } else {
+                String validateCarrierStrings[] = {  senderitem.getQuantity()};
+                if (Utility.isNull(validateCarrierStrings)) {
+                    return false;
+                }
+            }
+        } else {
+            if (carrierAttribute.getMode().equals(Constants.ARTICLE)) {
+                String validateCarrierStrings[] = {carrierAttribute.getCapacity()};
+                if (Utility.isNull(validateCarrierStrings)) {
+                    return false;
+                }
+            } else {
+                String validateCarrierStrings[] = {carrierAttribute.getPassengercount()};
+                if (Utility.isNull(validateCarrierStrings)) {
+                    return false;
+                }
+            }
+
+        }
+
+        return true;
+    }
+
+ 
 }

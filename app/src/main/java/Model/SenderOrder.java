@@ -19,19 +19,38 @@ import com.yourapp.developer.karrierbay.BR;
  */
 
 public class SenderOrder extends BaseObservable {
-
-
+    private User user;
 
     @Bindable
     public String getToDate() {
         return toDate;
     }
 
+    public User getUser() {
+        if(user==null){
+            user=new User();
+        }
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public CarrierScheduleDetailAttributes getCarrier_schedule_detail() {
+        return carrier_schedule_detail;
+    }
+
+    public void setCarrier_schedule_detail(CarrierScheduleDetailAttributes carrier_schedule_detail) {
+        this.carrier_schedule_detail = carrier_schedule_detail;
+    }
+
     public void setToDate(String toDate) {
         this.toDate = toDate;
         notifyPropertyChanged(BR.toDate);
     }
-@Bindable
+
+    @Bindable
     public String getFromDate() {
         return fromDate;
     }
@@ -40,7 +59,8 @@ public class SenderOrder extends BaseObservable {
         this.fromDate = fromDate;
         notifyPropertyChanged(BR.fromDate);
     }
-@Bindable
+
+    @Bindable
     public String getToTime() {
         return toTime;
     }
@@ -49,7 +69,8 @@ public class SenderOrder extends BaseObservable {
         this.toTime = toTime;
         notifyPropertyChanged(BR.toTime);
     }
-@Bindable
+
+    @Bindable
     public String getFromTime() {
         return fromTime;
     }
@@ -65,8 +86,8 @@ public class SenderOrder extends BaseObservable {
     private String fromTime;
 
     public CarrierScheduleDetailAttributes getCarrierScheduleDetailAttributes() {
-        if(carrierScheduleDetailAttributes==null){
-            carrierScheduleDetailAttributes=new CarrierScheduleDetailAttributes();
+        if (carrierScheduleDetailAttributes == null) {
+            carrierScheduleDetailAttributes = new CarrierScheduleDetailAttributes();
         }
         return carrierScheduleDetailAttributes;
     }
@@ -79,6 +100,8 @@ public class SenderOrder extends BaseObservable {
     private String total_amount;
     @SerializedName("carrier_schedule_detail_attributes")
     private CarrierScheduleDetailAttributes carrierScheduleDetailAttributes;
+
+    private CarrierScheduleDetailAttributes carrier_schedule_detail;
 
     public String getTotal_amount() {
         return total_amount;
@@ -98,6 +121,11 @@ public class SenderOrder extends BaseObservable {
 
     //fOr sender row
     public SenderOrderItemAttributes[] getSender_order_item() {
+        if(sender_order_item_attributes==null) {
+
+            sender_order_item = new SenderOrderItemAttributes[1];
+            sender_order_item[0]=new SenderOrderItemAttributes();
+        }
         return sender_order_item;
     }
 
@@ -285,14 +313,14 @@ public class SenderOrder extends BaseObservable {
         this.from_geo_lat = from_geo_lat;
     }
 
-@Bindable
-public String getFrom_loc() {
+    @Bindable
+    public String getFrom_loc() {
         return from_loc;
     }
 
     public void setFrom_loc(String from_loc) {
         this.from_loc = from_loc;
-   notifyPropertyChanged(BR.from_loc);
+        notifyPropertyChanged(BR.from_loc);
     }
 
     public int getFrom_loc_index() {
@@ -339,16 +367,14 @@ public String getFrom_loc() {
     }
 
 
-
     public void onFocusChangeValidation(View v, boolean hasFocus) {
-        if (!hasFocus)
-        {
-           EditText et= ((EditText)v);
-            if(et.getText().toString().equals("")) {
-                et .setError("Please fill it");
-            }else{
-                et .setError(null);
+        if (!hasFocus) {
+            EditText et = ((EditText) v);
+            if (et.getText().toString().equals("")) {
+                et.setError("Please fill it");
+            } else {
+                et.setError(null);
             }
-    }
+        }
     }
 }

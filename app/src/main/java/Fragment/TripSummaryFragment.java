@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import Model.CarrierScheduleDetailAttributes;
+import Model.Constants;
 import Model.ItemAttributes;
 import Model.PickupOrderMapping;
 import Model.ReceiverOrderMapping;
@@ -30,6 +31,7 @@ import Model.SenderOrderItemAttributes;
 import Model.SenderOrderRequest;
 import Model.SenderOrderResponse;
 import Model.User;
+import Utilities.Utility;
 import activity.MainActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -93,14 +95,15 @@ public class TripSummaryFragment extends Fragment {
                 senderOrderRequest.setSenderOrder(sender);
                 ((MainActivity) getActivity()).fragment(new CarrierListFragment(), "SenderFragment");
                 if (sender.isSender) {
-                    call = ((MainActivity) getActivity()).apiService.postSenderOrder("sender", "order", senderOrderRequest);
+            call = ((MainActivity) getActivity()).apiService.postSenderOrder("sender", "order", senderOrderRequest);
+               //  call = ((MainActivity) getActivity()).apiService.postSenderOrder("carrier", "schedule", senderOrderRequest);
+
+
                 } else {
                     senderOrderRequest.setCarrierOrder(senderOrderRequest.getSenderOrder());
                     senderOrderRequest.getCarrierOrder().setPickupOrderMapping(null);
                     senderOrderRequest.getCarrierOrder().setReceiverOrderMapping(null);
                     senderOrderRequest.getCarrierOrder().setSender_order_item_attributes(null);
-
-
                     senderOrderRequest.setSenderOrder(null);
                     call = ((MainActivity) getActivity()).apiService.postSenderOrder("carrier", "schedule", senderOrderRequest);
 
@@ -128,8 +131,9 @@ public class TripSummaryFragment extends Fragment {
 
             }
         });
-//        mViewModel.getText().set("Wednesday");
+
     }
+
 
 
 }

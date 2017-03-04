@@ -21,9 +21,10 @@ import Model.User;
 
 public class MyAdapter extends RecyclerView.Adapter<CustomViewHolder> {
     private List<SenderOrder> orderList;
-
-    public MyAdapter(List<SenderOrder> orderList) {
+private  User user;
+    public MyAdapter(List<SenderOrder> orderList,User user) {
         this.orderList = orderList;
+        this.user=user;
     }
 
     @Override
@@ -40,6 +41,7 @@ public class MyAdapter extends RecyclerView.Adapter<CustomViewHolder> {
         viewDataBinding.setVariable(BR.sender, orderList.get(i));
         viewDataBinding.setVariable(BR.senderitems, orderList.get(i).getSender_order_item()[0]);
         viewDataBinding.setVariable(BR.item,orderList.get(i).getSender_order_item()[0].getItem_attributes());
+        viewDataBinding.setVariable(BR.user,user);
     }
 
     @Override

@@ -45,8 +45,7 @@ public class ItemAttributes extends BaseObservable
     private String total_distance_charge;
 
     private String insurance_percent;
-    private int heightIndex;
-    private String volumetricfullDetails;
+     private String volumetricfullDetails;
     public String getVolumetricfullDetails() {
         volumetricfullDetails=length +"  "+breadth+"  "+height+"\n";
         return volumetricfullDetails;
@@ -55,40 +54,17 @@ public class ItemAttributes extends BaseObservable
     public void setVolumetricfullDetails(String volumetricfullDetails) {
         this.volumetricfullDetails = volumetricfullDetails;
     }
-    public int getBreadthIndex() {
-        return breadthIndex;
-    }
 
-    public void setBreadthIndex(int breadthIndex) {
-        this.breadthIndex = breadthIndex;
-    }
-
-    public int getHeightIndex() {
-        return heightIndex;
-    }
-
-    public void setHeightIndex(int heightIndex) {
-        this.heightIndex = heightIndex;
-    }
-
-    public int getLengthIndex() {
-        return lengthIndex;
-    }
-
-    public void setLengthIndex(int lengthIndex) {
-        this.lengthIndex = lengthIndex;
-    }
 
     private String item_value;
 
 
     private String length;
 
-    private int lengthIndex;
 
     @SerializedName("item_weight")
     private String weight;
-
+@Bindable
     public String getBreadth ()
     {
         return breadth;
@@ -97,8 +73,10 @@ public class ItemAttributes extends BaseObservable
     public void setBreadth (String breadth)
     {
         this.breadth = breadth;
+        notifyPropertyChanged(BR.breadth);
     }
 
+    @Bindable
     public String getHeight ()
     {
         return height;
@@ -188,6 +166,7 @@ public class ItemAttributes extends BaseObservable
     {
 
         this.height = height;
+        notifyPropertyChanged(BR.height);
     }
 
     public String getItem_value ()

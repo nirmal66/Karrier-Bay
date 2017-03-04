@@ -14,6 +14,10 @@
             type="Model.ItemAttributes" />
 
         <variable
+            name="senderitem"
+            type="Model.SenderOrderItemAttributes" />
+
+        <variable
             name="carrierAttribute"
             type="Model.CarrierScheduleDetailAttributes" />
 
@@ -58,10 +62,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:layout_marginTop="10dp"
-                    android:onFocusChange="@{sender.onFocusChangeValidation}"
-                    android:spinnerMode="dialog"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
+                    android:onFocusChange="@{sender.onFocusChangeValidation}"
+                    android:spinnerMode="dialog"
                     android:text="@={sender.from_loc}" />
 
                 <LinearLayout
@@ -106,13 +110,13 @@
                         android:layout_weight="50"
                         android:backgroundTint="@color/editTextSelected"
                         android:drawableRight="@drawable/calendarcolor"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:inputType="text"
                         android:maxLines="1"
                         android:onClick="dateClick"
                         android:onFocusChange="@{sender.onFocusChangeValidation}"
                         android:singleLine="true"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
                         android:text="@={sender.fromDate}"
                         android:textColor="@color/textColorDark"
                         android:textColorHint="@color/textHintColor"
@@ -126,10 +130,10 @@
                         android:layout_weight="50"
                         android:backgroundTint="@color/editTextSelected"
                         android:drawableRight="@drawable/timecolor"
-                        android:inputType="text"
-                        android:maxLines="1"
                         android:focusable="false"
                         android:focusableInTouchMode="false"
+                        android:inputType="text"
+                        android:maxLines="1"
                         android:onClick="timeClick"
                         android:onFocusChange="@{sender.onFocusChangeValidation}"
                         android:singleLine="true"
@@ -202,10 +206,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/edit_text_height"
                         android:layout_weight="50"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
                         android:backgroundTint="@color/editTextSelected"
                         android:drawableRight="@drawable/calendarcolor"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:inputType="text"
                         android:maxLines="1"
                         android:onClick="dateClick"
@@ -224,10 +228,10 @@
                         android:layout_weight="50"
                         android:backgroundTint="@color/editTextSelected"
                         android:drawableRight="@drawable/timecolor"
-                        android:inputType="text"
-                        android:maxLines="1"
                         android:focusable="false"
                         android:focusableInTouchMode="false"
+                        android:inputType="text"
+                        android:maxLines="1"
                         android:onClick="timeClick"
                         android:onFocusChange="@{sender.onFocusChangeValidation}"
                         android:singleLine="true"
@@ -282,7 +286,7 @@
 
                             <TextView
                                 android:id="@+id/labelCategory"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="50"
 
@@ -292,7 +296,7 @@
 
                             <TextView
                                 android:id="@+id/labelWeight"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="50"
 
@@ -311,10 +315,10 @@
                             <Spinner
                                 android:id="@+id/sp_sub_type"
                                 style="@style/Widget.AppCompat.Spinner.Underlined"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
-                                android:layout_weight="37"
+                                android:layout_weight="50"
                                 android:entries="@array/category"
                                 android:prompt="@string/prompt_wanttosend"
 
@@ -323,14 +327,14 @@
 
                             <EditText
                                 android:id="@+id/etWeight"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="@dimen/edit_text_height"
-                                android:layout_weight="63"
+                                android:layout_weight="50"
                                 android:backgroundTint="@color/editTextSelected"
 
+                                android:inputType="number"
                                 android:maxLines="1"
                                 android:onClick="timeClick"
-                                android:inputType="number"
                                 android:onFocusChange="@{sender.onFocusChangeValidation}"
                                 android:singleLine="true"
                                 android:text="@={item.weight}"
@@ -354,10 +358,48 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="50"
 
-                                android:text="@string/category"
+                                android:text="@string/dimension"
                                 android:textColor="@color/textHintColor"
                                 android:textSize="@dimen/font_size" />
 
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/volumetweightformsLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="15dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/labelspinHeight"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="50"
+                                android:text="@string/height"
+                                android:textColor="@color/textHintColor"
+                                android:textSize="@dimen/font_size" />
+
+                            <TextView
+                                android:id="@+id/labelWidth"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="50"
+
+                                android:text="@string/width"
+                                android:textColor="@color/textHintColor"
+                                android:textSize="@dimen/font_size" />
+
+                            <TextView
+                                android:id="@+id/labelBan"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="50"
+
+                                android:text="@string/breadth"
+                                android:textColor="@color/textHintColor"
+                                android:textSize="@dimen/font_size" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -366,45 +408,63 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <Spinner
-                                android:id="@+id/spinHeight"
-                                style="@style/Widget.AppCompat.Spinner.Underlined"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="bottom"
-                                android:layout_weight="33"
-                                android:entries="@array/height"
-                                android:prompt="@string/prompt_wanttosend"
-                                android:spinnerMode="dialog" />
+                            <EditText
+                                android:id="@+id/etHeight"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/edit_text_height"
+                                android:layout_weight="50"
+                                android:backgroundTint="@color/editTextSelected"
+                                android:inputType="number"
+                                android:maxLines="1"
 
-                            <Spinner
-                                android:id="@+id/spinWidth"
-                                style="@style/Widget.AppCompat.Spinner.Underlined"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="bottom"
-                                android:layout_weight="33"
-                                android:entries="@array/width"
-                                android:prompt="@string/prompt_wanttosend"
-                                android:spinnerMode="dialog" />
+                                android:onFocusChange="@{sender.onFocusChangeValidation}"
+                                android:singleLine="true"
+                                android:text="@={item.height}"
+                                android:textColor="@color/textColorDark"
+                                android:textColorHint="@color/textHintColor"
+                                android:textSize="@dimen/font_size"
+                                android:textStyle="bold" />
 
-                            <Spinner
-                                android:id="@+id/spinBand"
-                                style="@style/Widget.AppCompat.Spinner.Underlined"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="bottom"
-                                android:layout_weight="33"
-                                android:entries="@array/band"
-                                android:prompt="@string/prompt_wanttosend"
-                                android:spinnerMode="dialog" />
+                            <EditText
+                                android:id="@+id/etWidth"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/edit_text_height"
+                                android:layout_weight="50"
+                                android:backgroundTint="@color/editTextSelected"
+                                android:inputType="number"
+                                android:maxLines="1"
+                                android:onFocusChange="@{sender.onFocusChangeValidation}"
+                                android:singleLine="true"
+                                android:text="@={item.length}"
+                                android:textColor="@color/textColorDark"
+                                android:textColorHint="@color/textHintColor"
+                                android:textSize="@dimen/font_size"
+
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/etBreadth"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/edit_text_height"
+                                android:layout_weight="50"
+                                android:backgroundTint="@color/editTextSelected"
+                                android:inputType="number"
+                                android:maxLines="1"
+                                android:onFocusChange="@{sender.onFocusChangeValidation}"
+                                android:singleLine="true"
+                                android:text="@={item.breadth}"
+                                android:textColor="@color/textColorDark"
+                                android:textColorHint="@color/textHintColor"
+                                android:textSize="@dimen/font_size"
+
+                                android:textStyle="bold" />
+
 
                         </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/dynamicformsPassengers"
-
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -414,22 +474,22 @@
                             android:id="@+id/labelSeat"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
-
                             android:text="@string/noofseat"
                             android:textColor="@color/textHintColor"
                             android:textSize="@dimen/font_size" />
 
-                        <Spinner
-                            android:id="@+id/spinSeat"
-                            style="@style/Widget.AppCompat.Spinner.Underlined"
-                            android:layout_width="wrap_content"
+
+                        <EditText
+                            android:id="@+id/etPassenger"
+                            android:layout_width="230dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom"
-                            android:layout_weight="33"
-                            android:entries="@array/passengers"
-                            android:prompt="@string/prompt_wanttosend"
-                            android:spinnerMode="dialog" />
+                            android:layout_weight="50"
+                            android:inputType="number"
+                            android:onFocusChange="@{sender.onFocusChangeValidation}"
+                            android:text="@={senderitem.quantity}" />
+
+
                     </LinearLayout>
                 </LinearLayout>
 
@@ -470,10 +530,11 @@
 
                         <CheckBox
                             android:id="@+id/cbarticle"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom"
                             android:layout_weight="50"
+                            android:checked="@{cbpassenger.checked ? false : true}"
                             android:spinnerMode="dialog"
                             android:text="@string/article" />
 
@@ -482,6 +543,7 @@
                             android:layout_width="0dp"
                             android:layout_height="@dimen/edit_text_height"
                             android:layout_weight="50"
+                            android:checked="@{cbarticle.checked ? false : true}"
                             android:text="@string/passengers" />
                     </LinearLayout>
 
@@ -518,7 +580,6 @@
                                 android:layout_gravity="bottom"
                                 android:layout_weight="50"
                                 android:inputType="number"
-                                android:spinnerMode="dialog"
                                 android:text="@={carrierAttribute.capacity}" />
 
 
@@ -542,17 +603,17 @@
                                 android:text="@string/noofseat"
                                 android:textColor="@color/textHintColor"
                                 android:textSize="@dimen/font_size" />
-
-                            <Spinner
-                                android:id="@+id/spCarrierPassengers"
-                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                            <EditText
+                                android:id="@+id/etCarrierPassengers"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:layout_weight="50"
-                                android:entries="@array/passengers"
-                                android:prompt="@string/prompt_wanttosend"
-                                android:spinnerMode="dialog" />
+                                android:inputType="number"
+                                android:onFocusChange="@{sender.onFocusChangeValidation}"
+                                android:text="@={carrierAttribute.passengercount}"/>
+
+
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
