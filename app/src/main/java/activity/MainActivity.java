@@ -17,7 +17,6 @@ import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -27,15 +26,13 @@ import android.widget.TimePicker;
 import com.google.gson.Gson;
 import com.yourapp.developer.karrierbay.R;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Calendar;
 import java.util.HashMap;
 
-import Fragment.*;
+import Fragment.ContactFragment;
+import Fragment.HomeFragment;
+import Fragment.ProfileFragment;
 import Model.Constants;
-import Model.Quote;
 import Model.QuoteRequest;
 import Model.SenderOrder;
 import RetroGit.ApiClient;
@@ -94,9 +91,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         View hView = navigationView.getHeaderView(0);
+
         emailHeader = (TextView) hView.findViewById(R.id.email_header);
         user = sessionManager.getUserDetails();
         emailHeader.setText(user.get(SessionManager.KEY_NAME));
+
+        hView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fragment(new ProfileFragment(), "ProfileFragment");
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        });
+
         apiService = ApiClient.getClientWithHeader(this).create(ApiInterface.class);
 
         fragment(new HomeFragment(), "MainFragment");

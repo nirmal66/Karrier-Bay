@@ -6,10 +6,8 @@ import android.content.SharedPreferences;
 
 import java.util.HashMap;
 
-import Model.LoginResponse;
 import activity.LoginActivity;
 import okhttp3.Headers;
-import retrofit2.Response;
 
 
 /**
@@ -31,7 +29,8 @@ public class SessionManager {
     public static final String KEY_NAME = "name";
     // Email address (make variable public to access from outside)
     public static final String KEY_EMAIL = "email";
-
+    // User Address
+    public static final String KEY_ADDRESS = "address";
     public static final String ACCESS_TOKEN = "Access-Token";
     public static final String CLIENT = "Client";
     // Constructor
@@ -72,10 +71,10 @@ public class SessionManager {
         HashMap<String, String> user = new HashMap<String, String>();
         // user name
         user.put(KEY_NAME, sharedPreferences.getString(KEY_NAME, null));
-
         // user email id
         user.put(KEY_EMAIL, sharedPreferences.getString(KEY_EMAIL, null));
-
+        //user address
+        user.put(KEY_ADDRESS, sharedPreferences.getString(KEY_ADDRESS, null));
         // return user
         return user;
     }
@@ -100,5 +99,11 @@ public class SessionManager {
         _context.startActivity(i);
     }
 
+
+    public void address(String address)
+    {
+        editor.putString(KEY_ADDRESS,address);
+        editor.commit();
+    }
 
     }

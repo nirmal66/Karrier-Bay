@@ -56,9 +56,12 @@
     <string name="continuetext">CONTINUE</string>
     <string name="action_contact_title">Write your comments below</string>
     <string name="action_send">SEND</string>
+    <string name="action_save">SAVE</string>
     <string name="height">Heignt(cm)</string>
     <string name="width">Width(cm)</string>
     <string name="breadth">Breadth(cm)</string>
     <string name="dimension">DIMENSIONS</string>
     <string name="flatename">FLAT NAME</string>
+    <string name="action_loaction">Enter your location:</string>
+
 </resources>
