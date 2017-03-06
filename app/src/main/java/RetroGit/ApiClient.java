@@ -75,7 +75,8 @@ public class ApiClient {
                             }
                         })
                 .build();
-        retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(BASE_URL).client(okClient).build();
+
+            retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(BASE_URL).client(okClient).build();
 
     }    return retrofit;
     }

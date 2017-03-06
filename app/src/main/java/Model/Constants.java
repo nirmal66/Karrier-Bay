@@ -8,4 +8,7 @@ public class Constants {
 
     public static String ARTICLE="Article";
     public static String PASSENGER="Passenger";
+    public static String LISTFRAGMENT="ListFragment";
+    public static String TRIPSUMMARYFRAGMENT="TripSummaryFragment";
+
 }

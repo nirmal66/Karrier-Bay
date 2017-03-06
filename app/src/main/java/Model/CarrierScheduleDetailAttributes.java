@@ -3,6 +3,8 @@ package Model;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
+import Utilities.Utility;
+
 /**
  * Created by vel on 16/2/17.
  */
@@ -103,6 +105,26 @@ public class CarrierScheduleDetailAttributes extends BaseObservable {
     {
         return start_time;
     }
+
+    private String displayStartTime;
+
+    public String getDisplayStartTime() {
+        return  Utility.displayDateTime(start_time);
+    }
+
+    public void setDisplayStartTime(String displayStartTime) {
+        this.displayStartTime = displayStartTime;
+    }
+
+    public String getDisplayEndTime() {
+        return Utility.displayDateTime(end_time);
+    }
+
+    public void setDisplayEndTime(String displayEndTime) {
+        this.displayEndTime = displayEndTime;
+    }
+
+    private String displayEndTime;
 
     public void setStart_time (String start_time)
     {

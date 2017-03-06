@@ -50,7 +50,7 @@ public class SenderTripScheduleFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(isPageValidationSuccess()) {
-                    ((MainActivity) getActivity()).fragment(new TripSummaryFragment(), "SenderFragment");
+                    ((MainActivity) getActivity()).fragment(new TripSummaryFragment(),Constants.TRIPSUMMARYFRAGMENT);
                 }else{
                     Toast.makeText(getActivity(), "Please provide all fields value", Toast.LENGTH_LONG).show();
 

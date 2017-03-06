@@ -2,14 +2,64 @@ package Model;
 
 import android.databinding.BaseObservable;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
+
+import Utilities.Utility;
+
+import static Utilities.Utility.displayDateTime;
+
 /**
  * Created by vel on 11/2/17.
  */
 
 public class SenderOrderItemAttributes extends BaseObservable {
     private ItemAttributes item_attributes;
+
+  private String displayStartTime;
+
+    public String getDisplayStartTime() {
+        return  Utility.displayDateTime(start_time);
+    }
+
+    public void setDisplayStartTime(String displayStartTime) {
+        this.displayStartTime = displayStartTime;
+    }
+
+    public String getDisplayEndTime() {
+        return Utility.displayDateTime(end_time);
+    }
+
+    public void setDisplayEndTime(String displayEndTime) {
+        this.displayEndTime = displayEndTime;
+    }
+
+    private String displayEndTime;
     private String total_amount;
 
+    public String getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(String end_time) {
+        this.end_time = end_time;
+    }
+
+    public String getStart_time() {
+        return start_time;
+    }
+
+
+
+    public void setStart_time(String start_time) {
+        this.start_time = start_time;
+    }
+
+    private String end_time;
+    private String start_time;
 
     private String id;
 

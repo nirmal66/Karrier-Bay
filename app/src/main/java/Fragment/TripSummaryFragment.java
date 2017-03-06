@@ -31,6 +31,8 @@ import Model.SenderOrderItemAttributes;
 import Model.SenderOrderRequest;
 import Model.SenderOrderResponse;
 import Model.User;
+import RetroGit.ApiClient;
+import RetroGit.ApiInterface;
 import Utilities.Utility;
 import activity.MainActivity;
 import retrofit2.Call;
@@ -63,7 +65,7 @@ public class TripSummaryFragment extends Fragment {
 
         SenderOrderItemAttributes senderorderitem = sender_order_item_attributes[0];
         binding.setSenderorderitem(senderorderitem);
-
+        Utility.hideKeyboard(getActivity());
         return view;
     }
 
@@ -76,27 +78,21 @@ public class TripSummaryFragment extends Fragment {
             ((MainActivity) getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>CARRIER WALL</font>"));
 
         }
+        ((MainActivity) getActivity()).apiService = ApiClient.getClientWithHeader(getActivity()).create(ApiInterface.class);
 
         view.findViewById(R.id.btn_sender_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-//                String s = "{\"SenderOrder\":{\"from_loc\":\"Mysore\",\"to_loc\":\"Calicut\",\"comments\":\"Car\",\"from_geo_lat\":\"11.8014\",\"from_geo_long\":\"76.0044\",\"to_geo_lat\":\"12.9716\",\"to_geo_long\":\"77.5946\",\"isInsured\":true,\"receiver_order_mapping\":{\"name\":\"Shuhail\",\"address_line_1\":\"mysore road\",\"address_line_2\":\"Wayanad\",\"phone_1\":\"12121212\",\"phone_2\":\"341356343\",\"landmark\":\"KSRTC\",\"pin\":\"679645\",\"auto_save\":true},\"pickup_order_mapping\":{\"name\":\"Shuhail\",\"address_line_1\":\"mysore road\",\"address_line_2\":\"Wayanad\",\"phone_1\":\"12121212\",\"phone_2\":\"341356343\",\"landmark\":\"KSRTC\",\"pin\":\"679645\",\"auto_save\":true},\"sender_order_item_attributes\":[{\"quantity\":1,\"item_type\":\"Laptop\",\"item_subtype\":\"Pishku\",\"item_attributes\":{\"length\":\"12\",\"breadth\":\"13\",\"height\":\"13\",\"item_weight\":\"122\",\"item_value\":\"12\"}}]}}";
-//                Gson gson = new Gson();
-                //sender  = gson.fromJson(new JSONObject(s).getString("SenderOrder"),SenderOrder.class);
+
                 Call<SenderOrderResponse> call = null;
                 SenderOrderRequest senderOrderRequest = new SenderOrderRequest();
-                sender.setFrom_geo_lat("11.8014");
-                sender.setFrom_geo_long("76.0044");
-                sender.setTo_geo_lat("12.9716");
-                sender.setTo_geo_long("77.5946");
-
 
                 senderOrderRequest.setSenderOrder(sender);
-                ((MainActivity) getActivity()).fragment(new CarrierListFragment(), "SenderFragment");
+              ((MainActivity) getActivity()).fragment(new CarrierListFragment(), Constants.LISTFRAGMENT);
                 if (sender.isSender) {
-            call = ((MainActivity) getActivity()).apiService.postSenderOrder("sender", "order", senderOrderRequest);
-               //  call = ((MainActivity) getActivity()).apiService.postSenderOrder("carrier", "schedule", senderOrderRequest);
+                    call = ((MainActivity) getActivity()).apiService.postSenderOrder("sender", "order", senderOrderRequest);
+                    //  call = ((MainActivity) getActivity()).apiService.postSenderOrder("carrier", "schedule", senderOrderRequest);
 
 
                 } else {
@@ -116,7 +112,7 @@ public class TripSummaryFragment extends Fragment {
                         if (response.code() == 201) {
                             Log.d("LoginResponse", response.message());
                             // Log.d("Error",response.body().getErrors().toString());
-                            ((MainActivity) getActivity()).fragment(new CarrierListFragment(), "SenderFragment");
+                            ((MainActivity) getActivity()).fragment(new CarrierListFragment(), Constants.LISTFRAGMENT);
                         } else {
                             Toast.makeText(getActivity(), "Incorrect Request", Toast.LENGTH_LONG).show();
                         }
@@ -125,6 +121,7 @@ public class TripSummaryFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<SenderOrderResponse> call, Throwable t) {
+                        Toast.makeText(getActivity(), "Incorrect Request", Toast.LENGTH_LONG).show();
 
                     }
                 });
@@ -133,7 +130,6 @@ public class TripSummaryFragment extends Fragment {
         });
 
     }
-
 
 
 }

@@ -38,8 +38,7 @@ public interface ApiInterface {
     @POST("{flowtype}/{flowtypeParam}")
     Call<SenderOrderResponse> postSenderOrder(@Path("flowtype") String flowtype, @Path("flowtypeParam") String flowtypeParam, @Body SenderOrderRequest senderOrderRequest);
 
-    //carrier/schedules
-    //sender/orders
+
     @GET("{flowtype}/{flowtypeParam}")
     Call<List<SenderOrder>> getSenderOrCarrierOrder(@Path("flowtype") String flowtype, @Path("flowtypeParam") String flowtypeParam);
 

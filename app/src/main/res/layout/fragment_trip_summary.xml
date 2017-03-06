@@ -117,7 +117,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        android:text="@{carrierattribute.start_time ?? carrierattribute.start_time }"
+                        android:text="@{carrierattribute.displayStartTime ?? senderorderitem.displayStartTime }"
 
                         android:textColor="@color/textHintColor"
                         android:textSize="@dimen/font_size" />
@@ -176,7 +176,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
 
-                        android:text="@{carrierattribute.end_time ?? carrierattribute.end_time }"
+                        android:text="@{carrierattribute.displayEndTime ?? senderorderitem.displayEndTime }"
                         android:textColor="@color/textHintColor"
                         android:textSize="@dimen/font_size" />
                 </LinearLayout>

@@ -21,11 +21,11 @@ public final class SenderOrderResponse {
     public final String updated_at;
     public final Coupon coupon;
     public final boolean isInsured;
-    public final Receiver_order_mapping receiver_order_mapping;
-    public final Sender_order_item sender_order_item[];
-    public final Pickup_order_mapping pickup_order_mapping;
+    public final Receiverordermapping receiver_order_mapping;
+    public final SenderOrderItem sender_order_item[];
+    public final Pickupordermapping pickup_order_mapping;
 
-    public SenderOrderResponse(long id, String order_id, String sender_id, String from_loc, String to_loc, String total_amount, String from_geo_lat, String from_geo_long, String to_geo_long, String to_geo_lat, String status, String comments, String created_at, String updated_at, Coupon coupon, boolean isInsured, Receiver_order_mapping receiver_order_mapping, Sender_order_item[] sender_order_item, Pickup_order_mapping pickup_order_mapping){
+    public SenderOrderResponse(long id, String order_id, String sender_id, String from_loc, String to_loc, String total_amount, String from_geo_lat, String from_geo_long, String to_geo_long, String to_geo_lat, String status, String comments, String created_at, String updated_at, Coupon coupon, boolean isInsured, Receiverordermapping receiver_order_mapping, SenderOrderItem[] sender_order_item, Pickupordermapping pickup_order_mapping){
         this.id = id;
         this.order_id = order_id;
         this.sender_id = sender_id;
@@ -53,7 +53,7 @@ public final class SenderOrderResponse {
         }
     }
 
-    public static final class Receiver_order_mapping {
+    public static final class Receiverordermapping {
         public final long id;
         public final String reciever_id;
         public final String order_id;
@@ -71,7 +71,7 @@ public final class SenderOrderResponse {
         public final String created_at;
         public final String updated_at;
 
-        public Receiver_order_mapping(long id, String reciever_id, String order_id, String sender_id, String name, String phone_1, String phone_2, String address_line_1, String address_line_2, State state, String landmark, String pin, String status, boolean auto_save, String created_at, String updated_at){
+        public Receiverordermapping(long id, String reciever_id, String order_id, String sender_id, String name, String phone_1, String phone_2, String address_line_1, String address_line_2, State state, String landmark, String pin, String status, boolean auto_save, String created_at, String updated_at){
             this.id = id;
             this.reciever_id = reciever_id;
             this.order_id = order_id;
@@ -97,7 +97,7 @@ public final class SenderOrderResponse {
         }
     }
 
-    public static final class Sender_order_item {
+    public static final class SenderOrderItem {
         public final long id;
         public final String order_id;
         public final Item_attributes item_attributes;
@@ -109,7 +109,7 @@ public final class SenderOrderResponse {
         public final String created_at;
         public final String updated_at;
 
-        public Sender_order_item(long id, String order_id, Item_attributes item_attributes, String unit_price, long quantity, String total_amount, String item_type, String item_subtype, String created_at, String updated_at){
+        public SenderOrderItem(long id, String order_id, Item_attributes item_attributes, String unit_price, long quantity, String total_amount, String item_type, String item_subtype, String created_at, String updated_at){
             this.id = id;
             this.order_id = order_id;
             this.item_attributes = item_attributes;
@@ -126,7 +126,7 @@ public final class SenderOrderResponse {
             public final long length;
             public final long breadth;
             public final long height;
-            public final long per_km_charge;
+            public final double per_km_charge;
             public final long total_distance;
             public final double total_distance_charge;
             public final long total_weight_charge;
@@ -155,7 +155,7 @@ public final class SenderOrderResponse {
         }
     }
 
-    public static final class Pickup_order_mapping {
+    public static final class Pickupordermapping {
         public final long id;
         public final String name;
         public final String order_id;
@@ -171,7 +171,7 @@ public final class SenderOrderResponse {
         public final String created_at;
         public final String updated_at;
 
-        public Pickup_order_mapping(long id, String name, String order_id, String sender_id, String phone, String address_line_1, String address_line_2, State state, String landmark, String pin, String status, boolean auto_save, String created_at, String updated_at){
+        public Pickupordermapping(long id, String name, String order_id, String sender_id, String phone, String address_line_1, String address_line_2, State state, String landmark, String pin, String status, boolean auto_save, String created_at, String updated_at){
             this.id = id;
             this.name = name;
             this.order_id = order_id;

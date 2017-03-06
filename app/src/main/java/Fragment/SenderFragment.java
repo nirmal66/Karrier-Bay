@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 
-import android.provider.SyncStateContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -30,17 +29,28 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.gson.Gson;
 import com.yourapp.developer.karrierbay.R;
 import com.yourapp.developer.karrierbay.databinding.FragmentSenderBinding;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import Model.CarrierScheduleDetailAttributes;
 import Model.Constants;
 import Model.ItemAttributes;
+import Model.Quote;
 import Model.QuoteRequest;
 import Model.QuoteResponse;
 import Model.SenderOrder;
 import Model.SenderOrderItemAttributes;
-import Model.SenderOrderResponse;
 import Utilities.Utility;
 import activity.MainActivity;
 import retrofit2.Call;
@@ -56,7 +66,8 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
     SenderOrder sender = null;
     boolean isFromLocFocused;
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
-    QuoteRequest quoteRequest = new QuoteRequest();
+    QuoteRequest quoteRequest ;
+
     CarrierScheduleDetailAttributes carrierAttribute;
     SenderOrderItemAttributes[] sender_order_item_attributes;
     SenderOrderItemAttributes senderitem;
@@ -71,13 +82,15 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
 
         //here data must be an instance of the class MarsDataProvider
         sender = ((MainActivity) getActivity()).sender;
+        quoteRequest = ((MainActivity) getActivity()).quoteRequest;
+
         sender_order_item_attributes = sender.getSender_order_item_attributes();
         senderitem = sender_order_item_attributes[0];
         binding.setSenderitem(senderitem);
         item = sender_order_item_attributes[0].getItem_attributes();
         binding.setSender(sender);
         binding.setItem(item);
-
+//        android:text="@{carrierattribute.displayStartTime ?? senderorderitem.displayStartTime }"
         carrierAttribute = sender.getCarrierScheduleDetailAttributes();
         binding.setCarrierAttribute(carrierAttribute);
 //        user.getText().set("Lugggage");
@@ -102,8 +115,7 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
         ((Spinner) view.findViewById(R.id.sp_sub_type)).setOnItemSelectedListener(this);
 
 
-
-         ;
+        ;
         ((EditText) view.findViewById(R.id.etDEPDate)).setOnClickListener(this);
         ((EditText) view.findViewById(R.id.etToDate)).setOnClickListener(this);
 
@@ -117,17 +129,20 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
         view.findViewById(R.id.btn_sender_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view1) {
+                Utility.hideKeyboard(getActivity());
                 if (sender.isSender) {
                     if (sender.getSpinWantToSendIdx() == 0) {
-                        quoteRequest.setBreadth(sender.getSender_order_item_attributes()[0].getItem_attributes().getBreadth());
-                        quoteRequest.setHeight(sender.getSender_order_item_attributes()[0].getItem_attributes().getHeight());
-                        quoteRequest.setLength(sender.getSender_order_item_attributes()[0].getItem_attributes().getLength());
-                        quoteRequest.setItem_weight(sender.getSender_order_item_attributes()[0].getItem_attributes().getWeight());
+                        quoteRequest.setBreadth(sender.getSender_order_item_attributes()[0].getItem_attributes().getBreadth()+"");
+                        quoteRequest.setHeight(sender.getSender_order_item_attributes()[0].getItem_attributes().getHeight()+"");
+                        quoteRequest.setLength(sender.getSender_order_item_attributes()[0].getItem_attributes().getLength()+"");
+                        quoteRequest.setItem_weight(sender.getSender_order_item_attributes()[0].getItem_attributes().getWeight()+"");
                     } else {
                         quoteRequest.setItem_value(sender.getSender_order_item_attributes()[0].getQuantity());
                     }
 
                     if (isPageValidationSuccess()) {
+                        senderitem.setStart_time(getDate(sender.getFromDate(), sender.getFromTime()));
+                        senderitem.setEnd_time(getDate(sender.getToDate(), sender.getToTime()));
                         Call call = ((MainActivity) getActivity()).apiService.getQuote(quoteRequest);
 
 
@@ -194,16 +209,16 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
                     sender.getCarrierScheduleDetailAttributes().setStart_time(getDate(sender.getFromDate(), sender.getFromTime()));
                     sender.getCarrierScheduleDetailAttributes().setEnd_time(getDate(sender.getToDate(), sender.getToTime()));
 
-                        if (((CheckBox) view.findViewById(R.id.cbarticle)).isChecked()) {
-                            sender.getCarrierScheduleDetailAttributes().setMode(Constants.ARTICLE);
-                            sender.getCarrierScheduleDetailAttributes().setPassengercount(null);
-                        } else if (((CheckBox) view.findViewById(R.id.cbpassenger)).isChecked()) {
-                            sender.getCarrierScheduleDetailAttributes().setMode(Constants.PASSENGER);
-                            sender.getCarrierScheduleDetailAttributes().setCapacity(null);
-                        }
+                    if (((CheckBox) view.findViewById(R.id.cbarticle)).isChecked()) {
+                        sender.getCarrierScheduleDetailAttributes().setMode(Constants.ARTICLE);
+                        sender.getCarrierScheduleDetailAttributes().setPassengercount(null);
+                    } else if (((CheckBox) view.findViewById(R.id.cbpassenger)).isChecked()) {
+                        sender.getCarrierScheduleDetailAttributes().setMode(Constants.PASSENGER);
+                        sender.getCarrierScheduleDetailAttributes().setCapacity(null);
+                    }
                     if (isPageValidationSuccess()) {
 
-                        ((MainActivity) getActivity()).fragment(new TripSummaryFragment(), "SenderFragment");
+                        ((MainActivity) getActivity()).fragment(new TripSummaryFragment(), Constants.TRIPSUMMARYFRAGMENT);
 
                     } else {
                         Toast.makeText(getActivity(), "Please provide all fields value", Toast.LENGTH_LONG).show();
@@ -213,16 +228,30 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
 
         });
 
+
     }
+
 
     public String getDate(String date, String time) {
 //    2016-09-08T12:00:00.000Z
 
-        date = "10-01-2017";
+
         String a[] = date.split("-");
-        time = "06:50";
-        return a[2] + "-" + a[1] + "-" + a[0] + "T" + time + "00.000Z";
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DATE, Integer.parseInt(a[0]));
+        calendar.set(Calendar.MONTH, Integer.parseInt(a[1]));
+        calendar.set(Calendar.YEAR, Integer.parseInt(a[2]));
+
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+        df.setTimeZone(TimeZone.getTimeZone("GMT"));
+        System.out.println("Current date and time in GMT: " + df.format(calendar.getTime()));
+
+        //    return a[2] + "-" + a[1] + "-" + a[0] + "T" + time + "00.000Z";
+        return df.format(calendar.getTime());
     }
+
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -241,8 +270,6 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
             case R.id.sp_sub_type:
                 sender_order_item_attributes[0].setItem_subtype(selectedValue);
                 break;
-
-
 
 
             default:
@@ -287,10 +314,16 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
                 Place place = PlaceAutocomplete.getPlace(getActivity(), data);
                 if (isFromLocFocused) {
                     sender.setFrom_loc(place.getAddress().toString());
+                    sender.setFrom_geo_lat(place.getLatLng().latitude+"");
+
+                    sender.setFrom_geo_long(place.getLatLng().longitude+"");
+
                     quoteRequest.setLat1((place.getLatLng().latitude) + "");
                     quoteRequest.setLong1((place.getLatLng().longitude) + "");
                 } else {
                     sender.setTo_loc(place.getAddress().toString());
+                    sender.setTo_geo_lat(place.getLatLng().latitude+"");
+                    sender.setTo_geo_long(place.getLatLng().longitude+"");
                     quoteRequest.setLat2((place.getLatLng().latitude) + "");
                     quoteRequest.setLong2((place.getLatLng().longitude) + "");
                 }
@@ -343,13 +376,13 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
         }
         if (sender.isSender) {
             if (senderitem.getItem_type().equals(Constants.ARTICLE)) {
-                String validateCarrierStrings[] = {senderitem.getItem_subtype(),item.getLength(),item.getHeight(),item.getBreadth()
-                ,item.getWeight()};
+                String validateCarrierStrings[] = {senderitem.getItem_subtype(), item.getLength()+"", item.getHeight()+"", item.getBreadth()+""
+                        , item.getWeight()};
                 if (Utility.isNull(validateCarrierStrings)) {
                     return false;
                 }
             } else {
-                String validateCarrierStrings[] = {  senderitem.getQuantity()};
+                String validateCarrierStrings[] = {senderitem.getQuantity()};
                 if (Utility.isNull(validateCarrierStrings)) {
                     return false;
                 }
@@ -372,5 +405,5 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
         return true;
     }
 
- 
+
 }
