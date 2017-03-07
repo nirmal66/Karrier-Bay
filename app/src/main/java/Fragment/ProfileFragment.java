@@ -37,6 +37,7 @@ public class ProfileFragment extends BaseFragment implements
     private HashMap<String, String> user;
     private SessionManager sessionManager;
     private GoogleApiClient mGoogleApiClient;
+    private String lat,lon;
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private static final int PERMISSION_REQUEST_CODE = 100;
 
@@ -84,6 +85,8 @@ public class ProfileFragment extends BaseFragment implements
             public void onResult(PlaceLikelihoodBuffer likelyPlaces) {
                 for (PlaceLikelihood placeLikelihood : likelyPlaces) {
                     binding.locationEdittext.setText(placeLikelihood.getPlace().getAddress());
+                    lat = placeLikelihood.getPlace().getLatLng().latitude+"";
+                    lon = placeLikelihood.getPlace().getLatLng().longitude+"";
                 }
                 likelyPlaces.release();
             }
@@ -107,7 +110,7 @@ public class ProfileFragment extends BaseFragment implements
     public class ProfileHandler {
         public void ProfileOnClick(View view) {
             Toast.makeText(getActivity(), "Your details has been updated", Toast.LENGTH_LONG).show();
-            sessionManager.address(binding.locationEdittext.getText().toString());
+            sessionManager.address(binding.locationEdittext.getText().toString(),lat,lon);
             ((MainActivity) getActivity()).fragment(new HomeFragment(), "HomeFragment");
 
         }

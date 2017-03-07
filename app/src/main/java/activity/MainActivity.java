@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public SenderOrder sender = new SenderOrder();
     public QuoteRequest quoteRequest = new QuoteRequest();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-
 
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Karrier Bay</font>"));
 
@@ -128,7 +128,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 for (int i = 1; i < fm.getBackStackEntryCount(); ++i) {
                     fm.popBackStack();
                 }
-
                 sender = new SenderOrder();
                 quoteRequest = new QuoteRequest();
                 fragment(new HomeFragment(), "MainFragment");
