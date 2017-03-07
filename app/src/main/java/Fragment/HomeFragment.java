@@ -40,6 +40,8 @@ public class HomeFragment extends BaseFragment {
         beaCarrier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((MainActivity)getActivity()).  sender = new SenderOrder();
+                ((MainActivity)getActivity()).quoteRequest = new QuoteRequest();
                 Bundle bundle=new Bundle();
                 bundle.putBoolean("isSenderFlow",false);
                 senderFragment.setArguments(bundle);
@@ -50,6 +52,9 @@ public class HomeFragment extends BaseFragment {
         beaSender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((MainActivity)getActivity()).  sender = new SenderOrder();
+                ((MainActivity)getActivity()).quoteRequest = new QuoteRequest();
+
                 Bundle bundle=new Bundle();
                 bundle.putBoolean("isSenderFlow",true);
                 senderFragment.setArguments(bundle);

@@ -253,7 +253,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        android:text="@{sender.isSender ? @string/volumetricweight : @string/noofseat}"
+                        android:text="@{sender.isSender ? @string/total_price : @string/noofseat}"
                         android:textColor="@color/textHintColor"
                         android:textSize="@dimen/font_size" />
 
@@ -262,7 +262,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        android:text="@{carrierattribute.passengercount ?? item.volumetricfullDetails}"
+                        android:text="@{carrierattribute.passengercount ?? item.total_distance_charge}"
 
                         android:textColor="@color/textHintColor"
                         android:textSize="@dimen/font_size" />

@@ -63,5 +63,5 @@
     <string name="dimension">DIMENSIONS</string>
     <string name="flatename">FLAT NAME</string>
     <string name="action_loaction">Enter your location:</string>
-
+    <string name="total_price">Total Price</string>
 </resources>

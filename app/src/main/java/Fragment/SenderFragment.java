@@ -158,6 +158,7 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
 
                                     sender.getPickupOrderMapping().setAddress_line_2(sender.getFrom_loc());
                                     sender.getReceiverOrderMapping().setAddress_line_2(sender.getTo_loc());
+                                    sender.getSender_order_item_attributes()[0].getItem_attributes().setTotal_charge(quoteResponse.quote.getTotal_distance_charge());
                                     // set the custom dialog components - text, image and button
                                     TextView text = (TextView) dialog.findViewById(R.id.textView2);
                                     text.setText("The appropriate charge for your courier is RS." + quoteResponse.quote.getTotal_distance_charge() + " The prices may be vary according to the exact " +

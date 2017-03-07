@@ -46,6 +46,9 @@ public class ItemAttributes extends BaseObservable
 
     private String insurance_percent;
      private String volumetricfullDetails;
+
+
+
     public String getVolumetricfullDetails() {
         volumetricfullDetails=length +"  "+breadth+"  "+height+"\n";
         return volumetricfullDetails;
@@ -137,21 +140,23 @@ public class ItemAttributes extends BaseObservable
     public void setRisk_charge(String risk_charge) {
         this.risk_charge = risk_charge;
     }
-
+@Bindable
     public String getTotal_charge() {
         return total_charge;
     }
 
     public void setTotal_charge(String total_charge) {
         this.total_charge = total_charge;
+        notifyPropertyChanged(BR.total_charge);
     }
-
+@Bindable
     public String getTotal_distance_charge() {
         return total_distance_charge;
     }
 
     public void setTotal_distance_charge(String total_distance_charge) {
         this.total_distance_charge = total_distance_charge;
+        notifyPropertyChanged(BR.total_distance_charge);
     }
 
     public String getInsurance_percent() {

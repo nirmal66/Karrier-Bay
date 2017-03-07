@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView emailHeader;
     public ApiInterface apiService;
     public SenderOrder sender = new SenderOrder();
-    public QuoteRequest quoteRequest=new QuoteRequest();
+    public QuoteRequest quoteRequest = new QuoteRequest();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,8 +124,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (tag.equals("MainFragment")) {
                 finish();
             } else if (tag.equals(Constants.LISTFRAGMENT)) {
-                FragmentManager fm =  getSupportFragmentManager();
-                for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+                FragmentManager fm = getSupportFragmentManager();
+                for (int i = 1; i < fm.getBackStackEntryCount(); ++i) {
                     fm.popBackStack();
                 }
 
@@ -161,8 +161,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //item.setVisible(false);
         }*/
         if (id == R.id.action_home) {
-  sender = new SenderOrder();
- quoteRequest = new QuoteRequest();
+            sender = new SenderOrder();
+            quoteRequest = new QuoteRequest();
             fragment(new HomeFragment(), "MainFragment");
         }
 
