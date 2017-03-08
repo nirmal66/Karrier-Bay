@@ -31,6 +31,11 @@ public class SessionManager {
     public static final String KEY_EMAIL = "email";
     // User Address
     public static final String KEY_ADDRESS = "address";
+    // User latitude
+    public static final String KEY_LATITUDE = "latitude";
+    // User longitude
+    public static final String KEY_LONGITUDE = "longitude";
+
     public static final String ACCESS_TOKEN = "Access-Token";
     public static final String CLIENT = "Client";
     // Constructor
@@ -100,9 +105,11 @@ public class SessionManager {
     }
 
 
-    public void address(String address)
+    public void address(String address, String lat, String lon)
     {
         editor.putString(KEY_ADDRESS,address);
+        editor.putString(KEY_LATITUDE,lat);
+        editor.putString(KEY_LONGITUDE,lon);
         editor.commit();
     }
 

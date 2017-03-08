@@ -4,13 +4,11 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -29,28 +27,22 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
-import com.google.gson.Gson;
 import com.yourapp.developer.karrierbay.R;
 import com.yourapp.developer.karrierbay.databinding.FragmentSenderBinding;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+import java.util.HashMap;
 import java.util.TimeZone;
 
 import Model.CarrierScheduleDetailAttributes;
 import Model.Constants;
 import Model.ItemAttributes;
-import Model.Quote;
 import Model.QuoteRequest;
 import Model.QuoteResponse;
 import Model.SenderOrder;
 import Model.SenderOrderItemAttributes;
+import Utilities.SessionManager;
 import Utilities.Utility;
 import activity.MainActivity;
 import retrofit2.Call;
@@ -66,12 +58,13 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
     SenderOrder sender = null;
     boolean isFromLocFocused;
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
-    QuoteRequest quoteRequest ;
-
+    QuoteRequest quoteRequest;
+    private HashMap<String, String> user;
     CarrierScheduleDetailAttributes carrierAttribute;
     SenderOrderItemAttributes[] sender_order_item_attributes;
     SenderOrderItemAttributes senderitem;
     ItemAttributes item;
+    private SessionManager sessionManager;
 
     @Nullable
     @Override
@@ -102,6 +95,11 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         sender.isSender = getArguments().getBoolean("isSenderFlow");
+
+        //retriving user details
+        sessionManager = new SessionManager(getActivity());
+        user = sessionManager.getUserDetails();
+
         if (sender.isSender) {
             ((MainActivity) getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>SENDER TRIP SCHEDULE</font>"));
         } else {
@@ -133,10 +131,10 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
                 Utility.hideKeyboard(getActivity());
                 if (sender.isSender) {
                     if (sender.getSpinWantToSendIdx() == 0) {
-                        quoteRequest.setBreadth(sender.getSender_order_item_attributes()[0].getItem_attributes().getBreadth()+"");
-                        quoteRequest.setHeight(sender.getSender_order_item_attributes()[0].getItem_attributes().getHeight()+"");
-                        quoteRequest.setLength(sender.getSender_order_item_attributes()[0].getItem_attributes().getLength()+"");
-                        quoteRequest.setItem_weight(sender.getSender_order_item_attributes()[0].getItem_attributes().getWeight()+"");
+                        quoteRequest.setBreadth(sender.getSender_order_item_attributes()[0].getItem_attributes().getBreadth() + "");
+                        quoteRequest.setHeight(sender.getSender_order_item_attributes()[0].getItem_attributes().getHeight() + "");
+                        quoteRequest.setLength(sender.getSender_order_item_attributes()[0].getItem_attributes().getLength() + "");
+                        quoteRequest.setItem_weight(sender.getSender_order_item_attributes()[0].getItem_attributes().getWeight() + "");
                     } else {
                         quoteRequest.setItem_value(sender.getSender_order_item_attributes()[0].getQuantity());
                     }
@@ -231,7 +229,15 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
 
         });
 
+        //assign default address to from edittext box:
 
+        if (user.get(SessionManager.KEY_ADDRESS) != null) {
+            sender.setFrom_loc(user.get(sessionManager.KEY_ADDRESS));
+            sender.setFrom_geo_lat(user.get(sessionManager.KEY_LATITUDE));
+            sender.setFrom_geo_long(user.get(sessionManager.KEY_LONGITUDE));
+            quoteRequest.setLat1(user.get(sessionManager.KEY_LATITUDE));
+            quoteRequest.setLong1(user.get(sessionManager.KEY_LONGITUDE));
+        }
     }
 
 
@@ -321,16 +327,16 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
                 Place place = PlaceAutocomplete.getPlace(getActivity(), data);
                 if (isFromLocFocused) {
                     sender.setFrom_loc(place.getAddress().toString());
-                    sender.setFrom_geo_lat(place.getLatLng().latitude+"");
+                    sender.setFrom_geo_lat(place.getLatLng().latitude + "");
 
-                    sender.setFrom_geo_long(place.getLatLng().longitude+"");
+                    sender.setFrom_geo_long(place.getLatLng().longitude + "");
 
                     quoteRequest.setLat1((place.getLatLng().latitude) + "");
                     quoteRequest.setLong1((place.getLatLng().longitude) + "");
                 } else {
                     sender.setTo_loc(place.getAddress().toString());
-                    sender.setTo_geo_lat(place.getLatLng().latitude+"");
-                    sender.setTo_geo_long(place.getLatLng().longitude+"");
+                    sender.setTo_geo_lat(place.getLatLng().latitude + "");
+                    sender.setTo_geo_long(place.getLatLng().longitude + "");
                     quoteRequest.setLat2((place.getLatLng().latitude) + "");
                     quoteRequest.setLong2((place.getLatLng().longitude) + "");
                 }
@@ -383,7 +389,7 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
         }
         if (sender.isSender) {
             if (senderitem.getItem_type().equals(Constants.ARTICLE)) {
-                String validateCarrierStrings[] = {senderitem.getItem_subtype(), item.getLength()+"", item.getHeight()+"", item.getBreadth()+""
+                String validateCarrierStrings[] = {senderitem.getItem_subtype(), item.getLength() + "", item.getHeight() + "", item.getBreadth() + ""
                         , item.getWeight()};
                 if (Utility.isNull(validateCarrierStrings)) {
                     return false;
