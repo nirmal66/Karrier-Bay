@@ -111,6 +111,7 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
 
         ;
         ((Spinner) view.findViewById(R.id.spinWantTo)).setOnItemSelectedListener(this);
+        ((Spinner) view.findViewById(R.id.spinSenderWantTo)).setOnItemSelectedListener(this);
 
         ((Spinner) view.findViewById(R.id.sp_sub_type)).setOnItemSelectedListener(this);
 
@@ -210,10 +211,11 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
                     sender.getCarrierScheduleDetailAttributes().setStart_time(getDate(sender.getFromDate(), sender.getFromTime()));
                     sender.getCarrierScheduleDetailAttributes().setEnd_time(getDate(sender.getToDate(), sender.getToTime()));
 
-                    if (((CheckBox) view.findViewById(R.id.cbarticle)).isChecked()) {
+                    if (sender.getCarrierWanttosSendIdx()==0) {
                         sender.getCarrierScheduleDetailAttributes().setMode(Constants.ARTICLE);
+
                         sender.getCarrierScheduleDetailAttributes().setPassengercount(null);
-                    } else if (((CheckBox) view.findViewById(R.id.cbpassenger)).isChecked()) {
+                    } else if (sender.getCarrierWanttosSendIdx()==1) {
                         sender.getCarrierScheduleDetailAttributes().setMode(Constants.PASSENGER);
                         sender.getCarrierScheduleDetailAttributes().setCapacity(null);
                     }
@@ -267,6 +269,10 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
 
                 sender_order_item_attributes[0].setItem_type(selectedValue);
                 sender.setSpinWantToSendIdx(i);
+                break;
+            case R.id.spinSenderWantTo:
+
+                sender.setCarrierWanttosSendIdx(i);
                 break;
             case R.id.sp_sub_type:
                 sender_order_item_attributes[0].setItem_subtype(selectedValue);

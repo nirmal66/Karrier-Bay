@@ -227,9 +227,18 @@ public class SenderOrder extends BaseObservable {
     private String isInsured;
 
     private String coupon;
+@Bindable
+    public int getCarrierWanttosSendIdx() {
+        return carrierWanttosSendIdx;
+    }
+
+    public void setCarrierWanttosSendIdx(int carrierWanttosSendIdx) {
+        this.carrierWanttosSendIdx = carrierWanttosSendIdx;
+        notifyPropertyChanged(BR.carrierWanttosSendIdx);
+    }
 
     private String comments;
-
+private int carrierWanttosSendIdx;
     @Bindable
     public int getSpinWantToSendIdx() {
         return spinWantToSendIdx;

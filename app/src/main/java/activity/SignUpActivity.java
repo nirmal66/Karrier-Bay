@@ -21,6 +21,8 @@ import java.io.IOException;
 import Model.Otp;
 import Model.SignUpRequest;
 import Model.SignUpResponse;
+import RetroGit.ApiClient;
+import RetroGit.ApiInterface;
 import Utilities.BaseActivity;
 import Utilities.SessionManager;
 import okhttp3.MediaType;
@@ -192,7 +194,11 @@ public class SignUpActivity extends BaseActivity {
             }
         });
     }
-
+    @Override
+    protected void onResume() {
+        apiService = ApiClient.getClient().create(ApiInterface.class);
+        super.onResume();
+    }
     public boolean Validation() {
         if (email.getText().length() == 0 || password.getText().length() == 0 || confirmPassword.getText().length() == 0 || phoneNumber.getText().length() == 0 || fullName.getText().length() == 0 || otp.getText().length() == 0) {
             if (fullName.getText().length() == 0) {

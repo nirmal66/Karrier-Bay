@@ -105,11 +105,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        apiService = ApiClient.getClientWithHeader(this).create(ApiInterface.class);
 
         fragment(new HomeFragment(), "MainFragment");
     }
+    @Override
+    protected void onResume() {
+        apiService = ApiClient.getClientWithHeader(this).create(ApiInterface.class);
 
+        super.onResume();
+    }
     @Override
     public void onBackPressed() {
 

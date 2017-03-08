@@ -13,6 +13,8 @@ import com.yourapp.developer.karrierbay.R;
 
 import Model.LoginRequest;
 import Model.LoginResponse;
+import RetroGit.ApiClient;
+import RetroGit.ApiInterface;
 import Utilities.BaseActivity;
 import Utilities.SessionManager;
 import retrofit2.Call;
@@ -73,7 +75,7 @@ public class LoginActivity extends BaseActivity {
 
                                 // Log.d("Error",response.body().getErrors().toString());
                                 sessionManager.createLoginSession(response.body().getData().getEmail().toString(),
-                                        response.body().getData().getUid().toString(),response.headers());
+                                        response.body().getData().getUid().toString(), response.headers());
                                 Toast.makeText(getApplicationContext(), response.body().getData().getEmail().toString(), Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 finish();
@@ -102,6 +104,11 @@ public class LoginActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        apiService = ApiClient.getClient().create(ApiInterface.class);
+        super.onResume();
+    }
 
     public boolean Validation() {
         if (email.getText().length() == 0 || password.getText().length() == 0) {

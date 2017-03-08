@@ -527,24 +527,34 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/cbarticle"
-                            android:layout_width="wrap_content"
+                        <Spinner
+                            android:id="@+id/spinSenderWantTo"
+                            style="@style/Widget.AppCompat.Spinner.Underlined"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom"
-                            android:layout_weight="50"
-                            android:checked="@{cbpassenger.checked ? false : true}"
-                            android:spinnerMode="dialog"
-                            android:text="@string/article" />
+                            android:entries="@array/wanttosend"
+                            android:prompt="@string/prompt_wanttosend"
 
-                        <CheckBox
-                            android:id="@+id/cbpassenger"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/edit_text_height"
-                            android:layout_weight="50"
-                            android:checked="@{cbarticle.checked ? false : true}"
-                            android:text="@string/passengers" />
+                            android:spinnerMode="dialog" />
+                        <!--<CheckBox-->
+                            <!--android:id="@+id/cbarticle"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_gravity="bottom"-->
+                            <!--android:layout_weight="50"-->
+                            <!--android:checked="@{cbpassenger.checked ? false : true}"-->
+                            <!---->
+                            <!--android:spinnerMode="dialog"-->
+                            <!--android:text="@string/article" />-->
+
+                        <!--<CheckBox-->
+                            <!--android:id="@+id/cbpassenger"-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="@dimen/edit_text_height"-->
+                            <!--android:layout_weight="50"-->
+                            <!--android:checked="@{cbarticle.checked ? false : true}"-->
+                            <!--android:text="@string/passengers" />-->
                     </LinearLayout>
 
                     <LinearLayout
@@ -562,7 +572,8 @@
                             android:layout_marginTop="15dp"
                             android:layout_weight="50"
                             android:orientation="vertical"
-                            android:visibility="@{cbarticle.checked ? View.VISIBLE : View.GONE}">
+
+                            android:visibility="@{sender.carrierWanttosSendIdx == 0 ? View.VISIBLE : View.GONE}">
 
                             <TextView
                                 android:id="@+id/labelcapacity"
@@ -593,7 +604,7 @@
                             android:layout_marginTop="15dp"
                             android:layout_weight="50"
                             android:orientation="vertical"
-                            android:visibility="@{cbpassenger.checked ? View.VISIBLE : View.GONE}">
+                            android:visibility="@{sender.carrierWanttosSendIdx == 1? View.VISIBLE : View.GONE}">
 
                             <TextView
                                 android:id="@+id/labelPassen"
