@@ -36,6 +36,9 @@ public class SessionManager {
     // User longitude
     public static final String KEY_LONGITUDE = "longitude";
 
+    // User Phone
+    public static final String KEY_PHONE = "phone";
+
     public static final String ACCESS_TOKEN = "Access-Token";
     public static final String CLIENT = "Client";
     // Constructor
@@ -48,7 +51,7 @@ public class SessionManager {
     /**
      * Create login session
      * */
-    public void createLoginSession(String email, String name, Headers headers){
+    public void createLoginSession(String email, String name, Headers headers, String phone){
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
         // Storing name in pref
@@ -58,7 +61,9 @@ public class SessionManager {
         // commit changes
         editor.putString(ACCESS_TOKEN, headers.get("access-token"));
 
-        editor.putString(CLIENT,headers.get("client")); ;
+        editor.putString(CLIENT,headers.get("client"));
+
+        editor.putString(KEY_PHONE, phone);
 
         editor.commit();
     }
@@ -81,6 +86,8 @@ public class SessionManager {
         //user address
         user.put(KEY_ADDRESS, sharedPreferences.getString(KEY_ADDRESS, null));
         // return user
+        user.put(KEY_PHONE, sharedPreferences.getString(KEY_PHONE, null));
+
         return user;
     }
 

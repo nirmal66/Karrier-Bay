@@ -55,8 +55,10 @@ public class ProfileFragment extends BaseFragment implements
         super.onViewCreated(view, savedInstanceState);
         sessionManager = new SessionManager(getActivity());
         user = sessionManager.getUserDetails();
+        binding.nameHeader.setText(user.get(SessionManager.KEY_NAME));
         binding.emailHeader.setText(user.get(SessionManager.KEY_EMAIL));
-
+        binding.emailEdittext.setText(user.get(SessionManager.KEY_EMAIL));
+        binding.phoneNumberEdittext.setText(user.get(SessionManager.KEY_PHONE));
         if (user.get(SessionManager.KEY_ADDRESS) == null) {
             // for getting current location
             mGoogleApiClient = new GoogleApiClient.Builder(getActivity())

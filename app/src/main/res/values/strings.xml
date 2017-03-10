@@ -62,6 +62,7 @@
     <string name="breadth">Breadth(cm)</string>
     <string name="dimension">DIMENSIONS</string>
     <string name="flatename">FLAT NAME</string>
-    <string name="action_loaction">Enter your location:</string>
+    <string name="action_loaction">Enter your location</string>
+    <string name="tv_phone_number">Phone Number</string>
     <string name="total_price">Total Price</string>
 </resources>

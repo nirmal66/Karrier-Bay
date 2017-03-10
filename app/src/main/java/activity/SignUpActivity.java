@@ -167,7 +167,7 @@ public class SignUpActivity extends BaseActivity {
                         public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                             if (response.errorBody() == null) {
                                 Log.d("LoginResponse", response.body().getStatus().toString());
-                                sessionManager.createLoginSession(response.body().getData().getEmail().toString(), response.body().getData().getUid().toString(),response.headers());
+                                sessionManager.createLoginSession(response.body().getData().getEmail().toString(), response.body().getData().getName().toString(),response.headers(),response.body().getData().getPhone().toString());
                                 startActivity(new Intent(SignUpActivity.this, MainActivity.class));
                                 finish();
                             } else {

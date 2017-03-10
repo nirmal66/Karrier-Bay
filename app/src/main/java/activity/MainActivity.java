@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private String tag;
     private HashMap<String, String> user;
-    private TextView emailHeader;
+    private TextView emailHeader,nameHeader;
     public ApiInterface apiService;
     public SenderOrder sender = new SenderOrder();
     public QuoteRequest quoteRequest = new QuoteRequest();
@@ -93,8 +93,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View hView = navigationView.getHeaderView(0);
 
         emailHeader = (TextView) hView.findViewById(R.id.email_header);
+        nameHeader = (TextView) hView.findViewById(R.id.name_header);
         user = sessionManager.getUserDetails();
-        emailHeader.setText(user.get(SessionManager.KEY_NAME));
+        emailHeader.setText(user.get(SessionManager.KEY_EMAIL));
+        nameHeader.setText(user.get(SessionManager.KEY_NAME));
 
         hView.setOnClickListener(new View.OnClickListener() {
             @Override
