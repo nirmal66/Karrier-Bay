@@ -10,5 +10,5 @@ public class Constants {
     public static String PASSENGER="Passenger";
     public static String LISTFRAGMENT="ListFragment";
     public static String TRIPSUMMARYFRAGMENT="TripSummaryFragment";
-
+    public static String DETAILSFRAGMENT="DetailsFragment";
 }

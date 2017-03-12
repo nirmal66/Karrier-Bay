@@ -180,6 +180,7 @@ public class SenderOrderItemAttributes extends BaseObservable {
     }
 
     public String getQuantity() {
+
         return quantity;
     }
 
@@ -196,6 +197,7 @@ public class SenderOrderItemAttributes extends BaseObservable {
     }
 
     public String getItem_type() {
+
         return item_type;
     }
 

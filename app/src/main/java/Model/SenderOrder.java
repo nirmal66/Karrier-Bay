@@ -75,15 +75,41 @@ public class SenderOrder extends BaseObservable {
         return fromTime;
     }
 
+    public String getSenderItemInfo() {
+        if(isSender) {
+            if (getSender_order_item_attributes()[0].getItem_type()!=null&&getSender_order_item_attributes()[0].getItem_type().equals(Constants.ARTICLE)) {
+                senderItemInfo = getSender_order_item_attributes()[0].getItem_attributes().getWeight() + " Kg";
+            } else {
+                senderItemInfo = getSender_order_item_attributes()[0].getQuantity() + " Persons";
+
+            }
+        }else{
+            if(getCarrierScheduleDetailAttributes().getMode()!=null&&getCarrierScheduleDetailAttributes().getMode().equals(Constants.ARTICLE))
+            {
+                senderItemInfo=    getCarrierScheduleDetailAttributes().getCapacity() +" kg";
+            }else{
+                senderItemInfo=    getCarrierScheduleDetailAttributes().getPassengercount() +" Persons";
+            }
+        }
+
+        return senderItemInfo;
+    }
+
+    public void setSenderItemInfo(String senderItemInfo) {
+        this.senderItemInfo = senderItemInfo;
+    }
+
     public void setFromTime(String fromTime) {
         this.fromTime = fromTime;
         notifyPropertyChanged(BR.fromTime);
+
     }
 
     private String toDate;
     private String fromDate;
     private String toTime;
     private String fromTime;
+    private String senderItemInfo;
 
     public CarrierScheduleDetailAttributes getCarrierScheduleDetailAttributes() {
         if (carrierScheduleDetailAttributes == null) {

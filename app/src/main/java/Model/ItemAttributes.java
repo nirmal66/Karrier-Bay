@@ -197,6 +197,9 @@ public class ItemAttributes extends BaseObservable
     @Bindable
     public String getWeight()
     {
+        if(weight==null){
+            weight="";
+        }
         return weight;
     }
     public void setWeight(String weight)

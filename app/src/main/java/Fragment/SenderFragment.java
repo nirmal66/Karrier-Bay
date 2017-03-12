@@ -129,6 +129,11 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
             @Override
             public void onClick(View view1) {
                 Utility.hideKeyboard(getActivity());
+                if (sender.getFrom_loc() != null && sender.getTo_loc() != null && (sender.getFrom_loc().equals(sender.getTo_loc()))) {
+                    Toast.makeText(getActivity(), "From address and Send address should not be same!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 if (sender.isSender) {
                     if (sender.getSpinWantToSendIdx() == 0) {
                         quoteRequest.setBreadth(sender.getSender_order_item_attributes()[0].getItem_attributes().getBreadth() + "");
@@ -157,7 +162,7 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
 
                                     sender.getPickupOrderMapping().setAddress_line_2(sender.getFrom_loc());
                                     sender.getReceiverOrderMapping().setAddress_line_2(sender.getTo_loc());
-                                    sender.getSender_order_item_attributes()[0].getItem_attributes().setTotal_charge(quoteResponse.quote.getTotal_distance_charge());
+                                    sender.getSender_order_item_attributes()[0].getItem_attributes().setTotal_distance_charge(quoteResponse.quote.getTotal_distance_charge());
                                     // set the custom dialog components - text, image and button
                                     TextView text = (TextView) dialog.findViewById(R.id.textView2);
                                     text.setText("The appropriate charge for your courier is RS." + quoteResponse.quote.getTotal_distance_charge() + " The prices may be vary according to the exact " +
@@ -209,11 +214,11 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
                     sender.getCarrierScheduleDetailAttributes().setStart_time(getDate(sender.getFromDate(), sender.getFromTime()));
                     sender.getCarrierScheduleDetailAttributes().setEnd_time(getDate(sender.getToDate(), sender.getToTime()));
 
-                    if (sender.getCarrierWanttosSendIdx()==0) {
+                    if (sender.getCarrierWanttosSendIdx() == 0) {
                         sender.getCarrierScheduleDetailAttributes().setMode(Constants.ARTICLE);
 
                         sender.getCarrierScheduleDetailAttributes().setPassengercount(null);
-                    } else if (sender.getCarrierWanttosSendIdx()==1) {
+                    } else if (sender.getCarrierWanttosSendIdx() == 1) {
                         sender.getCarrierScheduleDetailAttributes().setMode(Constants.PASSENGER);
                         sender.getCarrierScheduleDetailAttributes().setCapacity(null);
                     }
@@ -387,6 +392,7 @@ public class SenderFragment extends Fragment implements Spinner.OnItemSelectedLi
         if (Utility.isNull(validateCommonStrings)) {
             return false;
         }
+
         if (sender.isSender) {
             if (senderitem.getItem_type().equals(Constants.ARTICLE)) {
                 String validateCarrierStrings[] = {senderitem.getItem_subtype(), item.getLength() + "", item.getHeight() + "", item.getBreadth() + ""

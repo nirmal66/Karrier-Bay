@@ -72,6 +72,7 @@ public class CarrierScheduleDetailAttributes extends BaseObservable {
     private String mode;
 
     public String getPassengercount() {
+
         return passengercount;
     }
 
@@ -93,6 +94,7 @@ public class CarrierScheduleDetailAttributes extends BaseObservable {
 
     public String getCapacity ()
     {
+
         return capacity;
     }
 
@@ -133,6 +135,7 @@ public class CarrierScheduleDetailAttributes extends BaseObservable {
 
     public String getMode ()
     {
+
         return mode;
     }
 

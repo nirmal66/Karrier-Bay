@@ -334,7 +334,7 @@
 
                                 android:inputType="number"
                                 android:maxLines="1"
-                                android:onClick="timeClick"
+
                                 android:onFocusChange="@{sender.onFocusChangeValidation}"
                                 android:singleLine="true"
                                 android:text="@={item.weight}"

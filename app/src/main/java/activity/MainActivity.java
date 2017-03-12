@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //Toast.makeText(this,tag,Toast.LENGTH_LONG).show();
             if (tag.equals("MainFragment")) {
                 finish();
-            } else if (tag.equals(Constants.LISTFRAGMENT)) {
+            } else if (tag.equals(Constants.DETAILSFRAGMENT)) {
                 FragmentManager fm = getSupportFragmentManager();
                 for (int i = 1; i < fm.getBackStackEntryCount(); ++i) {
                     fm.popBackStack();

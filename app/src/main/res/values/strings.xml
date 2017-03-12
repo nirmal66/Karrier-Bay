@@ -65,4 +65,9 @@
     <string name="action_loaction">Enter your location</string>
     <string name="tv_phone_number">Phone Number</string>
     <string name="total_price">Total Price</string>
+    <string name="trip_details">Trip Detail</string>
+    <string name="item_details">Item Details</string>
+    <string name="duration">Duration</string>
+    <string name="notify">NOTIFY</string>
+    <string name="accept">ACCEPT</string>
 </resources>

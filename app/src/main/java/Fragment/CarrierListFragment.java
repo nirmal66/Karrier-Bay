@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -18,6 +19,8 @@ import java.util.List;
 
 import Adapter.MyAdapter;
 import Model.SenderOrder;
+import Utilities.CustomViewHolder;
+import Utilities.Utility;
 import activity.MainActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,36 +41,37 @@ public class CarrierListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-     //   RowCarrierListBinding binding = DataBindingUtil.inflate(inflater, R.layout.row_carrier_list, container, false);
-        sender=  ((MainActivity) getActivity()).sender;
-      final RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-       mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-
+        //   RowCarrierListBinding binding = DataBindingUtil.inflate(inflater, R.layout.row_carrier_list, container, false);
+        sender = ((MainActivity) getActivity()).sender;
+        Utility.hideKeyboard(getActivity());
+        final RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
 
         Call<List<SenderOrder>> call;
-        if(sender.isSender) {
-            ((MainActivity)getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>CARRIER LIST</font>"));
+        if (sender.isSender) {
+            ((MainActivity) getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>CARRIER LIST</font>"));
             call = ((MainActivity) getActivity()).apiService.getSenderOrCarrierOrder("carrier", "schedules");
 
-        }else{
-            ((MainActivity)getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>SENDER LIST</font>"));
+        } else {
+            ((MainActivity) getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>SENDER LIST</font>"));
             call = ((MainActivity) getActivity()).apiService.getSenderOrCarrierOrder("sender", "orders");
         }
         call.enqueue(new Callback<List<SenderOrder>>() {
             @Override
             public void onResponse(Call<List<SenderOrder>> call, Response<List<SenderOrder>> response) {
 
-                if (response.code() == 200&&response.body()!=null) {
-                    List<SenderOrder> list=    response.body();
+                if (response.code() == 200 && response.body() != null) {
+                    List<SenderOrder> list = response.body();
                     Log.d("LoginResponse", response.message());
-                    MyAdapter mAdapter = new MyAdapter(list,sender.getUser());
+                    MyAdapter mAdapter = new MyAdapter(list);
+
                     mRecyclerView.setAdapter(mAdapter);
+
 
                 } else {
                     Toast.makeText(getActivity(), "Incorrect Request", Toast.LENGTH_LONG).show();
                 }
-
             }
 
             @Override
@@ -76,21 +80,6 @@ public class CarrierListFragment extends Fragment {
             }
         });
 
-
-//
-//        FragmentDemoBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_demo, container, false);
-//        final UserViewModel userViewModel = new UserViewModel();
-//        userViewModel.setUser(new User("王浩", "12345678912", 24, true));
-//        binding.setFragmentUserViewModel(userViewModel);
-//
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                userViewModel.setUser(new User("新用户名哈哈", "12345678912", 24, false));
-//            }
-//        }, 3000);
-
-//        return binding.getRoot();
 
     }
 
