@@ -32,6 +32,7 @@ import java.util.HashMap;
 import Fragment.ContactFragment;
 import Fragment.HomeFragment;
 import Fragment.ProfileFragment;
+import Fragment.*;
 import Model.Constants;
 import Model.QuoteRequest;
 import Model.SenderOrder;
@@ -181,7 +182,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        if(id==R.id.nav_my_bay)
+        {
+            fragment(new MyBayFragment(), "MyBayFragment");
 
+        }
         if (id == R.id.nav_contact_us) {
             fragment(new ContactFragment(), "ContactFragment");
         }
