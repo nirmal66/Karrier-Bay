@@ -25,5 +25,7 @@ public class BaseFragment extends Fragment {
         mTfBold = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Bold.ttf");
         mTfSemiBold = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Semibold.ttf");
         apiService = ApiClient.getClient().create(ApiInterface.class);
+
+
     }
 }
