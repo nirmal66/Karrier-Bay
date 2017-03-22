@@ -1,10 +1,8 @@
 package Fragment;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -15,20 +13,10 @@ import android.widget.Toast;
 
 import com.yourapp.developer.karrierbay.R;
 
-import java.io.File;
-import java.io.InputStream;
-
-import Model.ImageUploadResponse;
 import Model.QuoteRequest;
 import Model.SenderOrder;
 import Utilities.BaseFragment;
 import activity.MainActivity;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
 

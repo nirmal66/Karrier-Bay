@@ -36,8 +36,8 @@ public class MyBayFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-        adapter.addFragment(new HomeFragment(), "Current");
-        adapter.addFragment(new HomeFragment(), "History");
+        adapter.addFragment(new CurrentFragment(), "Current");
+        adapter.addFragment(new HistoryFragment(), "History");
         viewPager.setAdapter(adapter);
     }
 }
