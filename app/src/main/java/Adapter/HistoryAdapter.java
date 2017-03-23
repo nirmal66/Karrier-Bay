@@ -29,7 +29,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<CustomViewHolder> {
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()), R.layout.row_history_list, viewGroup, false);
-
         return new CustomViewHolder(binding);
     }
 

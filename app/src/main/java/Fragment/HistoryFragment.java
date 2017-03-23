@@ -56,10 +56,13 @@ public class HistoryFragment extends Fragment {
 
 
     private void preparenotificationData() {
-        History history = new History("Chennai", "Madurai", "250","Document","Delivered");
+        History history = new History("Chennai, TamilNadu", "Madurai, TamilNadu", "250","Document","Delivered");
         historyLists.add(history);
-
-        history = new History("Chennai", "ooty", "777","Document","Delivered");
+        history = new History("Chennai, TamilNadu", "ooty, TamilNadu", "777","Document","Delivered");
+        historyLists.add(history);
+        history = new History("Chennai, TamilNadu", "ooty, TamilNadu", "666","Document","Delivered");
+        historyLists.add(history);
+        history = new History("Chennai, TamilNadu", "ooty, TamilNadu", "888","Tv","Delivered");
         historyLists.add(history);
 
     }
