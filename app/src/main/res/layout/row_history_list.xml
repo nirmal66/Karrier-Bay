@@ -6,8 +6,21 @@
     <data>
 
         <variable
-            name="history"
-            type="Model.History" />
+            name="sender"
+            type="Model.SenderOrder" />
+
+        <variable
+            name="item"
+            type="Model.ItemAttributes" />
+
+        <variable
+            name="senderitems"
+            type="Model.SenderOrderItemAttributes" />
+
+        <variable
+            name="user"
+            type="Model.User" />
+
     </data>
 
     <LinearLayout
@@ -51,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="@={history.from}"
+                        android:text="@={sender.from_loc}"
                         android:textColor="@color/textColorDark"
                         android:textSize="13sp" />
 
@@ -75,7 +88,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_marginLeft="10dp"
-                        android:text="@={history.to}"
+                        android:text="@={sender.to_loc}"
                         android:textColor="@color/textColorDark"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -120,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="@={history.amount}"
+                    android:text="@={senderitems.total_amount}"
                     android:textColor="@color/textColorDark"
                     android:textSize="13sp" />
 
@@ -143,7 +156,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
-                    android:text="@={history.details}"
+                    android:text="@={senderitems.item_type}"
                     android:textColor="@color/textColorDark"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -154,7 +167,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
-                android:text="@={history.status}"
+                android:text="@={sender.status}"
                 android:textColor="@color/textColorDark"
                 android:textSize="13sp"
                 android:textStyle="bold" />

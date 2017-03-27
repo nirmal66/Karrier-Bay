@@ -1,14 +1,9 @@
 package Model;
 
-import android.app.DatePickerDialog;
-import android.app.DatePickerDialog.OnDateSetListener;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.icu.util.Calendar;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.gson.annotations.SerializedName;
 import com.yourapp.developer.karrierbay.BR;
@@ -20,6 +15,25 @@ import com.yourapp.developer.karrierbay.BR;
 
 public class SenderOrder extends BaseObservable {
     private User user;
+    private String toDate;
+    private String fromDate;
+    private String toTime;
+    private String fromTime;
+    private String senderItemInfo;
+    private int spinWantToSendIdx = 1;
+    private String total_amount;
+    public boolean isSender;
+    private String status;
+    //For currier list
+    private SenderOrderItemAttributes[] sender_order_item;
+    private String id;
+    private String order_id;
+    private String sender_id;
+    private String to_geo_long;
+    private String updated_at;
+    private String created_at;
+    private String isInsured;
+    private String coupon;
 
     @Bindable
     public String getToDate() {
@@ -27,8 +41,8 @@ public class SenderOrder extends BaseObservable {
     }
 
     public User getUser() {
-        if(user==null){
-            user=new User();
+        if (user == null) {
+            user = new User();
         }
         return user;
     }
@@ -76,19 +90,18 @@ public class SenderOrder extends BaseObservable {
     }
 
     public String getSenderItemInfo() {
-        if(isSender) {
-            if (getSender_order_item_attributes()[0].getItem_type()!=null&&getSender_order_item_attributes()[0].getItem_type().equals(Constants.ARTICLE)) {
+        if (isSender) {
+            if (getSender_order_item_attributes()[0].getItem_type() != null && getSender_order_item_attributes()[0].getItem_type().equals(Constants.ARTICLE)) {
                 senderItemInfo = getSender_order_item_attributes()[0].getItem_attributes().getWeight() + " Kg";
             } else {
                 senderItemInfo = getSender_order_item_attributes()[0].getQuantity() + " Persons";
 
             }
-        }else{
-            if(getCarrierScheduleDetailAttributes().getMode()!=null&&getCarrierScheduleDetailAttributes().getMode().equals(Constants.ARTICLE))
-            {
-                senderItemInfo=    getCarrierScheduleDetailAttributes().getCapacity() +" kg";
-            }else{
-                senderItemInfo=    getCarrierScheduleDetailAttributes().getPassengercount() +" Persons";
+        } else {
+            if (getCarrierScheduleDetailAttributes().getMode() != null && getCarrierScheduleDetailAttributes().getMode().equals(Constants.ARTICLE)) {
+                senderItemInfo = getCarrierScheduleDetailAttributes().getCapacity() + " kg";
+            } else {
+                senderItemInfo = getCarrierScheduleDetailAttributes().getPassengercount() + " Persons";
             }
         }
 
@@ -105,11 +118,6 @@ public class SenderOrder extends BaseObservable {
 
     }
 
-    private String toDate;
-    private String fromDate;
-    private String toTime;
-    private String fromTime;
-    private String senderItemInfo;
 
     public CarrierScheduleDetailAttributes getCarrierScheduleDetailAttributes() {
         if (carrierScheduleDetailAttributes == null) {
@@ -122,8 +130,6 @@ public class SenderOrder extends BaseObservable {
         this.carrierScheduleDetailAttributes = carrierScheduleDetailAttributes;
     }
 
-    private int spinWantToSendIdx = 1;
-    private String total_amount;
     @SerializedName("carrier_schedule_detail_attributes")
     private CarrierScheduleDetailAttributes carrierScheduleDetailAttributes;
 
@@ -147,10 +153,10 @@ public class SenderOrder extends BaseObservable {
 
     //fOr sender row
     public SenderOrderItemAttributes[] getSender_order_item() {
-        if(sender_order_item_attributes==null) {
+        if (sender_order_item_attributes == null) {
 
             sender_order_item = new SenderOrderItemAttributes[1];
-            sender_order_item[0]=new SenderOrderItemAttributes();
+            sender_order_item[0] = new SenderOrderItemAttributes();
         }
         return sender_order_item;
     }
@@ -159,7 +165,6 @@ public class SenderOrder extends BaseObservable {
         this.sender_order_item = sender_order_item;
     }
 
-    public boolean isSender;
 
     public boolean isSender() {
         return isSender;
@@ -233,27 +238,9 @@ public class SenderOrder extends BaseObservable {
         this.comments = comments;
     }
 
-    private String status;
-    //For currier list
-    private SenderOrderItemAttributes[] sender_order_item;
-    private String order_id;
-
-    private String id;
-
-    private String to_geo_long;
 
 
-    private String updated_at;
-
-
-    private String sender_id;
-
-    private String created_at;
-
-    private String isInsured;
-
-    private String coupon;
-@Bindable
+    @Bindable
     public int getCarrierWanttosSendIdx() {
         return carrierWanttosSendIdx;
     }
@@ -264,7 +251,8 @@ public class SenderOrder extends BaseObservable {
     }
 
     private String comments;
-private int carrierWanttosSendIdx;
+    private int carrierWanttosSendIdx;
+
     @Bindable
     public int getSpinWantToSendIdx() {
         return spinWantToSendIdx;

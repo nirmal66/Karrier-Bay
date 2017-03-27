@@ -3,7 +3,6 @@ package Fragment;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,15 +17,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Adapter.HistoryAdapter;
-import Model.History;
+import Model.SenderOrder;
+import Utilities.BaseFragment;
+import activity.MainActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class HistoryFragment extends Fragment {
+public class HistoryFragment extends BaseFragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private FragmentHistoryBinding binding;
-    private List<History> historyLists = new ArrayList<>();;
+    private List<SenderOrder> historyLists = new ArrayList<>();;
 
 
     @Nullable
@@ -43,7 +47,6 @@ public class HistoryFragment extends Fragment {
         mRecyclerView = binding.recyclerViewHistory;
 
         preparenotificationData();
-        mAdapter = new HistoryAdapter(historyLists);
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
@@ -56,14 +59,28 @@ public class HistoryFragment extends Fragment {
 
 
     private void preparenotificationData() {
-        History history = new History("Chennai, TamilNadu", "Madurai, TamilNadu", "250","Document","Delivered");
+       /* History history = new History("Chennai, TamilNadu", "Madurai, TamilNadu", "250","Document","Delivered");
         historyLists.add(history);
         history = new History("Chennai, TamilNadu", "ooty, TamilNadu", "777","Document","Delivered");
         historyLists.add(history);
         history = new History("Chennai, TamilNadu", "ooty, TamilNadu", "666","Document","Delivered");
         historyLists.add(history);
         history = new History("Chennai, TamilNadu", "ooty, TamilNadu", "888","Tv","Delivered");
-        historyLists.add(history);
+        historyLists.add(history);*/
+
+        Call<List<SenderOrder>> call = ((MainActivity)getActivity()).apiService.getMyBayHistory();
+        call.enqueue(new Callback<List<SenderOrder>>() {
+            @Override
+            public void onResponse(Call<List<SenderOrder>> call, Response<List<SenderOrder>> response) {
+                historyLists = response.body();
+                mAdapter = new HistoryAdapter(historyLists);
+            }
+
+            @Override
+            public void onFailure(Call<List<SenderOrder>> call, Throwable t) {
+                Toast.makeText(getActivity(), "Incorrect Request", Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 

@@ -11,7 +11,7 @@ import com.yourapp.developer.karrierbay.R;
 
 import java.util.List;
 
-import Model.History;
+import Model.SenderOrder;
 import Utilities.CustomViewHolder;
 
 /**
@@ -19,9 +19,9 @@ import Utilities.CustomViewHolder;
  */
 
 public class HistoryAdapter extends RecyclerView.Adapter<CustomViewHolder> {
-    private List<History> historyList;
+    private List<SenderOrder> historyList;
 
-    public HistoryAdapter(List<History> historyList) {
+    public HistoryAdapter(List<SenderOrder> historyList) {
         this.historyList = historyList;
 
     }
@@ -35,7 +35,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<CustomViewHolder> {
     @Override
     public void onBindViewHolder(CustomViewHolder customViewHolder, int i) {
         ViewDataBinding viewDataBinding = customViewHolder.getViewDataBinding();
-        viewDataBinding.setVariable(BR.history,historyList.get(i));
+        viewDataBinding.setVariable(BR.sender, historyList.get(i));
+        viewDataBinding.setVariable(BR.senderitems, historyList.get(i).getSender_order_item()[0]);
+        viewDataBinding.setVariable(BR.item,historyList.get(i).getSender_order_item()[0].getItem_attributes());
+        viewDataBinding.setVariable(BR.user,historyList.get(i).getUser());
     }
 
     @Override
