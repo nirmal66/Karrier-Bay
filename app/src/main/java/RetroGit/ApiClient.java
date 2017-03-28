@@ -62,7 +62,7 @@ public class ApiClient {
                                @Override
                                public Response intercept(Interceptor.Chain chain) throws IOException {
 
-                                       Request request = chain.request().newBuilder().addHeader("Uid", sessionManager.getUserDetails().get(SessionManager.KEY_NAME)).
+                                       Request request = chain.request().newBuilder().addHeader("Uid", sessionManager.getUserDetails().get(SessionManager.KEY_EMAIL)).
                                                addHeader(SessionManager.CLIENT, sessionManager.sharedPreferences.getString(SessionManager.CLIENT, ""))
                                                .addHeader(SessionManager.ACCESS_TOKEN, sessionManager.sharedPreferences.getString(SessionManager.ACCESS_TOKEN, "")).build();
 //                                Request original = chain.request();
