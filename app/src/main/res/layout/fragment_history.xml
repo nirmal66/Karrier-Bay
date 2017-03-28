@@ -2,7 +2,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        >
         <!-- A RecyclerView with some commonly used attributes -->
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_history"
@@ -11,3 +11,5 @@
             android:scrollbars="vertical" />
     </RelativeLayout>
 </layout>
+
+

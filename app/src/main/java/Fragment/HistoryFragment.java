@@ -5,15 +5,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.yourapp.developer.karrierbay.R;
 import com.yourapp.developer.karrierbay.databinding.FragmentHistoryBinding;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import Adapter.HistoryAdapter;
@@ -30,7 +31,7 @@ public class HistoryFragment extends BaseFragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private FragmentHistoryBinding binding;
-    private List<SenderOrder> historyLists = new ArrayList<>();;
+    private List<SenderOrder> historyLists;
 
 
     @Nullable
@@ -49,11 +50,7 @@ public class HistoryFragment extends BaseFragment {
         preparenotificationData();
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+
         Toast.makeText(getActivity(),"History Fragment",Toast.LENGTH_LONG).show();
     }
 
@@ -68,12 +65,29 @@ public class HistoryFragment extends BaseFragment {
         history = new History("Chennai, TamilNadu", "ooty, TamilNadu", "888","Tv","Delivered");
         historyLists.add(history);*/
 
-        Call<List<SenderOrder>> call = ((MainActivity)getActivity()).apiService.getMyBayHistory();
+        Call<List<SenderOrder>> call = ((MainActivity)getActivity()).apiService.getSenderOrCarrierOrder("sender", "orders");
         call.enqueue(new Callback<List<SenderOrder>>() {
             @Override
             public void onResponse(Call<List<SenderOrder>> call, Response<List<SenderOrder>> response) {
-                historyLists = response.body();
-                mAdapter = new HistoryAdapter(historyLists);
+
+                if(200==response.code()) {
+                    historyLists = response.body();
+                    Gson gson = new Gson();
+
+                    Log.d("historyresult",  gson.toJson(historyLists).toString());
+                    mAdapter = new HistoryAdapter(historyLists);
+                    mRecyclerView.setHasFixedSize(true);
+                    // use a linear layout manager
+                    mLayoutManager = new LinearLayoutManager(getActivity());
+                    mRecyclerView.setLayoutManager(mLayoutManager);
+                    mRecyclerView.setAdapter(mAdapter);
+                   // Toast.makeText(getActivity(), "No problem"+ gson.toJson(historyLists).toString(), Toast.LENGTH_LONG).show();
+
+                }
+                else
+                {
+                    Toast.makeText(getActivity(), "Authentication problem", Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override

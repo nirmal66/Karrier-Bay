@@ -11,46 +11,41 @@ import com.yourapp.developer.karrierbay.BR;
  */
 
 
-
-
-public class ItemAttributes extends BaseObservable
-{
+public class ItemAttributes extends BaseObservable {
 
     private int breadthIndex;
-
-
-
     private String breadth;
-
     private String total_distance;
-
     private String service_charge_percent;
-
     private String service_charge;
-
     private String insurance_charge;
-
     private String per_km_charge;
-
     private String total_weight_charge;
-
     private String height;
-
     private String risk_charge;
-
     private String total_charge;
-
-
-
     private String total_distance_charge;
-
     private String insurance_percent;
-     private String volumetricfullDetails;
+    private String volumetricfullDetails;
+    private String item_value;
+    private String length;
+    @SerializedName("item_weight")
+    private String weight;
+    private  String grand_total;
+
+
+    public String getGrand_total() {
+        return grand_total;
+    }
+
+    public void setGrand_total(String grand_total) {
+        this.grand_total = grand_total;
+    }
 
 
 
     public String getVolumetricfullDetails() {
-        volumetricfullDetails=length +"  "+breadth+"  "+height+"\n";
+        volumetricfullDetails = length + "  " + breadth + "  " + height + "\n";
         return volumetricfullDetails;
     }
 
@@ -59,29 +54,20 @@ public class ItemAttributes extends BaseObservable
     }
 
 
-    private String item_value;
 
 
-    private String length;
-
-
-    @SerializedName("item_weight")
-    private String weight;
-@Bindable
-    public String getBreadth ()
-    {
+    @Bindable
+    public String getBreadth() {
         return breadth;
     }
 
-    public void setBreadth (String breadth)
-    {
+    public void setBreadth(String breadth) {
         this.breadth = breadth;
         notifyPropertyChanged(BR.breadth);
     }
 
     @Bindable
-    public String getHeight ()
-    {
+    public String getHeight() {
         return height;
     }
 
@@ -140,7 +126,8 @@ public class ItemAttributes extends BaseObservable
     public void setRisk_charge(String risk_charge) {
         this.risk_charge = risk_charge;
     }
-@Bindable
+
+    @Bindable
     public String getTotal_charge() {
         return total_charge;
     }
@@ -149,7 +136,8 @@ public class ItemAttributes extends BaseObservable
         this.total_charge = total_charge;
         notifyPropertyChanged(BR.total_charge);
     }
-@Bindable
+
+    @Bindable
     public String getTotal_distance_charge() {
         return total_distance_charge;
     }
@@ -167,43 +155,39 @@ public class ItemAttributes extends BaseObservable
         this.insurance_percent = insurance_percent;
     }
 
-    public void setHeight (String height)
-    {
+    public void setHeight(String height) {
 
         this.height = height;
         notifyPropertyChanged(BR.height);
     }
 
-    public String getItem_value ()
-    {
+    public String getItem_value() {
         return item_value;
     }
 
-    public void setItem_value (String item_value)
-    {
+    public void setItem_value(String item_value) {
         this.item_value = item_value;
     }
+
     @Bindable
-    public String getLength ()
-    {
+    public String getLength() {
         return length;
     }
 
-    public void setLength (String length)
-    {
+    public void setLength(String length) {
         this.length = length;
         notifyPropertyChanged(BR.length);
     }
+
     @Bindable
-    public String getWeight()
-    {
-        if(weight==null){
-            weight="";
+    public String getWeight() {
+        if (weight == null) {
+            weight = "";
         }
         return weight;
     }
-    public void setWeight(String weight)
-    {
+
+    public void setWeight(String weight) {
         this.weight = weight;
         notifyPropertyChanged(BR.weight);
     }
