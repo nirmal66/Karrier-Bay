@@ -10,17 +10,12 @@
             type="Model.SenderOrder" />
 
         <variable
-            name="item"
-            type="Model.ItemAttributes" />
-
-        <variable
-            name="senderitems"
-            type="Model.SenderOrderItemAttributes" />
+            name="carrier"
+            type="Model.CarrierScheduleDetailAttributes" />
 
         <variable
             name="user"
             type="Model.User" />
-
     </data>
 
     <LinearLayout
@@ -31,7 +26,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="7dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -42,7 +37,7 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -72,7 +67,7 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="20dp"
                     android:layout_margin="7dp"
                     android:orientation="horizontal">
 
@@ -92,13 +87,39 @@
                         android:textColor="@color/textColorDark"
                         android:textSize="13sp" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_margin="7dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:text="@string/item"
+                        android:textColor="@color/textHintColor"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="@={carrier.mode}"
+                        android:textColor="@color/textColorDark"
+                        android:textSize="13sp" />
+                </LinearLayout>
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="20dp"
-                android:layout_weight="0.5"
-                android:src="@drawable/timecolor" />
+            <TextView
+                android:id="@+id/details"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="@={carrier.capacity}"
+                android:textColor="@color/textColorDark"
+                android:textSize="14sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <View
@@ -111,67 +132,58 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_margin="10dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="7dp"
             android:orientation="horizontal">
 
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/order_created"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
+                android:layout_height="20dp"
                 android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/card_rate" />
-
-                <TextView
-                    android:id="@+id/history_amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="@={item.grand_total}"
-                    android:textColor="@color/textColorDark"
-                    android:textSize="13sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/card_item" />
-
-                <TextView
-                    android:id="@+id/history_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="@={senderitems.item_type}"
-                    android:textColor="@color/textColorDark"
-                    android:textSize="13sp" />
-            </LinearLayout>
+                android:text="@string/order_created"
+                android:textColor="@color/textHintColor"
+                android:textSize="11sp" />
 
             <TextView
-                android:id="@+id/history_status"
+                android:id="@+id/picked"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
+                android:layout_height="20dp"
                 android:layout_weight="1"
-                android:text="@={sender.status}"
-                android:textColor="@color/textColorDark"
-                android:textSize="13sp"
-                android:textStyle="bold" />
+                android:text="@string/picked"
+                android:textColor="@color/textHintColor"
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/intransit"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:text="@string/intransit"
+                android:textColor="@color/textHintColor"
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/delivered"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:text="@string/delivered"
+                android:textColor="@color/textHintColor"
+                android:textSize="11sp" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="27dp"
+            android:alpha="0.3"
+            android:background="@color/textHintColor" />
+
+
 
         <View
             android:layout_width="match_parent"

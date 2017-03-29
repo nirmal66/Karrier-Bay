@@ -46,25 +46,12 @@ public class HistoryFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = binding.recyclerViewHistory;
-
         preparenotificationData();
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-
-        Toast.makeText(getActivity(),"History Fragment",Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity(),"History Fragment",Toast.LENGTH_LONG).show();
     }
 
 
     private void preparenotificationData() {
-       /* History history = new History("Chennai, TamilNadu", "Madurai, TamilNadu", "250","Document","Delivered");
-        historyLists.add(history);
-        history = new History("Chennai, TamilNadu", "ooty, TamilNadu", "777","Document","Delivered");
-        historyLists.add(history);
-        history = new History("Chennai, TamilNadu", "ooty, TamilNadu", "666","Document","Delivered");
-        historyLists.add(history);
-        history = new History("Chennai, TamilNadu", "ooty, TamilNadu", "888","Tv","Delivered");
-        historyLists.add(history);*/
-
         Call<List<SenderOrder>> call = ((MainActivity)getActivity()).apiService.getSenderOrCarrierOrder("sender", "orders");
         call.enqueue(new Callback<List<SenderOrder>>() {
             @Override

@@ -70,4 +70,10 @@
     <string name="duration">Duration</string>
     <string name="notify">NOTIFY</string>
     <string name="accept">ACCEPT</string>
+    <string name="item">ITEM</string>
+    <string name="order_created">Order Created</string>
+    <string name="picked">Picked</string>
+    <string name="intransit">Intransit</string>
+    <string name="delivered">Delivered</string>
+
 </resources>

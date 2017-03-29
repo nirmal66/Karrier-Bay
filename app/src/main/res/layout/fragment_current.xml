@@ -1,34 +1,13 @@
-
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-
-
     <RelativeLayout
-        android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:background="@color/colorPrimary"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/name_header"
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        >
+        <!-- A RecyclerView with some commonly used attributes -->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_history"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Nirmal"
-            android:textColor="@color/textColorWhite"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/email_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/name_header"
-            android:layout_centerInParent="true"
-            android:layout_margin="@dimen/edit_text_gap"
-            android:text="nirmal6060@gmail.com"
-            android:textColor="@color/textColorWhite" />
-
+            android:scrollbars="vertical" />
     </RelativeLayout>
-
 </layout>

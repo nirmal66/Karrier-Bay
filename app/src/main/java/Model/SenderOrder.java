@@ -132,7 +132,7 @@ public class SenderOrder extends BaseObservable {
 
     @SerializedName("carrier_schedule_detail_attributes")
     private CarrierScheduleDetailAttributes carrierScheduleDetailAttributes;
-
+    @SerializedName("carrier_schedule_detail")
     private CarrierScheduleDetailAttributes carrier_schedule_detail;
 
     public String getTotal_amount() {

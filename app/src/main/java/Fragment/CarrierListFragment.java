@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -19,7 +18,6 @@ import java.util.List;
 
 import Adapter.MyAdapter;
 import Model.SenderOrder;
-import Utilities.CustomViewHolder;
 import Utilities.Utility;
 import activity.MainActivity;
 import retrofit2.Call;
@@ -65,10 +63,7 @@ public class CarrierListFragment extends Fragment {
                     List<SenderOrder> list = response.body();
                     Log.d("LoginResponse", response.message());
                     MyAdapter mAdapter = new MyAdapter(list);
-
                     mRecyclerView.setAdapter(mAdapter);
-
-
                 } else {
                     Toast.makeText(getActivity(), "Incorrect Request", Toast.LENGTH_LONG).show();
                 }
