@@ -174,14 +174,53 @@
                 android:textColor="@color/textHintColor"
                 android:textSize="11sp" />
         </LinearLayout>
+<FrameLayout
+    android:layout_marginBottom="7dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+  >
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="17dp"
-            android:layout_marginRight="27dp"
-            android:alpha="0.3"
-            android:background="@color/textHintColor" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="37dp"
+        android:layout_marginRight="57dp"
+        android:layout_gravity="center"
+        android:alpha="0.3"
+        android:background="@color/textHintColor" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <View
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginLeft="27dp"
+        android:layout_weight="1"
+        android:background="@drawable/solid_circle" />
+    <View
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="97dp"
+
+        android:background="@drawable/solid_circle" />
+    <View
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginLeft="67dp"
+        android:layout_weight="1"
+
+        android:background="@drawable/solid_circle" />
+    <View
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="67dp"
+        android:background="@drawable/solid_circle" />
+</LinearLayout>
+
+</FrameLayout >
 
 
 
